@@ -10,19 +10,11 @@
   <body>
     <div class="bg-decor"></div>
 
-    <div class="auth" data-view="login" id="authBox">
+    <div class="auth" id="authBox">
       <h1 class="brand">Sistema de Ventas</h1>
 
-      <!-- Pestañas -->
-      <div class="tabs">
-        <button class="tab" data-target="login" aria-selected="true">
-          Iniciar sesión
-        </button>
-        <button class="tab" data-target="register">Registrarse</button>
-      </div>
-
-      <!-- PANEL: LOGIN -->
-      <form class="panel panel--login" id="form-login" autocomplete="on">
+      <!-- FORMULARIO DE LOGIN -->
+      <form class="panel" id="form-login" autocomplete="on">
         <div class="input-group">
           <label for="usuario">Usuario</label>
           <input
@@ -45,127 +37,93 @@
           />
         </div>
 
-        <div class="actions">
-          <label class="chk">
-            <input type="checkbox" id="remember" />
-            <span>Recordarme</span>
-          </label>
-          <a href="#" class="link">¿Olvidaste tu contraseña?</a>
-        </div>
-
         <button type="submit" class="btn primary">Ingresar</button>
 
         <p class="swap">
           ¿No tienes cuenta?
-          <a href="#" class="link" data-goto="register">Regístrate</a>
+          <a href="#" class="link" id="go-register">Regístrate</a>
         </p>
       </form>
 
-      <!-- PANEL: REGISTRO -->
-      <form class="panel panel--register" id="form-register" autocomplete="off">
-        <div class="grid-2">
-          <div class="input-group">
-            <label for="nombre">Nombre</label>
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              placeholder="Tu nombre"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="apellido">Apellido</label>
-            <input
-              type="text"
-              id="apellido"
-              name="apellido"
-              placeholder="Tu apellido"
-              required
-            />
-          </div>
-        </div>
-
+      <!-- FORMULARIO DE REGISTRO -->
+      <form
+        class="panel"
+        id="form-register"
+        style="display: none"
+        autocomplete="off"
+      >
         <div class="input-group">
           <label for="correo">Correo</label>
           <input
             type="email"
             id="correo"
-            name="correo"
             placeholder="tucorreo@dominio.com"
             required
           />
         </div>
 
-        <div class="grid-2">
-          <div class="input-group">
-            <label for="usuario-reg">Usuario</label>
-            <input
-              type="text"
-              id="usuario-reg"
-              name="usuarioReg"
-              placeholder="Elige un usuario"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="password-reg">Contraseña</label>
-            <input
-              type="password"
-              id="password-reg"
-              name="passwordReg"
-              placeholder="Crea una contraseña"
-              required
-            />
-          </div>
+        <div class="input-group">
+          <label for="usuario-reg">Usuario</label>
+          <input
+            type="text"
+            id="usuario-reg"
+            placeholder="Elige un usuario"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password-reg">Contraseña</label>
+          <input
+            type="password"
+            id="password-reg"
+            placeholder="Crea una contraseña"
+            required
+          />
         </div>
 
         <button type="submit" class="btn primary">Crear cuenta</button>
 
         <p class="swap">
           ¿Ya tienes cuenta?
-          <a href="#" class="link" data-goto="login">Inicia sesión</a>
+          <a href="#" class="link" id="go-login">Inicia sesión</a>
         </p>
       </form>
     </div>
 
-    <!-- Script -->
     <script>
-      const auth = document.getElementById("authBox");
-      const tabs = document.querySelectorAll(".tab");
-      const links = document.querySelectorAll("[data-goto]");
+      const fLogin = document.getElementById("form-login");
+      const fReg = document.getElementById("form-register");
 
-      function setView(view) {
-        auth.setAttribute("data-view", view);
-        tabs.forEach((t) =>
-          t.setAttribute("aria-selected", t.dataset.target === view)
-        );
-      }
-
-      tabs.forEach((t) =>
-        t.addEventListener("click", () => setView(t.dataset.target))
-      );
-      links.forEach((l) =>
-        l.addEventListener("click", (e) => {
-          e.preventDefault();
-          setView(l.dataset.goto);
-        })
-      );
-
-      // Cuando inicia sesión -> redirige a Main.html
-      document.getElementById("form-login").addEventListener("submit", (e) => {
+      // Cambiar a registro
+      document.getElementById("go-register").onclick = (e) => {
         e.preventDefault();
-        window.location.href = "Main.html";
+        fLogin.style.display = "none";
+        fReg.style.display = "grid";
+      };
+
+      // Volver a login
+      document.getElementById("go-login").onclick = (e) => {
+        e.preventDefault();
+        fReg.style.display = "none";
+        fLogin.style.display = "grid";
+      };
+
+      // Ingresar -> guardar sesión y mandar a Main
+      fLogin.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Guardar sesión (simple demo, sin backend aún)
+        sessionStorage.setItem("logueado", "true");
+        window.location.href = "./Main.html";
       });
 
-      // Cuando se registra -> vuelve a Login
-      document
-        .getElementById("form-register")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          alert("Cuenta creada (demo). Ahora inicia sesión.");
-          setView("login");
-        });
+      // Registro -> mensaje y volver al login
+      fReg.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Cuenta creada (demo). Ahora inicia sesión.");
+        fReg.style.display = "none";
+        fLogin.style.display = "grid";
+      });
     </script>
   </body>
 </html>

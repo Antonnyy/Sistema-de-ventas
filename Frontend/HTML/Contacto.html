@@ -4,15 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacto – Sistema de Ventas</title>
-    <!-- OJO: ajusta la ruta si tu estructura difiere -->
     <link rel="stylesheet" href="../CSS/Contacto.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css">
-    <script defer src="../JS/includes.js"></script>
+    <link rel="stylesheet" href="../CSS/Navbar.css" />
   </head>
   <body>
-    <div data-include="../HTML/Navbar.html"></div>
-    <div class="bg-decor"></div>
+    <!-- Navbar dinámico -->
+    <header id="navbar"></header>
 
+    <!-- Hero -->
     <header class="hero">
       <h1>Contáctanos</h1>
       <p>
@@ -20,6 +19,7 @@
       </p>
     </header>
 
+    <!-- Contenido principal -->
     <main class="wrapper">
       <!-- Tarjetas con info -->
       <section class="cards">
@@ -81,10 +81,8 @@
           <p class="note">* Responderemos dentro de 24–48 horas hábiles.</p>
         </form>
 
-        <!-- Mapa (opcional): reemplaza src por tu ubicación o imagen -->
+        <!-- Mapa -->
         <div class="map fade-up" style="--d: 0.18s">
-          <!-- Puedes usar un iframe de Google Maps o una imagen -->
-          <!-- <iframe src="TU_URL_DE_MAPS" loading="lazy"></iframe> -->
           <div class="map-placeholder">Mapa / Ubicación</div>
         </div>
       </section>
@@ -98,8 +96,33 @@
       </section>
     </main>
 
-    <footer class="foot">
-      <small>© 2025 Equipo Sistema de Ventas</small>
-    </footer>
+    <!-- Footer dinámico -->
+    <footer id="footer"></footer>
+
+    <!-- Script para cargar Navbar y Footer -->
+    <script>
+      // Cargar Navbar
+      fetch("../HTML/Navbar.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("navbar").innerHTML = html;
+
+          // Reasignar evento del menú móvil
+          const toggle = document.querySelector(".menu-toggle");
+          const links = document.querySelector(".nav-links");
+          if (toggle && links) {
+            toggle.addEventListener("click", () =>
+              links.classList.toggle("active")
+            );
+          }
+        });
+
+      // Cargar Footer
+      fetch("../HTML/Footer.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("footer").innerHTML = html;
+        });
+    </script>
   </body>
 </html>

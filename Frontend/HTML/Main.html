@@ -5,26 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main – Sistema de Ventas</title>
     <link rel="stylesheet" href="../CSS/Main.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css" />
   </head>
   <body>
-    <!-- Navbar -->
-    <header>
-      <!-- Aquí incluimos el código del Navbar.html -->
-      <!-- Si trabajas con includes dinámicos (JS o backend), basta con importarlo -->
-      <!-- Por ahora copia/pega el contenido de Navbar.html aquí -->
-      <nav class="navbar">
-        <div class="logo">Sistema de Ventas</div>
-        <ul class="nav-links">
-          <li><a href="Main.html">Inicio</a></li>
-          <li><a href="Catalogo.html">Catálogo</a></li>
-          <li><a href="Publicidad.html">Publicidad</a></li>
-          <li><a href="Contacto.html">Contacto</a></li>
-          <li><a href="Login.html" class="btn">Login</a></li>
-        </ul>
-        <button class="menu-toggle">☰</button>
-      </nav>
-    </header>
+    <!-- Navbar (se carga dinámicamente) -->
+    <header id="navbar"></header>
 
     <!-- Contenido principal -->
     <main class="hero">
@@ -37,11 +21,38 @@
       </section>
     </main>
 
-    <!-- Script menú móvil -->
+    <!-- Footer (se carga dinámicamente) -->
+    <footer id="footer"></footer>
+
+    <!-- Script para proteger acceso y cargar Navbar/Footer -->
     <script>
-      const toggle = document.querySelector(".menu-toggle");
-      const links = document.querySelector(".nav-links");
-      toggle.addEventListener("click", () => links.classList.toggle("active"));
+      // 🚨 Proteger acceso: si no hay sesión, redirige a Login
+      if (!sessionStorage.getItem("logueado")) {
+        window.location.href = "./Login.html";
+      }
+
+      // Cargar Navbar
+      fetch("../HTML/Navbar.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("navbar").innerHTML = html;
+
+          // Reasignar evento del menú móvil
+          const toggle = document.querySelector(".menu-toggle");
+          const links = document.querySelector(".nav-links");
+          if (toggle && links) {
+            toggle.addEventListener("click", () =>
+              links.classList.toggle("active")
+            );
+          }
+        });
+
+      // Cargar Footer
+      fetch("../HTML/Footer.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("footer").innerHTML = html;
+        });
     </script>
   </body>
 </html>
