@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/Navbar.css" />
-    <title>Nabar</title>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">Sistema de Ventas</div>
-      <ul class="nav-links">
-        <li><a href="Main.html">Inicio</a></li>
-        <li><a href="Catalogo.html">Catálogo</a></li>
-        <li><a href="Publicidad.html">Publicidad</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Login.html" class="btn">Login</a></li>
-      </ul>
-      <button class="menu-toggle" aria-label="Menú">☰</button>
-    </nav>
-  </body>
-</html>
+<nav class="navbar">
+  <div class="logo">Sistema de Ventas</div>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="Main.html">Inicio</a></li>
+    <li><a class="nav-link" href="Catalogo.html">Catálogo</a></li>
+    <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
+    <li><a class="btn nav-link" href="Login.html">Login</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Menú">☰</button>
+</nav>
+<script>
+  // Toggle menú móvil (se ejecuta al incluir el fragmento)
+  (function(){
+    var toggle = document.querySelector(".menu-toggle");
+    var links = document.querySelector(".nav-links");
+    if(toggle && links){
+      toggle.addEventListener("click", function(){
+        links.classList.toggle("active");
+      });
+    }
+  })();
+</script>

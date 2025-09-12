@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main – Sistema de Ventas</title>
     <link rel="stylesheet" href="../CSS/Main.css" />
+    <link rel="stylesheet" href="../CSS/Navbar.css">
+  <link rel="stylesheet" href="../CSS/Footer.css">
+  <script defer src="../JS/includes.js"></script>
   </head>
   <body>
     <!-- Navbar (se carga dinámicamente) -->
-    <header id="navbar"></header>
+    <div data-include="../HTML/Navbar.html"></div>
 
     <!-- Contenido principal -->
     <main class="hero">
@@ -22,37 +25,8 @@
     </main>
 
     <!-- Footer (se carga dinámicamente) -->
-    <footer id="footer"></footer>
+    <div data-include="../HTML/Footer.html"></div>
 
-    <!-- Script para proteger acceso y cargar Navbar/Footer -->
-    <script>
-      // 🚨 Proteger acceso: si no hay sesión, redirige a Login
-      if (!sessionStorage.getItem("logueado")) {
-        window.location.href = "./Login.html";
-      }
-
-      // Cargar Navbar
-      fetch("../HTML/Navbar.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.getElementById("navbar").innerHTML = html;
-
-          // Reasignar evento del menú móvil
-          const toggle = document.querySelector(".menu-toggle");
-          const links = document.querySelector(".nav-links");
-          if (toggle && links) {
-            toggle.addEventListener("click", () =>
-              links.classList.toggle("active")
-            );
-          }
-        });
-
-      // Cargar Footer
-      fetch("../HTML/Footer.html")
-        .then((res) => res.text())
-        .then((html) => {
-          document.getElementById("footer").innerHTML = html;
-        });
-    </script>
+    
   </body>
 </html>
