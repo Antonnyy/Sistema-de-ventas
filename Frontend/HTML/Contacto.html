@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto – Sistema de Ventas</title>
+    <!-- OJO: ajusta la ruta si tu estructura difiere -->
+    <link rel="stylesheet" href="../CSS/Contacto.css" />
+  </head>
+  <body>
+    <div class="bg-decor"></div>
+
+    <header class="hero">
+      <h1>Contáctanos</h1>
+      <p>
+        ¿Tienes dudas o una propuesta? Escríbenos y te responderemos pronto.
+      </p>
+    </header>
+
+    <main class="wrapper">
+      <!-- Tarjetas con info -->
+      <section class="cards">
+        <article class="card fade-up" style="--d: 0">
+          <div class="icon">📧</div>
+          <h3>Correo</h3>
+          <p>ventas-equipo@tuempresa.com</p>
+        </article>
+
+        <article class="card fade-up" style="--d: 0.07s">
+          <div class="icon">📞</div>
+          <h3>Teléfono</h3>
+          <p>+51 900 000 000</p>
+        </article>
+
+        <article class="card fade-up" style="--d: 0.14s">
+          <div class="icon">📍</div>
+          <h3>Dirección</h3>
+          <p>Av. Principal 123, Huancayo – Perú</p>
+        </article>
+      </section>
+
+      <!-- Formulario -->
+      <section class="contact">
+        <form class="form slide-in" id="form-contacto" autocomplete="on">
+          <div class="grid-2">
+            <div class="field">
+              <input id="nombre" name="nombre" required />
+              <label for="nombre">Nombre</label>
+              <span class="focus-ring"></span>
+            </div>
+            <div class="field">
+              <input type="email" id="correo" name="correo" required />
+              <label for="correo">Correo</label>
+              <span class="focus-ring"></span>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <input id="asunto" name="asunto" required />
+              <label for="asunto">Asunto</label>
+              <span class="focus-ring"></span>
+            </div>
+            <div class="field">
+              <input id="telefono" name="telefono" />
+              <label for="telefono">Teléfono (opcional)</label>
+              <span class="focus-ring"></span>
+            </div>
+          </div>
+
+          <div class="field textarea">
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+            <label for="mensaje">Mensaje</label>
+            <span class="focus-ring"></span>
+          </div>
+
+          <button class="btn primary">Enviar mensaje</button>
+          <p class="note">* Responderemos dentro de 24–48 horas hábiles.</p>
+        </form>
+
+        <!-- Mapa (opcional): reemplaza src por tu ubicación o imagen -->
+        <div class="map fade-up" style="--d: 0.18s">
+          <!-- Puedes usar un iframe de Google Maps o una imagen -->
+          <!-- <iframe src="TU_URL_DE_MAPS" loading="lazy"></iframe> -->
+          <div class="map-placeholder">Mapa / Ubicación</div>
+        </div>
+      </section>
+
+      <!-- Social -->
+      <section class="social fade-up" style="--d: 0.22s">
+        <a class="pill" href="#" aria-label="Facebook">Facebook</a>
+        <a class="pill" href="#" aria-label="Instagram">Instagram</a>
+        <a class="pill" href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a class="pill" href="#" aria-label="WhatsApp">WhatsApp</a>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <small>© 2025 Equipo Sistema de Ventas</small>
+    </footer>
+  </body>
+</html>

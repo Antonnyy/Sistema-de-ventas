@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Sistema de Ventas</title>
-    <!-- OJO a la ruta relativa: HTML -> (sube) .. -> CSS/Login.css -->
     <link rel="stylesheet" href="../CSS/Login.css" />
   </head>
   <body>
@@ -13,7 +12,7 @@
     <div class="auth" data-view="login" id="authBox">
       <h1 class="brand">Sistema de Ventas</h1>
 
-      <!-- Pestañas (opcional visual) -->
+      <!-- Pestañas -->
       <div class="tabs">
         <button class="tab" data-target="login" aria-selected="true">
           Iniciar sesión
@@ -129,7 +128,7 @@
       </form>
     </div>
 
-    <!-- Toggle simple (sin dependencias) -->
+    <!-- Script -->
     <script>
       const auth = document.getElementById("authBox");
       const tabs = document.querySelectorAll(".tab");
@@ -152,16 +151,18 @@
         })
       );
 
-      // (Opcional) Demo de submit:
+      // Cuando inicia sesión -> redirige a Main.html
       document.getElementById("form-login").addEventListener("submit", (e) => {
         e.preventDefault();
-        alert("Iniciaste sesión (demo).");
+        window.location.href = "Main.html";
       });
+
+      // Cuando se registra -> vuelve a Login
       document
         .getElementById("form-register")
         .addEventListener("submit", (e) => {
           e.preventDefault();
-          alert("Cuenta creada (demo).");
+          alert("Cuenta creada (demo). Ahora inicia sesión.");
           setView("login");
         });
     </script>
