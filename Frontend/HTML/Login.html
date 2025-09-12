@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Sistema de Ventas</title>
+    <!-- OJO a la ruta relativa: HTML -> (sube) .. -> CSS/Login.css -->
+    <link rel="stylesheet" href="../CSS/Login.css" />
+  </head>
+  <body>
+    <div class="bg-decor"></div>
+
+    <div class="auth" data-view="login" id="authBox">
+      <h1 class="brand">Sistema de Ventas</h1>
+
+      <!-- Pestañas (opcional visual) -->
+      <div class="tabs">
+        <button class="tab" data-target="login" aria-selected="true">
+          Iniciar sesión
+        </button>
+        <button class="tab" data-target="register">Registrarse</button>
+      </div>
+
+      <!-- PANEL: LOGIN -->
+      <form class="panel panel--login" id="form-login" autocomplete="on">
+        <div class="input-group">
+          <label for="usuario">Usuario</label>
+          <input
+            type="text"
+            id="usuario"
+            name="usuario"
+            placeholder="Tu usuario"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Tu contraseña"
+            required
+          />
+        </div>
+
+        <div class="actions">
+          <label class="chk">
+            <input type="checkbox" id="remember" />
+            <span>Recordarme</span>
+          </label>
+          <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn primary">Ingresar</button>
+
+        <p class="swap">
+          ¿No tienes cuenta?
+          <a href="#" class="link" data-goto="register">Regístrate</a>
+        </p>
+      </form>
+
+      <!-- PANEL: REGISTRO -->
+      <form class="panel panel--register" id="form-register" autocomplete="off">
+        <div class="grid-2">
+          <div class="input-group">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="apellido">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              placeholder="Tu apellido"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="correo">Correo</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="tucorreo@dominio.com"
+            required
+          />
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <label for="usuario-reg">Usuario</label>
+            <input
+              type="text"
+              id="usuario-reg"
+              name="usuarioReg"
+              placeholder="Elige un usuario"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="password-reg">Contraseña</label>
+            <input
+              type="password"
+              id="password-reg"
+              name="passwordReg"
+              placeholder="Crea una contraseña"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn primary">Crear cuenta</button>
+
+        <p class="swap">
+          ¿Ya tienes cuenta?
+          <a href="#" class="link" data-goto="login">Inicia sesión</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Toggle simple (sin dependencias) -->
+    <script>
+      const auth = document.getElementById("authBox");
+      const tabs = document.querySelectorAll(".tab");
+      const links = document.querySelectorAll("[data-goto]");
+
+      function setView(view) {
+        auth.setAttribute("data-view", view);
+        tabs.forEach((t) =>
+          t.setAttribute("aria-selected", t.dataset.target === view)
+        );
+      }
+
+      tabs.forEach((t) =>
+        t.addEventListener("click", () => setView(t.dataset.target))
+      );
+      links.forEach((l) =>
+        l.addEventListener("click", (e) => {
+          e.preventDefault();
+          setView(l.dataset.goto);
+        })
+      );
+
+      // (Opcional) Demo de submit:
+      document.getElementById("form-login").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Iniciaste sesión (demo).");
+      });
+      document
+        .getElementById("form-register")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Cuenta creada (demo).");
+          setView("login");
+        });
+    </script>
+  </body>
+</html>
