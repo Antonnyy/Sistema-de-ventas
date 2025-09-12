@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sección de Publicidad · Promociones</title>
+  <style>
+    :root{
+      --bg:#0b1b33;           /* azul profundo de fondo */
+      --bg-soft:#0f2747;      /* contenedores */
+      --card:#102a4d;         /* tarjetas */
+      --ink:#ffffff;          /* texto principal */
+      --muted:#c9d7ef;        /* texto sutil */
+      --accent:#2b87ff;       /* acento azul */
+      --accent-2:#79aaff;     /* acento suave */
+      --ring: rgba(121,170,255,.25);
+    }
+    /* Reset mínimo */
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg) 0%, #0c1f3c 100%);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+
+    .wrap{max-width:1200px;margin:auto;padding:40px 20px}
+
+    /* Encabezado */
+    .promo-header{display:flex;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+    .promo-title{font-size:clamp(24px,3.5vw,40px);line-height:1.1;margin:0}
+    .promo-sub{color:var(--muted);margin:4px 0 0;font-size:clamp(14px,1.6vw,16px)}
+
+    /* Subrayado animado sobrio */
+    .underline{position:relative;display:inline-block}
+    .underline::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);transform-origin:left;transition:transform .7s ease}
+    .in-view .underline::after{transform:scaleX(1)}
+
+    /* Carrusel destacado */
+    .carousel{position:relative;border:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.0));border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .carousel-track{display:flex;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+    .slide{min-width:100%;display:grid;grid-template-columns:1.1fr .9fr}
+    .slide-media{background:radial-gradient(1200px 400px at 70% -10%, rgba(121,170,255,.18), transparent 60%), linear-gradient(180deg,var(--bg-soft),transparent);padding:28px;display:flex;align-items:center;justify-content:center}
+    .slide-media img{width:100%;height:auto;max-height:360px;object-fit:contain;filter:drop-shadow(0 16px 30px rgba(0,0,0,.35))}
+    .slide-copy{padding:36px 24px 36px 16px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+    .badge{display:inline-block;background:linear-gradient(90deg, rgba(43,135,255,.15), rgba(121,170,255,.10));border:1px solid rgba(121,170,255,.35);color:var(--accent-2);padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px;letter-spacing:.4px}
+    .h2{font-size:clamp(20px,3vw,30px);margin:0}
+    .lead{color:var(--muted);margin:0}
+    .cta{align-self:flex-start;margin-top:6px}
+    .btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:var(--ink);text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,.12)}
+    .btn::after{content:"";position:absolute;inset:-2px;border-radius:16px;border:2px solid transparent;background:linear-gradient(var(--bg-soft),var(--bg-soft)) padding-box, linear-gradient(90deg,rgba(121,170,255,.0),rgba(121,170,255,.7),rgba(121,170,255,.0)) border-box;filter:blur(.2px);opacity:.6}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+
+    .ctrl{position:absolute;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(12,20,38,.65);backdrop-filter:blur(6px);cursor:pointer}
+    .ctrl svg{width:20px;height:20px;fill:var(--ink)}
+    .ctrl:hover{background:rgba(12,20,38,.8)}
+    .ctrl.prev{left:10px}
+    .ctrl.next{right:10px}
+
+    /* Rejilla de promos */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:22px}
+    .card{grid-column:span 4;min-height:180px;padding:18px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+    .card::before{content:"";position:absolute;inset:-40%;background:radial-gradient(240px 140px at var(--mx,60%) var(--my,40%), rgba(121,170,255,.10), transparent 60%);transition:all .4s ease}
+    .card:hover::before{--mx:52%;--my:32%}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .save{position:absolute;top:14px;right:14px;background:rgba(121,170,255,.15);border:1px solid rgba(121,170,255,.35);color:#d7e6ff;font-weight:800;padding:6px 10px;border-radius:999px;font-size:12px}
+    /* Productos con imagen y precio */
+    .card.product{display:flex;flex-direction:column;gap:10px}
+    .card-media{aspect-ratio:4/3;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;display:grid;place-items:center}
+    .card-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .5s ease}
+    .card.product:hover .card-media img{transform:scale(1.06)}
+    .meta{color:var(--muted);font-size:13px}
+    .price-row{display:flex;align-items:baseline;gap:10px;margin-top:2px}
+    .price{font-weight:800;font-size:18px}
+    .old{color:#9fb3d8;text-decoration:line-through;font-size:14px}
+    .card .btn{margin-top:6px;align-self:flex-start}
+
+
+    /* Marquee de marcas */
+    .marquee{margin-top:26px;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden;position:relative}
+    .marquee-track{display:flex;gap:48px;padding:16px 0;animation:scroll 24s linear infinite}
+    .logo{opacity:.75;transition:opacity .2s}
+    .logo:hover{opacity:1}
+
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+    /* Aparición sutil al hacer scroll */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.in-view{opacity:1;transform:none}
+
+    /* Responsivo */
+    @media (max-width: 900px){
+      .slide{grid-template-columns:1fr}
+      .slide-media{order:2}
+      .slide-copy{order:1}
+      .card{grid-column:span 6}
+    }
+    @media (max-width: 640px){
+      .card{grid-column:span 12}
+      .ctrl{display:none}
+    }
+
+    /* Respeta reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .marquee-track{animation:none}
+      .reveal{transition:none}
+      .carousel-track{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <section class="wrap" aria-label="Publicidad y Promociones">
+    <header class="promo-header in-view">
+      <div>
+        <h1 class="promo-title underline">Promociones destacadas</h1>
+        <p class="promo-sub">Ofertas profesionales, diseño sobrio en azul y blanco, con movimiento sutil y elegante.</p>
+      </div>
+      <a class="btn" href="#catalogo" aria-label="Ver catálogo completo">
+        Ver catálogo
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+      </a>
+    </header>
+
+    <!-- Carrusel principal -->
+    <div class="carousel reveal" id="carousel">
+      <button class="ctrl prev" aria-label="Anterior" data-dir="-1"><svg viewBox="0 0 24 24"><path d="M14.828 12l-4.95 4.95-1.414-1.414L12 12 8.464 8.464l1.414-1.414z"/></svg></button>
+      <div class="carousel-track" id="track">
+        <!-- Slide 1 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
+          <div class="slide-media"><img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=1600&auto=format&fit=crop" alt="Producto premium en fondo azul" loading="lazy"></div>
+          <div class="slide-copy">
+            <span class="badge">-25% lanzamiento</span>
+            <h2 class="h2">Línea Ejecutiva</h2>
+            <p class="lead">Calidad profesional con estética minimal: azul + blanco. Ideal para home office y estudio.</p>
+            <div class="cta"><a class="btn" href="#">Comprar ahora</a></div>
+          </div>
+        </article>
+        <!-- Slide 2 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+          <div class="slide-media"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop" alt="Tecnología en tonos azules" loading="lazy"></div>
+          <div class="slide-copy">
+            <span class="badge">2x1 fin de semana</span>
+            <h2 class="h2">Smart Essentials</h2>
+            <p class="lead">Accesorios esenciales con envío 24h. Diseño limpio y confiable.</p>
+            <div class="cta"><a class="btn" href="#">Ver combos</a></div>
+          </div>
+        </article>
+        <!-- Slide 3 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+          <div class="slide-media"><img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=1600&auto=format&fit=crop" alt="Minimal workspace azul" loading="lazy"></div>
+          <div class="slide-copy">
+            <span class="badge">Hasta 40% OFF</span>
+            <h2 class="h2">Oficina Minimal</h2>
+            <p class="lead">Setup ultra sobrio con materiales premium. Azul, blanco y productividad.</p>
+            <div class="cta"><a class="btn" href="#">Personalizar</a></div>
+          </div>
+        </article>
+      </div>
+      <button class="ctrl next" aria-label="Siguiente" data-dir="1"><svg viewBox="0 0 24 24"><path d="M9.172 12l4.95-4.95 1.414 1.414L12 12l3.536 3.536-1.414 1.414z"/></svg></button>
+    </div>
+
+    <!-- Rejilla de tarjetas de promoción -->
+    <div class="grid reveal" id="promos">
+      <!-- Producto 1 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-18%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Teclado mecánico azul" loading="lazy">
+        </div>
+        <h3>Teclado Mecánico Azul</h3>
+        <p class="meta">RGB silencioso · Switch Brown</p>
+        <div class="price-row"><span class="price">S/ 179</span><span class="old">S/ 219</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+      <!-- Producto 2 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-17%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1518443997429-5fef6aae0f72?q=80&w=1200&auto=format&fit=crop" alt="Auriculares profesionales en azul" loading="lazy">
+        </div>
+        <h3>Auriculares Pro</h3>
+        <p class="meta">Aislamiento pasivo · Sonido nítido</p>
+        <div class="price-row"><span class="price">S/ 249</span><span class="old">S/ 299</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+      <!-- Producto 3 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-18%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1200&auto=format&fit=crop" alt="Monitor 27 pulgadas en setup azul" loading="lazy">
+        </div>
+        <h3>Monitor 27" QHD</h3>
+        <p class="meta">75Hz · Borde delgado</p>
+        <div class="price-row"><span class="price">S/ 899</span><span class="old">S/ 1,099</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+      <!-- Producto 4 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-16%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1200&auto=format&fit=crop" alt="Silla ergonómica oficina azul y blanco" loading="lazy">
+        </div>
+        <h3>Silla Ergonómica</h3>
+        <p class="meta">Soporte lumbar · Tela fresca</p>
+        <div class="price-row"><span class="price">S/ 459</span><span class="old">S/ 549</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+      <!-- Producto 5 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-19%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f59?q=80&w=1200&auto=format&fit=crop" alt="Hub USB-C 8 en 1 metálico" loading="lazy">
+        </div>
+        <h3>Hub USB‑C 8 en 1</h3>
+        <p class="meta">HDMI · PD 100W · SD/TF</p>
+        <div class="price-row"><span class="price">S/ 129</span><span class="old">S/ 159</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+      <!-- Producto 6 -->
+      <article class="card product" tabindex="0">
+        <span class="save">-25%</span>
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1587822412627-c5693caed87a?q=80&w=1200&auto=format&fit=crop" alt="Mouse inalámbrico minimal azul" loading="lazy">
+        </div>
+        <h3>Mouse Inalámbrico</h3>
+        <p class="meta">Silencioso · 1600 DPI</p>
+        <div class="price-row"><span class="price">S/ 89</span><span class="old">S/ 119</span></div>
+        <a class="btn" href="#">Comprar</a>
+      </article>
+    </div>
+
+    <!-- Marquee de confianza / marcas -->
+    <div class="marquee reveal" aria-label="Marcas aliadas">
+      <div class="marquee-track">
+        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
+        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
+        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
+        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
+        <!-- duplicado para bucle infinito suave -->
+        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
+        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
+        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
+        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // Intersection Observer para revelar secciones con transición sutil
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view') })
+    },{threshold:.2});
+    document.querySelectorAll('.reveal, .promo-header').forEach(el=>io.observe(el));
+
+    // Carrusel minimal con auto-play y controles
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    const prev = document.querySelector('.ctrl.prev');
+    const next = document.querySelector('.ctrl.next');
+    let index = 0, timer;
+
+    function go(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index*100}%)`;
+    }
+    function autoplay(){
+      clearInterval(timer);
+      timer = setInterval(()=> go(index+1), 5000);
+    }
+    prev.addEventListener('click', ()=>{ go(index-1); autoplay(); });
+    next.addEventListener('click', ()=>{ go(index+1); autoplay(); });
+    autoplay();
+
+    // Efecto de luz que sigue el puntero en tarjetas (sutil)
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('pointermove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width)*100;
+        const y = ((e.clientY - r.top) / r.height)*100;
+        card.style.setProperty('--mx', x+'%');
+        card.style.setProperty('--my', y+'%');
+      });
+    });
+  </script>
+</body>
+</html>
