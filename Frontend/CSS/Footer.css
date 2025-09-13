@@ -1,10 +1,12 @@
-/* Footer */
+/* ========= Footer ========= */
 .footer {
-  background: rgba(15, 23, 42, 0.95);
+  background: #0f172acc; /* igual que navbar */
   border-top: 1px solid #1f2937;
   padding: 20px 8%;
   color: #9ca3af;
   font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.3);
   animation: fadeUp 0.7s ease-out;
 }
 
@@ -16,11 +18,14 @@
   gap: 14px;
 }
 
+/* Texto */
 .footer p {
   margin: 0;
   font-size: 0.85rem;
+  color: #cbd5e1;
 }
 
+/* ========= Social links ========= */
 .social-links {
   list-style: none;
   display: flex;
@@ -30,18 +35,24 @@
 }
 
 .social-links a {
-  color: #e2e8f0;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #05202a;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s, transform 0.2s;
+  background: linear-gradient(135deg, #22d3ee, #06b6d4);
+  box-shadow: 0 0 12px #22d3ee55;
+  transition: transform .2s, filter .2s, box-shadow .3s;
 }
 
 .social-links a:hover {
-  color: #22d3ee;
   transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 0 20px #22d3ee88, 0 0 6px #a78bfa55;
 }
 
-/* Animación de entrada */
+/* ========= Animación de entrada ========= */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
