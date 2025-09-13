@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="../CSS/Delivery.css"/>
   <link rel="stylesheet" href="../CSS/Navbar.css"/>
   <link rel="stylesheet" href="../CSS/Footer.css"/>
+  <script defer src="../JS/includes.js"></script>
+  <script defer src="../JS/Bodeguero.js"></script>
 </head>
 <body>
   <!-- Navbar dinámico (no necesitas modificar el archivo existente) -->
-  <header id="navbar"></header>
+  <div data-include="../HTML/Navbar.Bodega.html"></div>
 
   <header class="hero">
     <h1>Delivery</h1>
@@ -144,16 +146,5 @@
   <footer id="footer"></footer>
 
   <script src="../JS/delivery.js"></script>
-  <script>
-    // Inyecta Navbar/Footer existentes sin editarlos
-    fetch("../HTML/Navbar.html").then(r=>r.text()).then(h=>{ 
-      document.getElementById("navbar").innerHTML = h;
-      const t=document.querySelector(".menu-toggle"), l=document.querySelector(".nav-links");
-      if(t && l){ t.addEventListener("click", ()=>l.classList.toggle("active")); }
-    });
-    fetch("../HTML/Footer.html").then(r=>r.text()).then(h=>{ 
-      document.getElementById("footer").innerHTML = h; 
-    });
-  </script>
 </body>
 </html>

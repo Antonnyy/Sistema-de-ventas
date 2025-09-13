@@ -9,13 +9,15 @@
   <link rel="stylesheet" href="../CSS/Navbar.css">
   <link rel="stylesheet" href="../CSS/Footer.css">
   <link rel="stylesheet" href="../CSS/Venta.css?v=9"> <!-- ruta correcta -->
+  <script defer src="../JS/includes.js"></script>
+  <script defer src="../JS/Bodeguero.js"></script>
 </head>
   <!-- Estilos SOLO de esta página -->
   <link rel="stylesheet" href="../CSS/Venta.css?v=1">
 </head>
 <body data-page="ventas">
   <!-- Navbar (si usas includes.js, se carga desde Navbar.html) -->
-  <header data-include="../HTML/Navbar.html"></header>
+  <div data-include="../HTML/Navbar.Bodega.html"></div>
 
   <main class="v-container">
     <!-- Encabezado -->
@@ -126,9 +128,6 @@
       </aside>
     </section>
   </main>
-
-  <!-- Footer -->
-  <footer data-include="../HTML/Footer.html"></footer>
 
   <!-- Si ya usas includes.js para cargar header/footer, déjalo al final -->
   <script src="../JS/includes.js"></script>
