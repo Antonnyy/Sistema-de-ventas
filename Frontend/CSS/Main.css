@@ -1,20 +1,32 @@
 :root{
-  --bg:#0b1220;
-  --surface:#0f172aee;
-  --surface-2:#111827;
-  --text:#e2e8f0;
-  --muted:#cbd5e1;
-  --primary:#22d3ee;
-  --primary-2:#06b6d4;
-  --accent:#a78bfa;
-  --border:#1f2937;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --bg:#0b1020;
+  --card:#11182d;
+  --muted:#8ea3b2;
+  --text:#eaf2ff;
+  --brand:#5eead4;   /* teal base (acento) */
+  --brand-2:#7c3aed; /* violeta (botón por defecto) */
+
+  /* NUEVAS (faltaban) */
+  --surface: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  --border: rgba(255,255,255,.08);
+  --ring: rgba(94,234,212,.35);
+  --primary: #5eead4;  /* CTA teal */
+  --primary-2:#22d3ee; /* CTA teal brillante */
+  --danger:#ef4444;
+  --ok:#22c55e;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
   --radius:18px;
-  --speed:.45s;
+  --speed:.18s;
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), rgba(124,58,237,0)), var(--bg);
+  color: var(--text);
+  min-height:100%;
+}
 body{
   margin:0;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
@@ -35,7 +47,7 @@ body{
 .hero h1{
   font-size: clamp(28px,5vw,42px);
   margin:0 0 8px 0;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -46,18 +58,46 @@ body{
 
 /* Botones */
 .btn{
-  display:inline-block; padding:12px 18px; border-radius:12px;
-  border:1px solid #334155aa; font-weight:800; cursor:pointer; text-decoration:none;
-  transition: transform .12s, box-shadow var(--speed), background var(--speed), filter .2s;
+  display:inline-block;
+  background: linear-gradient(135deg, var(--brand-2), #4f46e5);
+  color:#fff;
+  border:none;
+  padding:12px 14px;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow: var(--shadow);
+  transition: transform .06s ease-in-out, opacity var(--speed), filter var(--speed);
 }
+.btn:hover{ filter: brightness(1.06); transform: translateY(-2px); }
+.btn:active{ transform: translateY(0) scale(.99); }
+.btn:focus-visible{ outline: none; box-shadow: 0 0 0 4px var(--ring); }
+
+/* CTA en teal (más brillante) */
 .btn.primary{
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
   color:#05202a;
   box-shadow: 0 0 18px #22d3ee55, 0 12px 30px rgba(34,211,238,.18);
 }
-.btn.primary:hover{ transform: translateY(-2px); filter:brightness(1.05) }
-.btn.ghost{ background:#0b1220aa; color:var(--text) }
-.btn.ghost:hover{ transform: translateY(-2px); border-color:#475569 }
+.btn.primary:hover{ filter: brightness(1.07); transform: translateY(-2px); }
+
+/* Fantasma / secundario */
+.btn.ghost{
+  background: #0b1220aa;
+  color: var(--text);
+  border:1px solid rgba(255,255,255,.14);
+}
+.btn.ghost:hover{ border-color:#475569; transform: translateY(-2px); }
+
+/* Outline (si lo usas en otras vistas) */
+.btn.outline{
+  background: transparent;
+  color: var(--text);
+  border:1px solid var(--border);
+}
+
+.btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; filter:none; }
 
 /* Layout */
 .wrapper{ width:min(1100px,92%); margin:16px auto 40px }
@@ -69,7 +109,7 @@ body{
 
 .qcard{
   background: var(--surface);
-  border:1px solid #1f293733;
+  border:1px solid var(--border);
   border-radius: var(--radius);
   padding:16px;
   box-shadow: var(--shadow);
@@ -89,7 +129,7 @@ body{
 
 .card{
   background: var(--surface);
-  border:1px solid #1f293733;
+  border:1px solid var(--border);
   border-radius: var(--radius);
   padding:18px;
   box-shadow: var(--shadow);
@@ -114,3 +154,31 @@ body{
 @keyframes fadeUp{ to{opacity:1; transform:translateY(0)} }
 @keyframes drop{ from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)} }
 @keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+
+/* === Público: destacados y categorías === */
+.featured{ margin: 16px 0 10px; }
+.row-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.row-head h2{ margin:0; }
+.featured-grid{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(1,1fr);
+}
+@media (min-width: 640px){ .featured-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px){ .featured-grid{ grid-template-columns: repeat(3,1fr); } }
+.fcard{ padding: 12px; }
+.fhead{ display:flex; justify-content:flex-start; }
+.fbody{ display:flex; flex-direction:column; gap:8px; }
+.ftitle{ margin:0; font-size: 16px; }
+.fsku{ color: var(--muted); font-size: 12px; margin:0; }
+.frow{ display:flex; align-items:center; justify-content:space-between; }
+.cat-pills{ display:flex; flex-wrap:wrap; gap:8px; }
+.pill.cat{ background:#0d1428; border:1px solid rgba(255,255,255,.12); }
+
+/* Cards estilo Catálogo (extra por si quieres el efecto glass más marcado) */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  box-shadow: var(--shadow);
+}
+.qcard.card{ padding:16px; }

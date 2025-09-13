@@ -16,7 +16,7 @@
     <header class="hero">
       <h1>Bienvenido a tu Sistema de Ventas</h1>
       <p class="sub">
-        Administra tu bodega Josdin: ventas, inventario, delivery y más.
+        Administra tu bodega Josdin: ventas e inventario — rápido y simple.
       </p>
       <div class="hero-actions">
         <a class="btn primary" href="Catalogo.html">Abrir Catálogo</a>
@@ -25,7 +25,7 @@
     </header>
 
     <main class="wrapper">
-      <!-- Atajos rápidos -->
+      <!-- Atajos rápidos (sin Delivery) -->
       <section class="quick grid-4">
         <a class="qcard fade-up" style="--d: 0s" href="Catalogo.html">
           <span class="ico">🛒</span>
@@ -37,10 +37,11 @@
           <h3>Publicidad</h3>
           <p>Promociones y banners para tu tienda.</p>
         </a>
-        <a class="qcard fade-up" style="--d: 0.12s" href="Delivery.html">
-          <span class="ico">🚚</span>
-          <h3>Delivery</h3>
-          <p>Registra pedidos y consulta historial.</p>
+        <!-- Reemplazo de Delivery -->
+        <a class="qcard fade-up" style="--d: 0.12s" href="Catalogo.html#novedades">
+          <span class="ico">🆕</span>
+          <h3>Novedades</h3>
+          <p>Lo último que llegó a la tienda.</p>
         </a>
         <a class="qcard fade-up" style="--d: 0.18s" href="Contacto.html">
           <span class="ico">📞</span>
@@ -49,7 +50,7 @@
         </a>
       </section>
 
-      <!-- Sección destacada -->
+      <!-- Consejo -->
       <section class="highlight fade-up" style="--d: 0.18s">
         <h2>Consejo</h2>
         <p>
@@ -57,12 +58,25 @@
           la sección Publicidad para aumentar el ticket promedio.
         </p>
       </section>
+
+      <!-- Promociones (bloque público extra) -->
+      <section class="highlight fade-up" style="--d: 0.22s">
+        <h2>Promociones</h2>
+        <p>
+          Revisa las ofertas vigentes y prepara campañas estacionales
+          (vuelta a clases, fiestas, etc.) desde <b>Publicidad</b>.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="Publicidad.html">Ver Promos</a>
+          <a class="btn ghost" href="Catalogo.html#novedades">Ver Novedades</a>
+        </div>
+      </section>
     </main>
 
     <!-- Footer dinámico -->
     <footer id="footer"></footer>
 
-    <!-- Scripts -->
+    <!-- Scripts (solo navbar/footer) -->
     <script>
       // Navbar
       fetch("../HTML/Navbar.html")
@@ -75,6 +89,7 @@
             t.addEventListener("click", () => l.classList.toggle("active"));
           }
         });
+
       // Footer
       fetch("../HTML/Footer.html")
         .then((r) => r.text())
@@ -82,37 +97,7 @@
           document.getElementById("footer").innerHTML = h;
         });
 
-      // ===== KPIs rápidos (no requiere backend) =====
-      (function kpis() {
-        // Delivery (usa la misma clave que te di en delivery.js)
-        const STORAGE_KEY = "delivery_pedidos";
-        let rows = [];
-        try {
-          rows = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        } catch (e) {
-          rows = [];
-        }
-
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const isToday = (iso) => {
-          const d = new Date(iso);
-          d.setHours(0, 0, 0, 0);
-          return d.getTime() === today.getTime();
-        };
-
-        const hoy = rows.filter((p) => isToday(p.fecha)).length;
-        const pend = rows.filter(
-          (p) => p.estado === "PENDIENTE" || p.estado === "EN_CAMINO"
-        ).length;
-
-        document.getElementById("kpi-delivery-hoy").textContent = hoy;
-        document.getElementById("kpi-delivery-pend").textContent = pend;
-
-        // Bajo stock (si ya manejas stock en localStorage o más adelante desde API)
-        // Si aún no tienes fuente, lo dejamos en "—"
-        document.getElementById("kpi-bajostock").textContent = "—";
-      })();
+      // ⛔️ Eliminé el bloque de KPIs de Delivery para que no “jale” nada interno.
     </script>
   </body>
 </html>
