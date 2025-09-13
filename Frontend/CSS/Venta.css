@@ -1,0 +1,108 @@
+:root{
+  --bg:#0f172a; --panel:#111827; --border:#1f2937;
+  --text:#e2e8f0; --muted:#9ca3af;
+  --accent:#22d3ee; --accent2:#06b6d4;
+  --success:#10b981; --warn:#f59e0b; --danger:#ef4444;
+  --shadow:0 12px 28px rgba(0,0,0,.35);
+}
+/* Fondo y tipografía solo para Ventas */
+body[data-page="ventas"]{
+  background: radial-gradient(1000px 520px at 10% -10%, rgba(34,211,238,.08), transparent),
+              radial-gradient(900px 480px at 110% -15%, rgba(34,211,238,.06), transparent),
+              var(--bg);
+  color:var(--text);
+  font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+}
+body[data-page="ventas"] h1,body[data-page="ventas"] h2,body[data-page="ventas"] h3{margin:0 0 6px}
+
+/* Contenedor */
+.v-container{width:min(1150px,92%);margin:28px auto 80px}
+.v-muted{color:var(--muted)}
+
+/* Encabezado */
+.v-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px}
+.v-head h1{font-size:1.6rem}
+.v-head-actions{display:flex;gap:12px}
+.v-switch{display:flex;gap:10px;align-items:center;color:var(--muted)}
+
+/* Toolbar */
+.v-toolbar{
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  background:rgba(17,24,39,.65);border:1px solid var(--border);
+  padding:12px;border-radius:14px;box-shadow:var(--shadow);
+  backdrop-filter:saturate(120%) blur(4px);
+}
+.v-toolbar input[type="search"],.v-toolbar input[type="number"]{
+  background:#0b1424;color:var(--text);border:1px solid var(--border);
+  border-radius:10px;padding:10px 12px;outline:none;
+}
+.v-inline{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.v-grow{flex:1}
+
+/* Botones */
+.v-btn{
+  background:#162033;color:var(--text);border:1px solid var(--border);
+  padding:10px 14px;border-radius:10px;cursor:pointer;
+  transition:transform .15s,border-color .2s,box-shadow .2s;
+}
+.v-btn:hover{transform:translateY(-1px);border-color:var(--accent)}
+.v-btn:active{transform:translateY(0) scale(.98)}
+.v-btn-primary{
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+  color:#001821;font-weight:600;border-color:transparent;
+  box-shadow:0 8px 20px rgba(34,211,238,.25)
+}
+.v-btn-secondary{background:#0e1a2c;border-color:#213046}
+
+/* Layout principal */
+.v-grid{display:grid;grid-template-columns:1fr 340px;gap:16px}
+@media (max-width:990px){.v-grid{grid-template-columns:1fr}}
+
+/* Panel detalle */
+.v-panel{background:rgba(17,24,39,.85);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.v-panel-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border)}
+.v-badge{background:rgba(34,211,238,.15);color:var(--accent);border:1px solid rgba(34,211,238,.45);padding:4px 10px;border-radius:999px;font-size:.85rem}
+
+/* Tabla */
+.v-table-wrap{overflow:auto}
+.v-table{width:100%;border-collapse:collapse}
+.v-table th{
+  text-align:left;font-weight:600;font-size:.9rem;color:var(--muted);
+  padding:14px 16px;background:#0e1627;border-bottom:1px solid var(--border)
+}
+.v-table td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.v-table tr:hover{background:rgba(34,211,238,.05)}
+.v-center{text-align:center}
+
+/* Inputs en tabla */
+.v-qty,.v-price{
+  width:90px;background:#0b1424;color:var(--text);
+  border:1px solid var(--border);border-radius:10px;padding:8px 10px
+}
+.v-sub{font-weight:600}
+
+/* Resumen / Pago */
+.v-summary{display:flex;flex-direction:column;gap:12px}
+.v-card{background:rgba(17,24,39,.85);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px}
+.v-row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.v-total{font-size:1.05rem;font-weight:700;border-top:1px dashed var(--border);padding-top:8px}
+.v-field{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.v-field input,.v-field select{background:#0b1424;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px 12px;outline:none}
+.v-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:400px){.v-actions{grid-template-columns:1fr}}
+
+/* Botón ícono */
+.v-icon-btn{background:#0f1b2f;color:var(--text);border:1px solid var(--border);width:34px;height:34px;border-radius:10px;cursor:pointer}
+.v-icon-btn:hover{border-color:var(--accent)}
+
+/* Toast y Modal (para cuando agregues JS) */
+.v-toast{position:fixed;right:18px;bottom:18px;z-index:60;background:#0e1627;border:1px solid var(--border);color:var(--text);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow)}
+.v-hidden{display:none!important}
+.v-modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center}
+.v-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.v-modal-card{position:relative;width:min(620px,92%);background:#0e1627;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px 16px}
+.v-modal-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.v-modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+
+/* Ticket monoespaciado */
+.v-ticket{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;white-space:pre-wrap;background:#0b1424;border:1px dashed var(--border);border-radius:12px;padding:12px;margin-top:10px}
