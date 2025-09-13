@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel del Bodeguero</title>
+  <link rel="stylesheet" href="../CSS/Bodeguero.css" />
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
+  <link rel="stylesheet" href="../CSS/Footer.css" />
+  <script defer src="../JS/includes.js"></script>
+  <script defer src="../JS/Bodeguero.js"></script>
+</head>
+<body class="bodega-page">
+
+  <div data-include="../HTML/Navbar.Bodega.html"></div>
+
+  <div class="bodega-wrap">
+    <div class="bodega-top">
+      <div class="bodega-title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 3h18v4H3V3zm2 6h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9z" fill="url(#g)"/>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
+              <stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div>
+          <div style="font-size:22px; line-height:1;">Bodega</div>
+          <div class="badge">Operaciones</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btnEntrada">+ Nueva entrada</button>
+        <button class="btn outline" id="btnSalida">- Nueva salida</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="card kpi"><div class="label">Productos</div><div class="value" id="kpiProductos">0</div></div>
+      <div class="card kpi"><div class="label">Bajo stock</div><div class="value" id="kpiBajoStock">0</div></div>
+      <div class="card kpi"><div class="label">Pedidos delivery</div><div class="value" id="kpiDelivery">0</div></div>
+      <div class="card kpi"><div class="label">Ventas hoy</div><div class="value" id="kpiVentas">S/ 0.00</div></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="stock">Stock</button>
+      <button class="tab" data-tab="movs">Movimientos</button>
+      <button class="tab" data-tab="delivery">Pedidos Delivery</button>
+      <button class="tab" data-tab="ventas">Ventas</button>
+    </div>
+
+    <!-- Stock -->
+    <section id="tab-stock" class="section active">
+      <div class="tools">
+        <input class="input" id="q" type="search" placeholder="Buscar por nombre o SKU...">
+        <select id="fcat">
+          <option value="">Todas las categorías</option>
+        </select>
+        <button class="btn outline" id="btnExport">Exportar CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table class="table" id="tblStock">
+          <thead>
+            <tr>
+              <th>SKU</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mín.</th><th>Estado</th><th style="text-align:right;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="note">Consejo: usa “Nueva salida” para descontar stock cuando Ventas/Delivery confirmaron una operación.</p>
+    </section>
+
+    <!-- Movimientos -->
+    <section id="tab-movs" class="section">
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- Delivery -->
+    <section id="tab-delivery" class="section">
+      <p class="note">Cola de pedidos desde Ventas. Sincroniza con la Interfaz de Delivery para estados “Pendiente → En ruta → Entregado”.</p>
+      <div class="table-wrap">
+        <table class="table" id="tblDelivery">
+          <thead><tr><th>ID</th><th>Cliente</th><th>Items</th><th>Estado</th><th>Creado</th><th style="text-align:right;">Acciones</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ventas -->
+    <section id="tab-ventas" class="section">
+      <p class="note">Resumen de ventas (lectura). La interfaz de Ventas actualiza estas cifras; aquí solo se muestra el estado.</p>
+      <div class="table-wrap">
+        <table class="table" id="tblVentas">
+          <thead><tr><th>ID</th><th>Hora</th><th>Items</th><th>Total</th><th>Método</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div data-include="../HTML/Footer.html"></div>
+
+  <!-- Modales -->
+  <div class="modal" id="modalEntrada">
+    <div class="pane">
+      <h3>Nueva entrada</h3>
+      <div class="row">
+        <div><label>SKU</label><input id="eSku" class="input" placeholder="SKU..."></div>
+        <div><label>Cantidad</label><input id="eQty" type="number" class="input" min="1" value="1"></div>
+        <div class="full"><label>Referencia</label><input id="eRef" class="input" placeholder="Compra / Proveedor / Nota"></div>
+      </div>
+      <div class="actions">
+        <button class="btn outline" data-close="#modalEntrada">Cancelar</button>
+        <button class="btn" id="saveEntrada">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalSalida">
+    <div class="pane">
+      <h3>Nueva salida</h3>
+      <div class="row">
+        <div><label>SKU</label><input id="sSku" class="input" placeholder="SKU..."></div>
+        <div><label>Cantidad</label><input id="sQty" type="number" class="input" min="1" value="1"></div>
+        <div class="full"><label>Referencia</label><input id="sRef" class="input" placeholder="Venta / Delivery / Nota"></div>
+      </div>
+      <div class="actions">
+        <button class="btn outline" data-close="#modalSalida">Cancelar</button>
+        <button class="btn" id="saveSalida">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

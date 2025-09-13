@@ -1,0 +1,27 @@
+<nav class="navbar sv-navbar">
+  <div class="logo">Sistema · Bodega</div>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
+    <li><a class="nav-link" href="Ventas.html">Ventas</a></li>
+    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
+    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+    <li><a class="btn nav-link" href="Login.html" id="logoutBtn">Salir</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Menú">☰</button>
+</nav>
+<script>
+  // Toggle móvil
+  (function(){
+    var t = document.querySelector(".menu-toggle");
+    var l = document.querySelector(".nav-links");
+    if(t && l) t.addEventListener("click", function(){ l.classList.toggle("active"); });
+  })();
+  // Logout (si hay sessionStorage.logueado)
+  (function(){
+    var b = document.getElementById("logoutBtn");
+    if(!b) return;
+    b.addEventListener("click", function(e){
+      try { sessionStorage.removeItem("logueado"); } catch(_){}
+    });
+  })();
+</script>
