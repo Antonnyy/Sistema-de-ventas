@@ -1,34 +1,43 @@
-/* ========= Variables (compatibles con tu catálogo) ========= */
+/* ========= Variables (compatibles con tu catálogo) =========
+   Tokens de diseño globales: colores, bordes, sombras y velocidad
+   reutilizados en toda la interfaz para mantener coherencia visual.
+============================================================== */
 :root{
   --bg:#0b1220;              /* fondo base oscuro */
-  --surface:#0f172aee;       /* tarjetas / paneles (glass) */
-  --surface-2:#111827;       /* superficies secundarias */
-  --text:#e2e8f0;
-  --muted:#cbd5e1;
-  --primary:#22d3ee;         /* cyan */
-  --primary-2:#06b6d4;       /* cyan oscuro */
+  --surface:#0f172aee;       /* superficie semitransparente tipo glass */
+  --surface-2:#111827;       /* superficie secundaria */
+  --text:#e2e8f0;            /* texto principal */
+  --muted:#cbd5e1;           /* texto secundario */
+  --primary:#22d3ee;         /* cyan brillante */
+  --primary-2:#06b6d4;       /* cyan más oscuro */
   --accent:#a78bfa;          /* morado */
-  --border:#1f2937;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-  --radius:18px;
-  --r-sm:12px;
-  --speed:.45s;
+  --border:#1f2937;          /* color de bordes */
+  --shadow:0 20px 60px rgba(0,0,0,.35); /* sombra difusa */
+  --radius:18px;             /* borde redondeado grande */
+  --r-sm:12px;               /* borde redondeado pequeño */
+  --speed:.45s;              /* velocidad de transiciones */
 }
 
-/* ========= Reset + Fondo ========= */
+/* ========= Reset + Fondo =========
+   Eliminamos márgenes/paddings por defecto.
+   Aplicamos tipografía base y el fondo con
+   brillos radiales en cyan y morado.
+============================================================== */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{
   font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
   background: var(--bg);
-  /* glows sutiles como el catálogo */
   background-image:
     radial-gradient(900px 500px at 15% 0%, rgba(124,58,237,.18), transparent 60%),
     radial-gradient(900px 500px at 85% 15%, rgba(34,211,238,.14), transparent 60%);
 }
 
-/* ========= Hero ========= */
+/* ========= Hero =========
+   Cabecera con título y subtítulo.
+   Incluye animación de caída suave.
+============================================================== */
 .hero{
   position:relative; z-index:1;
   text-align:center;
@@ -39,22 +48,32 @@ body{
 .hero h1{
   font-size: clamp(28px,5vw,40px);
   margin-bottom:10px;
+  /* degradado aplicado al texto */
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 .hero p{ color:var(--muted) }
 
-/* ========= Layout ========= */
+/* ========= Layout wrapper =========
+   Contenedor principal que centra el
+   contenido con un ancho máximo.
+============================================================== */
 .wrapper{
   position:relative; z-index:1;
   width:min(1100px, 92%);
   margin: 14px auto 40px;
 }
 
-/* ========= Tarjetas de info ========= */
+/* ========= Tarjetas de info =========
+   Cuadrícula de 3 columnas con tarjetas
+   de contacto (correo, teléfono, dirección).
+============================================================== */
 .cards{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:18px;
 }
 @media (max-width:900px){ .cards{grid-template-columns:1fr 1fr} }
 @media (max-width:620px){ .cards{grid-template-columns:1fr} }
@@ -68,12 +87,22 @@ body{
   transition: transform .15s, border-color var(--speed), background var(--speed);
 }
 .card:hover{ transform: translateY(-3px); border-color:#33415588; }
-.card .icon{ font-size:28px; margin-bottom:6px; animation:pulse 2.4s ease-in-out infinite }
+.card .icon{
+  font-size:28px;
+  margin-bottom:6px;
+  animation:pulse 2.4s ease-in-out infinite;
+}
 .card h3{ margin-bottom:4px }
 
-/* ========= Contenedor form + mapa ========= */
+/* ========= Contenedor form + mapa =========
+   Dos columnas: formulario de contacto +
+   mapa o ubicación. Se adapta en móviles.
+============================================================== */
 .contact{
-  display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; align-items:stretch;
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:14px;
+  align-items:stretch;
 }
 @media (max-width:900px){ .contact{grid-template-columns:1fr} }
 
@@ -85,25 +114,35 @@ body{
   box-shadow: var(--shadow);
 }
 
-/* ========= Campos con “float label” ========= */
+/* ========= Campos con “float label” =========
+   Inputs y textareas con etiquetas flotantes
+   que se elevan al enfocar o escribir.
+============================================================== */
 .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
 @media (max-width:620px){ .grid-2{ grid-template-columns:1fr } }
 
 .field{ position:relative; margin-bottom:12px; }
 .field input, .field textarea{
   width:100%; padding:14px;
-  border-radius:12px; border:1px solid #334155aa;
-  background:#0b1220; color:var(--text); outline:none;
+  border-radius:12px;
+  border:1px solid #334155aa;
+  background:#0b1220;
+  color:var(--text);
+  outline:none;
   transition: border var(--speed), box-shadow var(--speed), transform .12s;
 }
 .field textarea{ resize: vertical }
-.field input::placeholder, .field textarea::placeholder{ color:#94a3b8; opacity:.6 }
+.field input::placeholder, .field textarea::placeholder{
+  color:#94a3b8; opacity:.6
+}
 
+/* Etiqueta flotante */
 .field label{
   position:absolute; left:12px; top:50%; transform:translateY(-50%);
   padding:0 4px; color:#9fb1c6; pointer-events:none; transition: all .18s ease;
   background:transparent;
 }
+/* Estados activos: enfocado o con contenido */
 .field:has(input:focus) label,
 .field:has(textarea:focus) label,
 .field input:not(:placeholder-shown) + label,
@@ -114,7 +153,8 @@ body{
 
 /* Focus ring suave */
 .focus-ring{
-  position:absolute; inset:0; border-radius:12px; pointer-events:none;
+  position:absolute; inset:0;
+  border-radius:12px; pointer-events:none;
   box-shadow:0 0 0 0 rgba(34,211,238,.18);
   transition: box-shadow var(--speed);
 }
@@ -128,8 +168,11 @@ body{
 
 /* ========= Botón primario ========= */
 .btn{
-  display:inline-block; padding:12px 18px; border-radius:12px;
-  border:1px solid #334155aa; font-weight:800; cursor:pointer;
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid #334155aa;
+  font-weight:800; cursor:pointer;
   transition: transform .12s, box-shadow var(--speed), background var(--speed);
 }
 .btn.primary{
@@ -146,34 +189,62 @@ body{
   background: var(--surface);
   border:1px solid #1f293733;
   border-radius: var(--radius);
-  min-height: 320px; display:grid; place-items:center;
+  min-height: 320px;
+  display:grid; place-items:center;
   box-shadow: var(--shadow);
 }
 .map iframe{ width:100%; height:100%; border:0; border-radius: var(--radius); }
 .map-placeholder{
-  color:#cbd5e1; border:1px dashed #334155aa; border-radius:12px; padding:16px 18px; opacity:.9
+  color:#cbd5e1;
+  border:1px dashed #334155aa;
+  border-radius:12px;
+  padding:16px 18px;
+  opacity:.9;
 }
 
-/* ========= Social ========= */
+/* ========= Social =========
+   Botones de redes sociales en forma
+   de píldoras con degradado y glow.
+============================================================== */
 .social{
-  display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:18px 0 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:18px 0 0;
 }
 .pill{
-  display:inline-block; padding:10px 14px; border-radius:999px; color:#05202a;
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  color:#05202a;
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
-  text-decoration:none; font-weight:800; border:1px solid #33415566;
+  text-decoration:none;
+  font-weight:800;
+  border:1px solid #33415566;
   transition: transform .12s, filter .2s, box-shadow .25s;
   box-shadow: 0 0 14px #22d3ee44;
 }
-.pill:hover{ transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 0 20px #22d3ee66 }
+.pill:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 0 20px #22d3ee66;
+}
 
-/* ========= Footer (si usas propio en esta página) ========= */
+/* ========= Footer (opcional local) ========= */
 .foot{ text-align:center; padding:26px 12px; color:#9fb1c6 }
 
 /* ========= Animaciones ========= */
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
-.fade-up{ opacity:0; transform:translateY(10px); animation:fadeUp .55s ease-out forwards; animation-delay:var(--d,0s) }
+.fade-up{
+  opacity:0; transform:translateY(10px);
+  animation:fadeUp .55s ease-out forwards;
+  animation-delay:var(--d,0s);
+}
 @keyframes fadeUp{ to{opacity:1; transform:translateY(0)} }
-.slide-in{ opacity:0; transform:translateX(-12px); animation:slideIn .6s ease-out forwards }
+.slide-in{
+  opacity:0; transform:translateX(-12px);
+  animation:slideIn .6s ease-out forwards;
+}
 @keyframes slideIn{ to{opacity:1; transform:translateX(0)} }
 @keyframes drop{ from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)} }
