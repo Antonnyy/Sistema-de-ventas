@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delivery – Sistema de Ventas</title>
+  <link rel="stylesheet" href="../CSS/Delivery.css"/>
+  <link rel="stylesheet" href="../CSS/Navbar.css"/>
+  <link rel="stylesheet" href="../CSS/Footer.css"/>
+</head>
+<body>
+  <!-- Navbar dinámico (no necesitas modificar el archivo existente) -->
+  <header id="navbar"></header>
+
+  <header class="hero">
+    <h1>Delivery</h1>
+    <p>Registra pedidos a domicilio y gestiona su historial.</p>
+  </header>
+
+  <main class="wrapper">
+    <!-- Formulario de nuevo pedido -->
+    <section class="form card">
+      <h2 class="section-title">Nuevo pedido</h2>
+
+      <form id="form-delivery" autocomplete="on">
+        <div class="grid-3">
+          <div class="field">
+            <input id="cliente" name="cliente" placeholder=" " required>
+            <label for="cliente">Cliente</label><span class="focus-ring"></span>
+          </div>
+          <div class="field">
+            <input id="telefono" name="telefono" placeholder=" ">
+            <label for="telefono">Teléfono</label><span class="focus-ring"></span>
+          </div>
+          <div class="field">
+            <input id="metodoPago" name="metodoPago" placeholder=" " list="metodos" required>
+            <label for="metodoPago">Método de pago</label><span class="focus-ring"></span>
+            <datalist id="metodos">
+              <option value="EFECTIVO"></option>
+              <option value="YAPE"></option>
+              <option value="PLIN"></option>
+              <option value="TARJETA"></option>
+            </datalist>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <input id="direccion" name="direccion" placeholder=" " required>
+            <label for="direccion">Dirección</label><span class="focus-ring"></span>
+          </div>
+          <div class="field">
+            <input id="referencia" name="referencia" placeholder=" ">
+            <label for="referencia">Referencia</label><span class="focus-ring"></span>
+          </div>
+        </div>
+
+        <!-- Items -->
+        <div class="items card-lite">
+          <div class="items-head">
+            <h3>Ítems</h3>
+            <button class="btn sm" type="button" id="btn-add-item">+ Agregar ítem</button>
+          </div>
+          <div id="items-container" class="items-grid">
+            <!-- Fila de ítem dinámica -->
+          </div>
+        </div>
+
+        <!-- Extras -->
+        <div class="grid-3">
+          <div class="field">
+            <input id="repartidor" name="repartidor" placeholder=" ">
+            <label for="repartidor">Repartidor</label><span class="focus-ring"></span>
+          </div>
+          <div class="field">
+            <input id="costoDelivery" name="costoDelivery" placeholder="0.00" inputmode="decimal" value="0">
+            <label for="costoDelivery">Costo delivery (S/)</label><span class="focus-ring"></span>
+          </div>
+          <div class="field">
+            <select id="estado" name="estado" class="select">
+              <option value="PENDIENTE" selected>PENDIENTE</option>
+              <option value="EN_CAMINO">EN CAMINO</option>
+              <option value="ENTREGADO">ENTREGADO</option>
+              <option value="CANCELADO">CANCELADO</option>
+            </select>
+            <label for="estado" class="label-select">Estado</label>
+          </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="totales">
+          <div><span>Subt. (S/):</span><strong id="subTotal">0.00</strong></div>
+          <div><span>Delivery (S/):</span><strong id="dlv">0.00</strong></div>
+          <div><span>Total (S/):</span><strong id="total">0.00</strong></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" type="submit">Guardar pedido</button>
+          <button class="btn" type="reset" id="btn-reset">Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Historial -->
+    <section class="card">
+      <div class="hist-head">
+        <h2 class="section-title">Historial de pedidos</h2>
+        <div class="filters">
+          <input id="filtroTexto" class="input sm" placeholder="Buscar cliente/dirección…">
+          <select id="filtroEstado" class="select sm">
+            <option value="">Todos</option>
+            <option value="PENDIENTE">PENDIENTE</option>
+            <option value="EN_CAMINO">EN CAMINO</option>
+            <option value="ENTREGADO">ENTREGADO</option>
+            <option value="CANCELADO">CANCELADO</option>
+          </select>
+          <input id="fDesde" type="date" class="input sm">
+          <input id="fHasta" type="date" class="input sm">
+          <button id="btn-export" class="btn sm">Exportar CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fecha/Hora</th>
+              <th>Cliente</th>
+              <th>Dirección</th>
+              <th>Ítems</th>
+              <th>Total (S/)</th>
+              <th>Estado</th>
+              <th>Repartidor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-historial"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <script src="../JS/delivery.js"></script>
+  <script>
+    // Inyecta Navbar/Footer existentes sin editarlos
+    fetch("../HTML/Navbar.html").then(r=>r.text()).then(h=>{ 
+      document.getElementById("navbar").innerHTML = h;
+      const t=document.querySelector(".menu-toggle"), l=document.querySelector(".nav-links");
+      if(t && l){ t.addEventListener("click", ()=>l.classList.toggle("active")); }
+    });
+    fetch("../HTML/Footer.html").then(r=>r.text()).then(h=>{ 
+      document.getElementById("footer").innerHTML = h; 
+    });
+  </script>
+</body>
+</html>
