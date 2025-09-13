@@ -1,32 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main – Sistema de Ventas</title>
-    <link rel="stylesheet" href="../CSS/Main.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css">
-  <link rel="stylesheet" href="../CSS/Footer.css">
-  <script defer src="../JS/includes.js"></script>
-  </head>
-  <body>
-    <!-- Navbar (se carga dinámicamente) -->
-    <div data-include="../HTML/Navbar.html"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio – Sistema de Ventas</title>
+  <link rel="stylesheet" href="../CSS/Main.css" />
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
+  <link rel="stylesheet" href="../CSS/Footer.css" />
+</head>
+<body>
+  <!-- Navbar dinámico -->
+  <header id="navbar"></header>
 
-    <!-- Contenido principal -->
-    <main class="hero">
-      <section class="hero-content">
-        <h1>Bienvenido al Sistema de Ventas</h1>
-        <p>
-          Administra productos, clientes y ventas de forma rápida y sencilla.
-        </p>
-        <a href="Catalogo.html" class="btn-cta">Explorar catálogo</a>
-      </section>
-    </main>
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Bienvenido a tu Sistema de Ventas</h1>
+    <p class="sub">Administra tu bodega Josdin: ventas, inventario, delivery y más.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="Catalogo.html">Abrir Catálogo</a>
+      <a class="btn ghost" href="Contacto.html">Contactos</a>
+    </div>
+  </header>
 
-    <!-- Footer (se carga dinámicamente) -->
-    <div data-include="../HTML/Footer.html"></div>
+  <main class="wrapper">
+    <!-- Atajos rápidos -->
+    <section class="quick grid-4">
+      <a class="qcard fade-up" style="--d:.0s" href="Catalogo.html">
+        <span class="ico">🛒</span>
+        <h3>Catálogo</h3>
+        <p>Gestiona productos y stock mínimo.</p>
+      </a>
+      <a class="qcard fade-up" style="--d:.06s" href="Publicidad.html">
+        <span class="ico">📢</span>
+        <h3>Publicidad</h3>
+        <p>Promociones y banners para tu tienda.</p>
+      </a>
+      <a class="qcard fade-up" style="--d:.12s" href="Delivery.html">
+        <span class="ico">🚚</span>
+        <h3>Delivery</h3>
+        <p>Registra pedidos y consulta historial.</p>
+      </a>
+      <a class="qcard fade-up" style="--d:.18s" href="Contacto.html">
+        <span class="ico">📞</span>
+        <h3>Contacto</h3>
+        <p>Canales de atención y ubicación.</p>
+      </a>
+    </section>
 
-    
-  </body>
+    <!-- Resumen rápido -->
+    <section class="cards">
+      <article class="card fade-up" style="--d:.0s">
+        <div class="stat">
+          <div>
+            <h4>Pedidos de Delivery (hoy)</h4>
+            <p class="muted">Total registrados por fecha</p>
+          </div>
+          <strong id="kpi-delivery-hoy">0</strong>
+        </div>
+      </article>
+
+      <article class="card fade-up" style="--d:.06s">
+        <div class="stat">
+          <div>
+            <h4>Pedidos Pendientes</h4>
+            <p class="muted">En espera o en camino</p>
+          </div>
+          <strong id="kpi-delivery-pend">0</strong>
+        </div>
+      </article>
+
+      <article class="card fade-up" style="--d:.12s">
+        <div class="stat">
+          <div>
+            <h4>Productos con bajo stock</h4>
+            <p class="muted">Basado en tu stock mínimo</p>
+          </div>
+          <strong id="kpi-bajostock">—</strong>
+        </div>
+      </article>
+    </section>
+
+    <!-- Sección destacada -->
+    <section class="highlight fade-up" style="--d:.18s">
+      <h2>Consejo</h2>
+      <p>Activa tus combos (p. ej., “Pack desayuno”) y muestra promociones en la sección Publicidad para aumentar el ticket promedio.</p>
+    </section>
+  </main>
+
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <!-- Scripts -->
+  <script>
+    // Navbar
+    fetch("../HTML/Navbar.html").then(r=>r.text()).then(h=>{
+      document.getElementById("navbar").innerHTML = h;
+      const t=document.querySelector(".menu-toggle"), l=document.querySelector(".nav-links");
+      if(t && l){ t.addEventListener("click", ()=> l.classList.toggle("active")); }
+    });
+    // Footer
+    fetch("../HTML/Footer.html").then(r=>r.text()).then(h=>{
+      document.getElementById("footer").innerHTML = h;
+    });
+
+    // ===== KPIs rápidos (no requiere backend) =====
+    (function kpis(){
+      // Delivery (usa la misma clave que te di en delivery.js)
+      const STORAGE_KEY = "delivery_pedidos";
+      let rows = [];
+      try{ rows = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }catch(e){ rows = []; }
+
+      const today = new Date(); today.setHours(0,0,0,0);
+      const isToday = iso => { const d=new Date(iso); d.setHours(0,0,0,0); return d.getTime()===today.getTime(); };
+
+      const hoy = rows.filter(p => isToday(p.fecha)).length;
+      const pend = rows.filter(p => p.estado==="PENDIENTE" || p.estado==="EN_CAMINO").length;
+
+      document.getElementById("kpi-delivery-hoy").textContent = hoy;
+      document.getElementById("kpi-delivery-pend").textContent = pend;
+
+      // Bajo stock (si ya manejas stock en localStorage o más adelante desde API)
+      // Si aún no tienes fuente, lo dejamos en "—"
+      document.getElementById("kpi-bajostock").textContent = "—";
+    })();
+  </script>
+</body>
 </html>
