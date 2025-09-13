@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión | Sistema</title>
+
+  <!-- Estilos base del proyecto -->
+  <link rel="stylesheet" href="../CSS/Navbar.css">
+  <link rel="stylesheet" href="../CSS/Footer.css">
+  <!-- Estilos de Gestión -->
+  <link rel="stylesheet" href="../CSS/gestion.css">
+</head>
+<body data-page="gestion">
+  <!-- Navbar (cargado por includes.js) -->
+  <header data-include="../HTML/Navbar.html"></header>
+
+  <main class="g-container">
+    <section class="g-page-head">
+      <div>
+        <h1>Gestión de Productos</h1>
+        <p class="g-muted">Administra catálogo, stock y precios.</p>
+      </div>
+      <div class="g-head-actions">
+        <button id="btnAdd" class="g-btn g-btn-primary">+ Nuevo producto</button>
+      </div>
+    </section>
+
+    <section class="g-toolbar">
+      <input id="searchInput" type="search" placeholder="Buscar por nombre o código…">
+      <select id="statusFilter">
+        <option value="todos">Todos</option>
+        <option value="activo">Activos</option>
+        <option value="inactivo">Inactivos</option>
+      </select>
+      <button id="btnExport" class="g-btn g-btn-secondary">Exportar JSON</button>
+    </section>
+
+    <section class="g-panel">
+      <div class="g-panel-head">
+        <h2>Listado</h2>
+        <span id="countBadge" class="g-badge">0</span>
+      </div>
+
+      <div class="g-table-wrapper">
+        <table class="g-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Precio (S/)</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th class="g-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyProducts"><!-- JS --></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (cargado por includes.js) -->
+  <footer data-include="../HTML/Footer.html"></footer>
+
+  <!-- Modal Crear/Editar -->
+  <div id="productModal" class="g-modal g-hidden" aria-hidden="true" role="dialog">
+    <div class="g-modal-backdrop" data-close></div>
+    <div class="g-modal-card" role="document">
+      <div class="g-modal-head">
+        <h3 id="modalTitle">Nuevo producto</h3>
+        <button class="g-icon-btn" data-close aria-label="Cerrar">✕</button>
+      </div>
+
+      <form id="productForm" class="g-form">
+        <div class="g-grid">
+          <label>
+            <span>Código*</span>
+            <input name="codigo" type="text" required minlength="2" placeholder="P-0001">
+          </label>
+          <label>
+            <span>Nombre*</span>
+            <input name="nombre" type="text" required minlength="2" placeholder="Producto X">
+          </label>
+          <label>
+            <span>Precio (S/)*</span>
+            <input name="precio" type="number" step="0.01" min="0" required placeholder="0.00">
+          </label>
+          <label>
+            <span>Stock*</span>
+            <input name="stock" type="number" step="1" min="0" required placeholder="0">
+          </label>
+          <label>
+            <span>Estado</span>
+            <select name="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </label>
+          <label class="g-col-span-2">
+            <span>Descripción</span>
+            <textarea name="descripcion" rows="3" placeholder="Opcional…"></textarea>
+          </label>
+        </div>
+
+        <div class="g-form-actions">
+          <button type="button" class="g-btn" data-close>Cancelar</button>
+          <button id="btnSave" class="g-btn g-btn-primary" type="submit">Guardar</button>
+        </div>
+        <input type="hidden" name="__editIndex" value="">
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="g-toast g-hidden" role="status" aria-live="polite"></div>
+
+  <!-- Scripts del proyecto -->
+  <script src="../JS/includes.js"></script>
+  <!-- Script de Gestión -->
+  <script src="../JS/gestion.js"></script>
+</body>
+</html>

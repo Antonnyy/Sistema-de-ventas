@@ -1,0 +1,119 @@
+/* ===== Gestión (aislado y con prefijo .g- para no chocar con otros CSS) ===== */
+:root{
+  --bg:#0f172a;
+  --panel:#111827;
+  --border:#1f2937;
+  --text:#e2e8f0;
+  --muted:#9ca3af;
+  --accent:#22d3ee;
+  --accent-2:#06b6d4;
+  --success:#10b981;
+  --warn:#f59e0b;
+  --shadow:0 10px 25px rgba(0,0,0,.35);
+}
+body[data-page="gestion"]{
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.08), transparent),
+              radial-gradient(1000px 500px at 110% -20%, rgba(34,211,238,.06), transparent),
+              var(--bg);
+  color:var(--text);
+  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+}
+.g-container{ width:min(1150px, 92%); margin: 28px auto 80px; }
+.g-page-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.g-page-head h1{ margin:0; font-size:1.6rem; letter-spacing:.3px }
+.g-muted{ color:var(--muted); font-size:.95rem }
+.g-head-actions{ display:flex; gap:10px }
+
+/* Botones */
+.g-btn{
+  background:#162033; color:var(--text); border:1px solid var(--border);
+  padding:10px 14px; border-radius:10px; cursor:pointer;
+  transition:transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.g-btn:hover{ transform: translateY(-1px); border-color: var(--accent) }
+.g-btn:active{ transform: translateY(0) scale(.98) }
+.g-btn-primary{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color:#001821; font-weight:600; border-color: transparent;
+  box-shadow: 0 8px 20px rgba(34,211,238,.25);
+}
+.g-btn-primary:hover{ box-shadow: 0 10px 28px rgba(34,211,238,.35) }
+.g-btn-secondary{ background:#0e1a2c; border-color:#213046; }
+
+/* Toolbar */
+.g-toolbar{
+  display:flex; gap:12px; align-items:center;
+  background:rgba(17,24,39,.6);
+  padding:12px; border:1px solid var(--border); border-radius:14px;
+  backdrop-filter: saturate(120%) blur(4px);
+  margin-bottom:16px; box-shadow: var(--shadow);
+}
+.g-toolbar input[type="search"], .g-toolbar select{
+  background:#0b1424; color:var(--text);
+  border:1px solid var(--border); padding:10px 12px; border-radius:10px; outline:none;
+}
+.g-toolbar input[type="search"]{ flex:1; }
+
+/* Panel + Tabla */
+.g-panel{ background: rgba(17,24,39,.85); border:1px solid var(--border); border-radius:18px; box-shadow: var(--shadow); overflow:hidden; }
+.g-panel-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); }
+.g-panel-head h2{ margin:0; font-size:1.1rem }
+.g-badge{
+  background:rgba(34,211,238,.15); color:var(--accent);
+  border:1px solid rgba(34,211,238,.45);
+  padding:4px 10px; border-radius:999px; font-size:.85rem;
+}
+
+.g-table{ width:100%; border-collapse:collapse }
+.g-table thead th{
+  text-align:left; font-weight:600; font-size:.9rem; color:var(--muted);
+  padding:14px 16px; background:#0e1627; border-bottom:1px solid var(--border);
+}
+.g-table tbody td{ padding:14px 16px; border-bottom:1px solid var(--border); vertical-align:middle; }
+.g-table tbody tr:hover{ background: rgba(34,211,238,.05) }
+.g-center{ text-align:center }
+.g-status{ padding:6px 10px; border-radius:999px; font-size:.8rem; border:1px solid transparent; }
+.g-status.activo{ color:var(--success); background:rgba(16,185,129,.12); border-color:rgba(16,185,129,.35) }
+.g-status.inactivo{ color:var(--warn); background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35) }
+.g-row-actions{ display:flex; gap:8px; justify-content:center; }
+
+.g-icon-btn{
+  background:#0f1b2f; color:var(--text); border:1px solid var(--border);
+  width:34px; height:34px; border-radius:10px; cursor:pointer;
+}
+.g-icon-btn:hover{ border-color: var(--accent) }
+
+/* Modal */
+.g-hidden{ display:none !important }
+.g-modal{ position:fixed; inset:0; z-index:50; display:grid; place-items:center; }
+.g-modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.55); }
+.g-modal-card{
+  position:relative; width:min(720px, 92%); background:#0e1627;
+  border:1px solid var(--border); border-radius:18px; box-shadow: var(--shadow);
+  padding:14px 16px 16px;
+}
+.g-modal-head{ display:flex; align-items:center; justify-content:space-between; padding-bottom:10px; border-bottom:1px solid var(--border); }
+
+/* Form */
+.g-form{ padding-top:12px }
+.g-grid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
+.g-col-span-2{ grid-column: span 2 }
+.g-form label{ display:flex; flex-direction:column; gap:6px; font-size:.92rem }
+.g-form input, .g-form select, .g-form textarea{
+  background:#0b1424; color:var(--text);
+  border:1px solid var(--border); border-radius:10px; padding:10px 12px; outline:none;
+}
+.g-form-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:14px }
+
+/* Toast */
+.g-toast{
+  position:fixed; right:18px; bottom:18px; z-index:60;
+  background:#0e1627; border:1px solid var(--border);
+  color:var(--text); padding:12px 14px; border-radius:12px; box-shadow: var(--shadow);
+}
+
+/* Utilidades */
+.g-table-wrapper{ width:100%; overflow:auto }
+@media (max-width: 720px){
+  .g-grid{ grid-template-columns: 1fr }
+}
