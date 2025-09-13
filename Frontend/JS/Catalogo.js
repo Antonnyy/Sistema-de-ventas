@@ -1,18 +1,20 @@
+// ========== Base de imágenes locales ==========
+const IMG_BASE = "../Imagenes/"; // desde Frontend/HTML/*.html hacia Frontend/Imagenes/
 
-// ========== Datos de ejemplo (reemplaza con tu backend cuando esté listo) ==========
+// ========== Datos de ejemplo (usando archivos reales de tu bodega) ==========
 const PRODUCTS = [
-  { id: 1, name: "Mouse Inalámbrico Pro", price: 49.90, category: "Accesorios", img: "https://images.unsplash.com/photo-1587825140400-58147a8aacc7?q=80&w=1200&auto=format&fit=crop", desc: "Ergonómico, 2.4Ghz, batería de larga duración.", createdAt: "2025-08-01" },
-  { id: 2, name: "Teclado Mecánico RGB", price: 189.00, category: "Accesorios", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop", desc: "Switches rojos, anti-ghosting, backlight.", createdAt: "2025-07-20" },
-  { id: 3, name: "Laptop 14'' Ultraligera", price: 3299.00, category: "Computo", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop", desc: "Intel i5, 16GB RAM, 512GB SSD.", createdAt: "2025-06-12" },
-  { id: 4, name: "Audífonos Bluetooth", price: 119.90, category: "Audio", img: "https://images.unsplash.com/photo-1518441902116-f8f7f8f9f4e0?q=80&w=1200&auto=format&fit=crop", desc: "Cancelación pasiva, 20h de batería.", createdAt: "2025-08-18" },
-  { id: 5, name: "Monitor 27'' 144Hz", price: 1199.00, category: "Monitores", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop", desc: "IPS, 1ms, FreeSync.", createdAt: "2025-05-04" },
-  { id: 6, name: "Impresora Wi‑Fi", price: 499.50, category: "Impresión", img: "https://images.unsplash.com/photo-1527430253228-e93688616381?q=80&w=1200&auto=format&fit=crop", desc: "Multifunción, tinta continua.", createdAt: "2025-08-28" },
-  { id: 7, name: "Memoria USB 128GB", price: 59.90, category: "Almacenamiento", img: "https://images.unsplash.com/photo-1558642084-fd07fae5282e?q=80&w=1200&auto=format&fit=crop", desc: "USB 3.2, metal, llavero.", createdAt: "2025-07-05" },
-  { id: 8, name: "Disco SSD 1TB", price: 349.00, category: "Almacenamiento", img: "https://images.unsplash.com/photo-1549921296-3b4a2b089772?q=80&w=1200&auto=format&fit=crop", desc: "NVMe Gen4, 7000MB/s.", createdAt: "2025-06-28" }
+  { id: 1, name: "Productos de aseo personal", price: 49.90,  category: "Aseo Personal",   img: "Aseo-Personal.jpg",      desc: "Ergonómico y garantizado para tu salud.", createdAt: "2025-08-01" },
+  { id: 2, name: "Teclado Mecánico RGB",  price: 189.00, category: "Aseo de Limpieza",   img: "aseo.jpg",    desc: "Prodcuctos de aseos de limpieza domésticas.",    createdAt: "2025-07-20" },
+  { id: 3, name: "Electrodomestico", price: 3299.00, category: "Electronicos",  img: "Electronicos.webp",     desc: "Productos eletrodomesticos.",               createdAt: "2025-06-12" },
+  { id: 4, name: "Bebidas alcohólicas",   price: 119.90, category: "Bebidas",        img: "Bebidas.jpg",  desc: "Para citas y eventos.",         createdAt: "2025-08-18" },
+  { id: 5, name: "Regalos para de todo tipo",    price: 1199.00, category: "Regalos",   img: "Regalos.jpg",    desc: "Super económico.",                         createdAt: "2025-05-04" },
+  { id: 6, name: "Productos escolares",       price: 499.50, category: "Útiles Escolares",    img: "útiles-escolares.jpg",  desc: "Productos Escolares de todo tipo.",               createdAt: "2025-08-28" },
+  { id: 7, name: "Fanta",     price: 59.90,  category: "Gaseosas", img: "Gaseosa.jpg",      desc: "Único y delicioso.",                    createdAt: "2025-07-05" },
+  { id: 8, name: "Dulces Variados",         price: 349.00, category: "Dulces", img: "Dulces.png",      desc: "Todos los sabores.",                       createdAt: "2025-06-28" }
 ];
 
 // ========== Utilidades UI ==========
-const $ = s => document.querySelector(s);
+const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const formatPrice = v => "S/ " + v.toFixed(2);
 
@@ -92,11 +94,11 @@ function apply(){
 
   // Orden
   switch(state.sort){
-    case "priceAsc": items.sort((a,b)=> a.price-b.price); break;
+    case "priceAsc":  items.sort((a,b)=> a.price-b.price); break;
     case "priceDesc": items.sort((a,b)=> b.price-a.price); break;
-    case "nameAsc": items.sort((a,b)=> a.name.localeCompare(b.name)); break;
-    case "nameDesc": items.sort((a,b)=> b.name.localeCompare(a.name)); break;
-    case "newest": items.sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt)); break;
+    case "nameAsc":   items.sort((a,b)=> a.name.localeCompare(b.name)); break;
+    case "nameDesc":  items.sort((a,b)=> b.name.localeCompare(a.name)); break;
+    case "newest":    items.sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt)); break;
     default: /* relevance */ break;
   }
 
@@ -115,7 +117,7 @@ function render(items){
     card.className = "card";
     card.innerHTML = `
       <div class="thumb-wrap">
-        <img class="thumb" src="${p.img}" alt="${p.name}">
+        <img class="thumb" alt="${p.name}">
         <span class="badge-top">${p.category}</span>
       </div>
       <div class="card-body">
@@ -127,6 +129,14 @@ function render(items){
         </div>
       </div>
     `;
+    // Setear imagen local y fallback
+    const img = card.querySelector(".thumb");
+    img.src = IMG_BASE + p.img;
+    img.onerror = () => { 
+      img.onerror = null; 
+      img.src = IMG_BASE + "placeholder.jpg"; // opcional: agrega un placeholder.jpg en tu carpeta
+    };
+
     grid.appendChild(card);
   }
 
@@ -152,7 +162,7 @@ function onAdd(e){
 function animateAdd(el){
   el.textContent = "✓ Agregado";
   el.style.borderColor = "rgba(34,197,94,.8)";
-  el.style.color = "var(--ok)";
+  el.style.color = "#d1fae5"; // verde suave
   setTimeout(()=>{
     el.textContent = "Agregar";
     el.style.borderColor = "rgba(255,255,255,.12)";
