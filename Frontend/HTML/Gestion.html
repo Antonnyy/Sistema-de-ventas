@@ -1,123 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gestión | Sistema</title>
-
-  <!-- Estilos base del proyecto -->
-  <link rel="stylesheet" href="../CSS/Navbar.css">
-  <link rel="stylesheet" href="../CSS/Footer.css">
-  <!-- Estilos de Gestión -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gestión de Productos</title>
+  <!-- ruta correcta hacia CSS -->
   <link rel="stylesheet" href="../CSS/Gestion.css">
 </head>
 <body data-page="gestion">
   <!-- Navbar (cargado por includes.js) -->
-  <div data-include="../HTML/Navbar.Bodega.html"></div>
+  <nav class="navbar sv-navbar">
+  <div class="logo">Sistema · Bodega</div>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
+    <li><a class="nav-link" href="Venta.html">Ventas</a></li>
+    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
+    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+    <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Menú">☰</button>
+</nav>
 
   <main class="g-container">
     <section class="g-page-head">
       <div>
         <h1>Gestión de Productos</h1>
-        <p class="g-muted">Administra catálogo, stock y precios.</p>
+        <p class="muted">Catálogo, stock y precios. (Solo HTML + CSS)</p>
       </div>
-      <div class="g-head-actions">
-        <button id="btnAdd" class="g-btn g-btn-primary">+ Nuevo producto</button>
-      </div>
-    </section>
+      <a href="#nuevo" class="btn pri">+ Nuevo</a>
+    </header>
 
-    <section class="g-toolbar">
-      <input id="searchInput" type="search" placeholder="Buscar por nombre o código…">
-      <select id="statusFilter">
-        <option value="todos">Todos</option>
+    <section class="tools">
+      <input type="search" name="q" placeholder="Buscar por nombre o código…">
+      <select name="estado">
+        <option value="">Todos</option>
         <option value="activo">Activos</option>
         <option value="inactivo">Inactivos</option>
       </select>
-      <button id="btnExport" class="g-btn g-btn-secondary">Exportar JSON</button>
+      <a class="btn" href="#">Exportar JSON</a>
     </section>
 
-    <section class="g-panel">
-      <div class="g-panel-head">
-        <h2>Listado</h2>
-        <span id="countBadge" class="g-badge">0</span>
+    <section class="card">
+      <div class="card-head">
+        <h2>Listado</h2><span class="badge">3</span>
       </div>
-
-      <div class="g-table-wrapper">
-        <table class="g-table">
+      <div class="table-wrap">
+        <table class="table">
           <thead>
             <tr>
-              <th>Código</th>
-              <th>Nombre</th>
-              <th>Precio (S/)</th>
-              <th>Stock</th>
-              <th>Estado</th>
-              <th class="g-center">Acciones</th>
+              <th>Código</th><th>Nombre</th><th>Precio (S/)</th><th>Stock</th><th>Estado</th><th class="center">Acciones</th>
             </tr>
           </thead>
-          <tbody id="tbodyProducts"><!-- JS --></tbody>
+          <tbody>
+            <tr>
+              <td>P-0001</td><td>Arroz 5Kg</td><td>24.90</td><td>12</td>
+              <td><span class="tag ok">Activo</span></td>
+              <td class="center"><div class="row"><a class="icon">✎</a><a class="icon">🗑</a></div></td>
+            </tr>
+            <tr>
+              <td>P-0002</td><td>Azúcar 1Kg</td><td>4.20</td><td>40</td>
+              <td><span class="tag ok">Activo</span></td>
+              <td class="center"><div class="row"><a class="icon">✎</a><a class="icon">🗑</a></div></td>
+            </tr>
+            <tr>
+              <td>P-0003</td><td>Aceite 1L</td><td>12.50</td><td>8</td>
+              <td><span class="tag warn">Inactivo</span></td>
+              <td class="center"><div class="row"><a class="icon">✎</a><a class="icon">🗑</a></div></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </section>
-  </main>
 
-  <!-- Footer (cargado por includes.js) -->
-  <footer data-include="../HTML/Footer.html"></footer>
-
-  <!-- Modal Crear/Editar -->
-  <div id="productModal" class="g-modal g-hidden" aria-hidden="true" role="dialog">
-    <div class="g-modal-backdrop" data-close></div>
-    <div class="g-modal-card" role="document">
-      <div class="g-modal-head">
-        <h3 id="modalTitle">Nuevo producto</h3>
-        <button class="g-icon-btn" data-close aria-label="Cerrar">✕</button>
+    <!-- Crear nuevo producto -->
+    <details id="nuevo">
+      <summary><span class="btn" style="margin-top:12px">➕ Crear nuevo producto</span></summary>
+      <div class="box form">
+        <form action="#" method="post">
+          <div class="grid">
+            <label><span>Código*</span><input name="codigo" required></label>
+            <label><span>Nombre*</span><input name="nombre" required></label>
+            <label><span>Precio*</span><input name="precio" type="number" step="0.01"></label>
+            <label><span>Stock*</span><input name="stock" type="number"></label>
+            <label><span>Estado</span>
+              <select name="estado">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+              </select>
+            </label>
+            <label class="span-2"><span>Descripción</span><textarea name="descripcion" rows="3"></textarea></label>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#top">Cancelar</a>
+            <button class="btn pri" type="submit">Guardar</button>
+          </div>
+        </form>
       </div>
-
-      <form id="productForm" class="g-form">
-        <div class="g-grid">
-          <label>
-            <span>Código*</span>
-            <input name="codigo" type="text" required minlength="2" placeholder="P-0001">
-          </label>
-          <label>
-            <span>Nombre*</span>
-            <input name="nombre" type="text" required minlength="2" placeholder="Producto X">
-          </label>
-          <label>
-            <span>Precio (S/)*</span>
-            <input name="precio" type="number" step="0.01" min="0" required placeholder="0.00">
-          </label>
-          <label>
-            <span>Stock*</span>
-            <input name="stock" type="number" step="1" min="0" required placeholder="0">
-          </label>
-          <label>
-            <span>Estado</span>
-            <select name="estado">
-              <option value="activo">Activo</option>
-              <option value="inactivo">Inactivo</option>
-            </select>
-          </label>
-          <label class="g-col-span-2">
-            <span>Descripción</span>
-            <textarea name="descripcion" rows="3" placeholder="Opcional…"></textarea>
-          </label>
-        </div>
-
-        <div class="g-form-actions">
-          <button type="button" class="g-btn" data-close>Cancelar</button>
-          <button id="btnSave" class="g-btn g-btn-primary" type="submit">Guardar</button>
-        </div>
-        <input type="hidden" name="__editIndex" value="">
-      </form>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="g-toast g-hidden" role="status" aria-live="polite"></div>
-
-  <!-- Scripts del proyecto -->
-  <script src="../JS/includes.js"></script>
-  <!-- Script de Gestión -->
-  <script src="../JS/gestion.js"></script>
+    </details>
+  </main>
 </body>
 </html>
