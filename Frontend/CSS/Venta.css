@@ -10,7 +10,7 @@ body{margin:0;color:var(--txt);font:16px/1.45 system-ui,Segoe UI,Roboto,Arial;
 body[data-page="ventas"] h1,body[data-page="ventas"] h2,body[data-page="ventas"] h3{margin:0 0 6px}
 .wrap{width:min(1100px,92%);margin:28px auto 80px}
 .muted{color:var(--mut)} .b{font-weight:600} .c{text-align:center} .grow{flex:1}
-
+  
 /* Header */
 .top{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}
 .chip{display:flex;align-items:center;gap:8px;color:var(--mut)}
