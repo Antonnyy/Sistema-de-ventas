@@ -1,110 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Catálogo</title>
-    <link rel="stylesheet" href="../CSS/Catalogo.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css" />
-    <link rel="stylesheet" href="../CSS/Footer.css" />
-    <script defer src="../JS/includes.js"></script>
-    <!-- Opcional: si ya usas Navbar.css/Footer.css, puedes enlazarlas aquí también -->
-  </head>
-  <body>
-    <nav class="navbar">
-  <div class="logo">Sistema de Ventas</div>
-  <ul class="nav-links">
-    <li><a class="nav-link" href="Main.html">Inicio</a></li>
-    <li><a class="nav-link" href="Catalogo.html">Catálogo</a></li>
-    <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
-    <li><a class="nav-link" href="Publicidad.html">Publicidad</a></li>
-    <li><a class="btn nav-link" href="Login.html">Login</a></li>
-  </ul>
-  <button class="menu-toggle" aria-label="Menú">☰</button>
-</nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo — Maqueta</title>
 
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="../CSS/Catalogo.css" />
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
+  <link rel="stylesheet" href="../CSS/Footer.css" />
 
-    <div class="container">
-      <div class="topbar">
-        <span class="pill" id="totalItems">0 productos</span>
-        <button class="cart" id="btnCart" title="Ver carrito">
-          🛒 Carrito
-          <span class="dot" id="cartCount">0</span>
-        </button>
+  <!-- CONSISTENCIA (opcional, pégalo también en Main/Bodeguero CSS si aún no) -->
+  <style>
+    :root{ --h1:clamp(28px,4vw,40px); --h2:clamp(20px,3vw,28px); --h3:clamp(16px,2.4vw,20px); --radius:14px; }
+    h1{font-size:var(--h1);margin:0 0 6px} h2{font-size:var(--h2)} h3{font-size:var(--h3)}
+    .card{border-radius:var(--radius)} .btn{border-radius:var(--radius)} .input,.select,textarea{border-radius:var(--radius)}
+    /* Fallback de grilla por si tu CSS no define clases de grid */
+    .catalog-wrap{width:min(1100px,92%);margin:16px auto 64px}
+    .filters{display:grid;gap:10px;margin:10px 0}
+    @media(min-width:720px){.filters{grid-template-columns:1fr .7fr .7fr .7fr}}
+    .grid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+    .product-card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    .thumb img{display:block;width:100%;height:auto;border-radius:12px}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR estático -->
+  <nav class="navbar">
+    <div class="logo">Sistema de Ventas</div>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="Main.html">Inicio</a></li>
+      <li><a class="nav-link active" href="Catalogo.html">Catálogo</a></li>
+      <li><a class="nav-link" href="Bodeguero.html">Bodeguero</a></li>
+      <li><a class="nav-link" href="Login.html">Login</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menú">☰</button>
+  </nav>
+
+  <main class="catalog-wrap">
+    <!-- Encabezado + filtros (maqueta, sin funcionalidad) -->
+    <section class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div>
+        <h2 style="margin:0">Catálogo</h2>
+        <p class="sub">Listado estático para la presentación.</p>
       </div>
+      <div class="filters" style="max-width:720px">
+        <input class="input" placeholder="Buscar producto… (mock)" />
+        <select class="select"><option>Todas las categorías</option></select>
+        <select class="select"><option>Orden: Relevancia</option></select>
+        <input class="input" placeholder="Precio mín." />
+      </div>
+    </section>
 
-      <div class="catalogo-header">
-        <div class="title">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 3h18v4H3V3zm2 6h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9z"
-              fill="url(#g)"
-            />
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
-                <stop stop-color="#5eead4" />
-                <stop offset="1" stop-color="#7c3aed" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div>
-            <div style="font-size: 22px; line-height: 1">Catálogo</div>
-            <div class="badge">Beta</div>
+    <!-- GRID DE PRODUCTOS (reemplaza los nombres de archivo por los tuyos del zip) -->
+    <section class="grid">
+      <!-- 1 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <!-- Reemplaza 'arroz.jpg' por tu archivo real del zip -->
+          <img src="../IMG/arroz.jpg" alt="Arroz 1kg" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Arroz 1kg</h3>
+          <p class="desc">Arroz costo/beneficio.</p>
+          <div class="meta">
+            <span class="price">S/ 5.50</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
           </div>
         </div>
+      </article>
 
-        <div class="controls">
-          <input
-            class="input"
-            id="q"
-            type="search"
-            placeholder="Buscar producto... (nombre o descripción)"
-          />
-          <select class="select" id="cat">
-            <option value="">Todas las categorías</option>
-          </select>
-          <select class="select" id="sort">
-            <option value="relevance">Orden: Relevancia</option>
-            <option value="priceAsc">Precio: menor a mayor</option>
-            <option value="priceDesc">Precio: mayor a menor</option>
-            <option value="nameAsc">Nombre: A → Z</option>
-            <option value="nameDesc">Nombre: Z → A</option>
-            <option value="newest">Más nuevos</option>
-          </select>
-          <input
-            class="input"
-            id="min"
-            type="number"
-            min="0"
-            step="0.10"
-            placeholder="Precio mín."
-          />
-          <input
-            class="input"
-            id="max"
-            type="number"
-            min="0"
-            step="0.10"
-            placeholder="Precio máx."
-          />
-          <button class="btn" id="clear">Limpiar</button>
+      <!-- 2 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/aceite.jpg" alt="Aceite 1L" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Aceite 1L</h3>
+          <p class="desc">Girasol 1 litro.</p>
+          <div class="meta">
+            <span class="price">S/ 10.90</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <div id="grid" class="grid"></div>
-      <div id="empty" class="empty" style="display: none">
-        No se encontraron productos con esos filtros.
-      </div>
+      <!-- 3 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/azucar.jpg" alt="Azúcar 1kg" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Azúcar 1kg</h3>
+          <p class="desc">Rubia, calidad A.</p>
+          <div class="meta">
+            <span class="price">S/ 4.80</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/gaseosa-500.jpg" alt="Gaseosa 500 ml" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Gaseosa 500 ml</h3>
+          <p class="desc">Pack refrescante.</p>
+          <div class="meta">
+            <span class="price">S/ 3.50</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/pan.jpg" alt="Pan x10 und" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Pan x10 und</h3>
+          <p class="desc">Bolsa de 10 unidades.</p>
+          <div class="meta">
+            <span class="price">S/ 2.50</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/detergente.jpg" alt="Detergente 800 g" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Detergente 800 g</h3>
+          <p class="desc">Limpieza profunda.</p>
+          <div class="meta">
+            <span class="price">S/ 6.90</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/leche.jpg" alt="Leche 1L" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Leche 1L</h3>
+          <p class="desc">Entera, larga vida.</p>
+          <div class="meta">
+            <span class="price">S/ 4.20</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="card product-card">
+        <figure class="thumb">
+          <img src="../IMG/galletas.jpg" alt="Galletas" />
+        </figure>
+        <div class="body">
+          <h3 class="title">Galletas</h3>
+          <p class="desc">Clásicas para lonche.</p>
+          <div class="meta">
+            <span class="price">S/ 2.00</span>
+            <a class="btn" href="Producto-Editar.html">Editar</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER estático -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Sistema de Ventas – Todos los derechos reservados</p>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
     </div>
+  </footer>
 
-    <div data-include="../HTML/Footer.html"></div>
-    
-    <script src="../JS/Catalogo.js"></script>
-  </body>
+  <!-- Sin scripts: elimina cualquier <script> que tuvieras aquí -->
+</body>
 </html>
