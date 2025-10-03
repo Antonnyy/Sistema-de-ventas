@@ -4,62 +4,109 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Delivery – Sistema de Ventas</title>
+
+  <!-- Tus estilos existentes -->
   <link rel="stylesheet" href="../CSS/Delivery.css"/>
   <link rel="stylesheet" href="../CSS/Navbar.css"/>
   <link rel="stylesheet" href="../CSS/Footer.css"/>
+
+  <!-- Mejoras visuales (no rompen tu tema) -->
   <style>
-    /* Numeración de filas con CSS (decorativa) */
-    .items-grid{counter-reset: fila}
-    .item-row{display:grid; grid-template-columns: 1.4fr .4fr .6fr; gap:10px; align-items:center}
-    .item-row::before{
-      counter-increment:fila; content: counter(fila) ".";
-      color:#9fb1c6; margin-right:6px; font-variant-numeric:tabular-nums;
-      grid-column: 1 / 1; display:none; /* ocúltalo si no quieres numeración visual */
+    /* ----- Layout refinado de ítems (sin JS) ----- */
+    .items .cols,
+    .item-row {
+      display:grid;
+      grid-template-columns: 1.6fr .4fr .6fr;
+      gap:10px;
+      align-items:center;
     }
-    .items .head-row{display:grid; grid-template-columns: 1.4fr .4fr .6fr; gap:10px; color:#9fb1c6; margin-bottom:6px}
+    .items .cols{ color:#9fb1c6; margin-bottom:6px }
+
+    /* Campos numéricos alineados a la derecha */
+    .num{ text-align:right; font-variant-numeric: tabular-nums }
+
+    /* Cabecera del pedido */
+    .order-head{
+      display:grid; gap:12px; margin-bottom:12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .order-meta{
+      display:grid; gap:12px; grid-template-columns: 1fr 1fr;
+    }
+
+    /* Totales resaltados */
+    .totales{
+      display:grid; gap:12px; grid-template-columns: repeat(3, 1fr);
+      margin-top:10px;
+    }
     .totales .field input{ text-align:right }
+    .totales .sum{
+      grid-column: 1 / -1;
+      display:grid; grid-template-columns: 1fr .6fr;
+      align-items:center; gap:10px; margin-top:6px;
+    }
+    .sum .total-box{
+      background: #0f172aee; border:1px solid #334155aa;
+      border-radius:12px; padding:10px 12px; text-align:right; font-weight:800;
+    }
+
+    /* Observaciones y firma */
+    .observaciones{ margin-top:10px }
+    .firmas{
+      display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:16px;
+    }
+    .firmas .line{
+      margin-top:40px; border-top:1px dashed #334155aa; padding-top:6px; text-align:center; color:#9fb1c6
+    }
+
+    /* Bloques imprimibles */
     @media print{
-      #navbar,#footer,.actions,.note,.filters{display:none}
-      body{background:#fff}
-      .card,.card-lite,.form{box-shadow:none; border:1px solid #ddd}
-      .hero{border:none; padding:6px 0 0}
-      .wrapper{width:100%; margin:0; padding:0 8mm}
+      #navbar,#footer,.note,.actions,.filters{display:none}
+      body{ background:#fff }
+      .hero{ border:none; padding:6px 0 0 }
+      .wrapper{ width:100%; margin:0; padding:0 10mm }
+      .card,.card-lite,.form{ box-shadow:none; border:1px solid #d1d5db }
+      .page-break{ page-break-after:always }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar (estático) -->
-<nav class="navbar sv-navbar">
-  <div class="logo">Sistema · Bodega</div>
-  <ul class="nav-links">
-    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
-    <li><a class="nav-link" href="Venta.html">Ventas</a></li>
-    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
-    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
-    <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
-  </ul>
-  <button class="menu-toggle" aria-label="Menú">☰</button>
-</nav>
+  <!-- NAVBAR (estático si no usas includes) -->
+  <header id="navbar"></header>
 
-
+  <!-- Encabezado -->
   <header class="hero">
-    <h1>Delivery</h1>
-    <p>Registra pedidos y genera un comprobante imprimible.</p>
-    <small style="color:#9fb1c6">Versión solo HTML+CSS (sin cálculos automáticos ni guardado).</small>
+    <h1>Pedido de Delivery</h1>
+    <p>Ficha de registro lista para imprimir o guardar como PDF.</p>
   </header>
 
   <main class="wrapper">
-    <!-- Pedido -->
+    <!-- ================= Formulario / Ficha ================= -->
     <section class="form card">
-      <h2 class="section-title">Nuevo pedido</h2>
+      <h2 class="section-title">Datos del pedido</h2>
 
-      <!-- Sin acción (no enviamos a servidor); sirve como ficha imprimible -->
+      <!-- Sin acción: se usa para impresión -->
       <form id="form-delivery" autocomplete="on">
-        <div class="grid-3">
+        <!-- Encabezado del pedido -->
+        <div class="order-head">
           <div class="field">
             <input id="cliente" name="cliente" required placeholder=" "/>
             <label for="cliente">Cliente</label><span class="focus-ring"></span>
           </div>
+          <div class="order-meta">
+            <div class="field">
+              <input id="fecha" name="fecha" type="date" required placeholder=" "/>
+              <label for="fecha">Fecha</label><span class="focus-ring"></span>
+            </div>
+            <div class="field">
+              <input id="hora" name="hora" type="time" required placeholder=" "/>
+              <label for="hora">Hora</label><span class="focus-ring"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contacto y pago -->
+        <div class="grid-3">
           <div class="field">
             <input id="telefono" name="telefono" inputmode="tel" pattern="[0-9+\s-]{6,}" placeholder=" "/>
             <label for="telefono">Teléfono</label><span class="focus-ring"></span>
@@ -74,8 +121,13 @@
               <option value="TARJETA"></option>
             </datalist>
           </div>
+          <div class="field">
+            <input id="orden" name="orden" placeholder=" "/>
+            <label for="orden">N° de pedido (opcional)</label><span class="focus-ring"></span>
+          </div>
         </div>
 
+        <!-- Dirección -->
         <div class="grid-2">
           <div class="field">
             <input id="direccion" name="direccion" required placeholder=" "/>
@@ -87,134 +139,85 @@
           </div>
         </div>
 
-        <!-- Ítems (hasta 10 filas) -->
+        <!-- Ítems (15 filas sin JS) -->
         <div class="items card-lite">
           <div class="items-head">
             <h3>Ítems</h3>
-            <p class="note">Completa las filas necesarias. Totales se ingresan abajo.</p>
+            <p class="note">Descripción, cantidad y precio unitario. Deja vacías las que no uses.</p>
           </div>
 
-          <div class="head-row">
+          <!-- Encabezados de columna -->
+          <div class="cols">
             <div>Descripción / producto</div>
-            <div>Cant.</div>
-            <div>Precio (S/)</div>
+            <div class="num">Cant.</div>
+            <div class="num">Precio (S/)</div>
           </div>
 
           <div class="items-grid">
-            <!-- Repite 10 filas sin JS -->
-            <!-- Fila 1 -->
+            <!-- Generamos 15 filas manuales para evitar JS -->
+            <!-- 1 -->
             <div class="item-row">
-              <input class="input" name="desc[]" placeholder="Gaseosa 500ml" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
+              <input class="input" name="desc[]" placeholder="Ej: Gaseosa 500ml"/>
+              <input class="input num"  name="cant[]" inputmode="decimal" />
+              <input class="input num"  name="prec[]" inputmode="decimal" />
             </div>
-            <!-- Fila 2 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 3 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 4 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 5 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 6 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 7 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 8 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 9 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
-            <!-- Fila 10 -->
-            <div class="item-row">
-              <input class="input" name="desc[]" />
-              <input class="input" name="cant[]" inputmode="decimal" />
-              <input class="input" name="prec[]" inputmode="decimal" />
-            </div>
+            <!-- 2-15 (copias) -->
+            <div class="item-row"><input class="input" name="desc[]"/><input class="input num" name="cant[]" inputmode="decimal"/><input class="input num" name="prec[]" inputmode="decimal"/></div>
+            <div class="item-row"><input class="input" name="desc[]"/><input class="input num" name="cant[]" inputmode="decimal"/><input class="input num" name="prec[]" inputmode="decimal"/></div>
           </div>
         </div>
 
         <!-- Totales (manuales) -->
-        <div class="grid-3 totales">
+        <div class="totales">
           <div class="field">
-            <input id="subTotal" name="subTotal" inputmode="decimal" placeholder="0.00"/>
+            <input id="subTotal" name="subTotal" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="subTotal">Subt. (S/)</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="costoDelivery" name="costoDelivery" inputmode="decimal" placeholder="0.00"/>
+            <input id="costoDelivery" name="costoDelivery" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="costoDelivery">Delivery (S/)</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="total" name="total" inputmode="decimal" placeholder="0.00"/>
+            <input id="total" name="total" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="total">Total (S/)</label><span class="focus-ring"></span>
+          </div>
+
+          <!-- Resumen grande de total -->
+          <div class="sum">
+            <div class="note">* Completa los importes antes de imprimir.</div>
+            <div class="total-box">TOTAL S/ __________</div>
           </div>
         </div>
 
+        <!-- Observaciones -->
+        <div class="observaciones">
+          <div class="field textarea">
+            <textarea id="obs" name="obs" rows="3" placeholder=" "></textarea>
+            <label for="obs">Observaciones (opcional)</label><span class="focus-ring"></span>
+          </div>
+        </div>
+
+        <!-- Firmas -->
+        <div class="firmas">
+          <div class="line">Firma del cliente</div>
+          <div class="line">Recibido por</div>
+        </div>
+
+        <!-- Acciones -->
         <div class="actions">
-          <!-- Sin JS: sugerimos imprimir o guardar como PDF -->
-          <button class="btn primary" type="submit" formaction="#" onclick="return false" title="Sin envío automático en esta versión">Guardar (no disponible)</button>
-          <span class="note">Para registrar este pedido: <strong>Imprimir</strong> (Ctrl/Cmd + P) o “Guardar como PDF”.</span>
+          <button class="btn primary" type="button" onclick="window.print()">Imprimir / Guardar PDF</button>
+          <button class="btn" type="reset">Limpiar</button>
+          <p class="note">Esta ficha no guarda datos. Para historial, imprime o guarda en PDF.</p>
         </div>
       </form>
     </section>
 
-    <!-- “Historial” imprimible (manual) -->
-    <section class="card">
-      <h2 class="section-title">Historial (manual)</h2>
-      <p class="note">Versión sin JS: el historial se gestiona imprimiendo/archivando los pedidos en PDF.</p>
-      <div class="table-wrap">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Fecha/Hora</th>
-              <th>Cliente</th>
-              <th>Dirección</th>
-              <th>Ítems</th>
-              <th>Total (S/)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="5" style="color:#9fb1c6">Sin registro automático (requiere JS o servidor).</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- Separador para impresión por lotes -->
+    <div class="page-break"></div>
+    
   </main>
 
-  <!-- Footer -->
-  <footer id="footer">
-    <!-- Pega tu Footer HTML si no usas includes -->
-  </footer>
+  <!-- FOOTER -->
+  <footer id="footer"></footer>
 </body>
 </html>
