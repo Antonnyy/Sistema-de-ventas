@@ -3,143 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Promociones · TuTienda</title>
+  <title>Publicidad · Sistema de Ventas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
   <link rel="stylesheet" href="../CSS/Publicidad.css" />
 </head>
 <body>
 
-  <!-- Navbar: ultra minimalista, sin sombras, solo línea sutil -->
-  <header class="navbar">
-    <div class="container">
-      <a href="../index.html" class="logo">TuTienda</a>
-      <nav class="nav">
-        <a href="../index.html">Inicio</a>
-        <a href="Publicidad.html" class="current">Promociones</a>
-        <a href="../HTML/Productos.html">Productos</a>
-        <a href="../HTML/Contacto.html">Contacto</a>
-      </nav>
-    </div>
-  </header>
+  <!-- TU NAVBAR EXACTO (sin cambios) -->
+  <nav class="navbar">
+    <div class="logo">Sistema de Ventas</div>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="Main.html">Inicio</a></li>
+      <li><a class="nav-link" href="Catalogo.html">Catálogo</a></li>
+      <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
+      <li><a class="nav-link" href="Publicidad.html">Publicidad</a></li>
+      <li><a class="btn nav-link" href="Login.html">Login</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menú">☰</button>
+  </nav>
 
+  <!-- Contenido principal rediseñado -->
   <main class="main-content">
-    <!-- Hero con tipografía editorial -->
-    <section class="hero-section">
-      <div class="hero-text">
+    <section class="hero">
+      <div class="hero-content">
         <h1>Promociones<br>del Mes</h1>
-        <p class="subtitle">Curadas con cuidado. Diseñadas para ti.</p>
+        <p class="subtitle">Ofertas seleccionadas con precisión para tu negocio.</p>
       </div>
     </section>
 
-    <!-- Featured Promotions: 3 imágenes en formato editorial -->
     <section class="featured-grid">
-      <div class="feature-item">
-        <div class="feature-image">
-          <img src="../Imagenes/Aseo-Personal.jpg" alt="Productos de aseo personal premium" loading="lazy">
-        </div>
-        <div class="feature-content">
+      <div class="feature-card">
+        <img src="../Imagenes/Aseo-Personal.jpg" alt="Productos de aseo personal en oferta" loading="lazy">
+        <div class="card-content">
           <span class="badge">-25%</span>
           <h2>Aseo Personal</h2>
-          <p>Lo esencial, elevado a su máxima expresión.</p>
+          <p>Lo esencial para el cuidado diario, al mejor precio.</p>
         </div>
       </div>
 
-      <div class="feature-item">
-        <div class="feature-image">
-          <img src="../Imagenes/Gaseosa.jpg" alt="Gaseosas artesanales y clásicas" loading="lazy">
-        </div>
-        <div class="feature-content">
+      <div class="feature-card">
+        <img src="../Imagenes/Gaseosa.jpg" alt="Gaseosas en variedad de sabores" loading="lazy">
+        <div class="card-content">
           <span class="badge">Oferta</span>
           <h2>Gaseosas</h2>
-          <p>Sabores que evocan recuerdos inolvidables.</p>
+          <p>Refresca tu inventario con nuestras gaseosas favoritas.</p>
         </div>
       </div>
 
-      <div class="feature-item">
-        <div class="feature-image">
-          <img src="../Imagenes/útiles-escolares.jpg" alt="Útiles escolares de diseño" loading="lazy">
-        </div>
-        <div class="feature-content">
+      <div class="feature-card">
+        <img src="../Imagenes/útiles-escolares.jpg" alt="Útiles escolares de calidad" loading="lazy">
+        <div class="card-content">
           <span class="badge">Escolar</span>
           <h2>Útiles Escolares</h2>
-          <p>Calidad que inspira cada día de estudio.</p>
+          <p>Todo lo necesario para el regreso a clases.</p>
         </div>
       </div>
     </section>
 
-    <!-- Catálogo refinado -->
     <section class="catalog-section">
-      <h2 class="section-heading">Catálogo de Ofertas</h2>
+      <h2 class="section-title">Catálogo de Promociones</h2>
       <div class="product-grid">
-        <!-- Producto 1 -->
-        <article class="product-card">
-          <img src="../Imagenes/Electronicos.webp" alt="Electrónicos de última generación" loading="lazy">
-          <div class="product-info">
-            <h3>Electrónicos</h3>
-            <p>Tecnología pensada para tu vida.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Electronicos.webp" alt="Electrónicos en promoción" loading="lazy">
+          <h3>Electrónicos</h3>
+          <p>Tecnología para tu negocio.</p>
         </article>
-        <!-- Producto 2 -->
-        <article class="product-card">
-          <img src="../Imagenes/Bebidas.jpg" alt="Bebidas premium seleccionadas" loading="lazy">
-          <div class="product-info">
-            <h3>Bebidas</h3>
-            <p>Para los momentos que merecen celebrarse.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Bebidas.jpg" alt="Bebidas alcohólicas seleccionadas" loading="lazy">
+          <h3>Bebidas</h3>
+          <p>Variedad para todo tipo de cliente.</p>
         </article>
-        <!-- Producto 3 -->
-        <article class="product-card">
-          <img src="../Imagenes/Dulces.png" alt="Dulces artesanales y clásicos" loading="lazy">
-          <div class="product-info">
-            <h3>Dulces</h3>
-            <p>El placer de lo simple, bien hecho.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Dulces.png" alt="Dulces surtidos" loading="lazy">
+          <h3>Dulces</h3>
+          <p>Los favoritos de tus consumidores.</p>
         </article>
-        <!-- Producto 4 -->
-        <article class="product-card">
-          <img src="../Imagenes/Recargas.jpg" alt="Recargas para todas las operadoras" loading="lazy">
-          <div class="product-info">
-            <h3>Recargas</h3>
-            <p>Conectividad sin límites, al instante.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Recargas.jpg" alt="Recargas de celular" loading="lazy">
+          <h3>Recargas</h3>
+          <p>Todas las operadoras, sin complicaciones.</p>
         </article>
-        <!-- Producto 5 -->
-        <article class="product-card">
-          <img src="../Imagenes/Pelota.webp" alt="Equipamiento deportivo de calidad" loading="lazy">
-          <div class="product-info">
-            <h3>Deportivos</h3>
-            <p>Rendimiento respaldado por diseño.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Pelota.webp" alt="Artículos deportivos" loading="lazy">
+          <h3>Deportivos</h3>
+          <p>Equipamiento para entusiastas.</p>
         </article>
-        <!-- Producto 6 -->
-        <article class="product-card">
-          <img src="../Imagenes/Regalos.jpg" alt="Regalos con significado" loading="lazy">
-          <div class="product-info">
-            <h3>Regalos</h3>
-            <p>Porque lo que importa es la intención.</p>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Regalos.jpg" alt="Ideas de regalo" loading="lazy">
+          <h3>Regalos</h3>
+          <p>Detalles que generan fidelidad.</p>
         </article>
       </div>
     </section>
 
-    <!-- Marcas: diseño editorial -->
-    <section class="brands-section">
-      <p class="brands-label">En colaboración con</p>
+    <section class="brands">
+      <p class="brands-label">Marcas destacadas este mes</p>
       <div class="brand-logos">
-        <img src="https://dummyimage.com/140x50/2563eb/ffffff&text=EKU" alt="EKU">
-        <img src="https://dummyimage.com/140x50/7dd3fc/1e40af&text=BYTE" alt="BYTE">
-        <img src="https://dummyimage.com/140x50/2563eb/ffffff&text=PRO" alt="PRO">
-        <img src="https://dummyimage.com/140x50/7dd3fc/1e40af&text=SHOP" alt="SHOP">
+        <img src="https://dummyimage.com/140x50/1fccd2/0f172a&text=EKU" alt="EKU">
+        <img src="https://dummyimage.com/140x50/22d3ee/0f172a&text=BYTE" alt="BYTE">
+        <img src="https://dummyimage.com/140x50/1fccd2/0f172a&text=PRO" alt="PRO">
+        <img src="https://dummyimage.com/140x50/22d3ee/0f172a&text=SHOP" alt="SHOP">
       </div>
     </section>
   </main>
 
-  <!-- Footer: minimalista, centrado -->
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 TuTienda. Hecho con atención al detalle.</p>
+      <p>&copy; 2025 Sistema de Ventas. Todos los derechos reservados.</p>
     </div>
   </footer>
 

@@ -1,31 +1,15 @@
-/* Publicidad.css — Diseño editorial ultra refinado */
+/* Publicidad.css — Diseño premium que complementa tu navbar glass oscuro */
 :root {
-  /* Paleta de colores sofisticada */
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --text: #111827;
-  --text-light: #4b5563;
-  --bg: #ffffff;
-  --bg-light: #f9fafb;
-  --border: #e5e7eb;
+  --primary: #1fccd2;
+  --primary-light: #22d3ee;
+  --dark-bg: #0f172a;
+  --text: #f1f5f9;
+  --text-light: #cbd5e1;
+  --gray: #64748b;
+  --light-bg: #1e293b;
   --success: #10b981;
-  --gray: #9ca3af;
-
-  /* Tipografía */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', serif;
-
-  /* Espaciado */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 3rem;
-  --space-xl: 4rem;
-
-  /* Radio y sombras */
   --radius: 16px;
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -34,16 +18,11 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: var(--font-sans);
-  background-color: var(--bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0b1120;
   color: var(--text);
   line-height: 1.6;
-  font-weight: 400;
 }
 
 .container {
@@ -51,71 +30,25 @@ body {
   margin-inline: auto;
 }
 
-/* === Navbar === */
-.navbar {
-  padding-block: var(--space-sm);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-.nav {
-  display: flex;
-  gap: var(--space-md);
-}
-.nav a {
-  text-decoration: none;
-  color: var(--text-light);
-  font-weight: 500;
-  font-size: 1.05rem;
-  position: relative;
-  padding-bottom: 4px;
-}
-.nav a.current,
-.nav a:hover {
-  color: var(--primary);
-}
-.nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-.nav a.current::after,
-.nav a:hover::after {
-  transform: scaleX(1);
+.main-content {
+  padding: 2rem 1.5rem 4rem;
 }
 
-/* === Hero Section === */
-.hero-section {
-  padding: var(--space-xl) 0 var(--space-lg);
+/* === Hero === */
+.hero {
   text-align: center;
+  padding: 3rem 0 2.5rem;
 }
-.hero-text h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 6vw, 4.5rem);
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -1.5px;
-  margin-bottom: var(--space-sm);
-  color: var(--text);
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .subtitle {
   font-size: 1.25rem;
@@ -123,83 +56,70 @@ body {
   max-width: 600px;
   margin: 0 auto;
   font-weight: 300;
-  letter-spacing: 0.5px;
 }
 
 /* === Featured Grid === */
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.25rem;
+  margin: 3.5rem 0;
 }
-.feature-item {
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
+.feature-card {
+  background: var(--light-bg);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.feature-item:hover {
+.feature-card:hover {
   transform: translateY(-8px);
 }
-.feature-image {
-  height: 240px;
-  overflow: hidden;
-}
-.feature-image img {
+.feature-card img {
   width: 100%;
-  height: 100%;
+  height: 220px;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  display: block;
 }
-.feature-item:hover .feature-image img {
-  transform: scale(1.03);
-}
-.feature-content {
-  padding: var(--space-md);
+.card-content {
+  padding: 1.75rem;
   position: relative;
 }
 .badge {
   position: absolute;
   top: -12px;
-  left: var(--space-md);
+  left: 1.75rem;
   background: var(--success);
   color: white;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 0.35rem 0.9rem;
   border-radius: 30px;
-  letter-spacing: 0.5px;
 }
-.feature-content h2 {
+.card-content h2 {
   font-size: 1.5rem;
   margin: 0.75rem 0 0.75rem;
   font-weight: 600;
 }
-.feature-content p {
+.card-content p {
   color: var(--text-light);
   font-size: 1.05rem;
   font-weight: 300;
-  line-height: 1.5;
 }
 
 /* === Catálogo === */
-.section-heading {
-  font-family: var(--font-serif);
+.section-title {
+  font-family: 'Playfair Display', serif;
   font-size: 2.25rem;
   text-align: center;
-  margin: var(--space-xl) 0 var(--space-lg);
+  margin: 3.5rem 0 2.5rem;
   font-weight: 600;
-  letter-spacing: -0.5px;
   position: relative;
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
 }
-.section-heading::after {
+.section-title::after {
   content: '';
   display: block;
   width: 50px;
@@ -211,52 +131,47 @@ body {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
 }
-.product-card {
-  background: var(--bg);
+.product-item {
+  background: var(--light-bg);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.product-card:hover {
-  box-shadow: var(--shadow-md);
+.product-item:hover {
   transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
-.product-card img {
+.product-item img {
   width: 100%;
-  height: 190px;
+  height: 170px;
   object-fit: cover;
-  display: block;
 }
-.product-info {
-  padding: var(--space-sm) var(--space-sm) var(--space-md);
-}
-.product-info h3 {
+.product-item h3 {
+  padding: 1.25rem 1.25rem 0.5rem;
   font-size: 1.25rem;
-  margin-bottom: 0.5rem;
   font-weight: 600;
 }
-.product-info p {
+.product-item p {
+  padding: 0 1.25rem 1.25rem;
   color: var(--text-light);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
-  line-height: 1.5;
 }
 
 /* === Marcas === */
-.brands-section {
+.brands {
   text-align: center;
-  padding-bottom: var(--space-xl);
+  margin-top: 3rem;
 }
 .brands-label {
-  font-size: 1.1rem;
   color: var(--gray);
-  margin-bottom: var(--space-md);
-  font-weight: 400;
+  margin-bottom: 1.75rem;
+  font-size: 1.1rem;
   letter-spacing: 1px;
 }
 .brand-logos {
@@ -264,42 +179,33 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 3.5rem;
-  opacity: 0.9;
 }
 .brand-logos img {
   height: 50px;
-  filter: grayscale(0%) opacity(0.9);
-  transition: all 0.4s ease;
+  opacity: 0.85;
+  transition: all 0.3s ease;
 }
 .brand-logos img:hover {
-  filter: grayscale(0%) opacity(1);
-  transform: scale(1.04);
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 /* === Footer === */
 .site-footer {
-  background: var(--bg-light);
-  padding: var(--space-md) 0;
-  border-top: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 2rem 0;
+  border-top: 1px solid #1f2937;
   text-align: center;
 }
 .site-footer p {
   color: var(--text-light);
   font-size: 1rem;
-  font-weight: 300;
 }
 
 /* === Responsive === */
 @media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.5rem;
-    letter-spacing: -1px;
-  }
-  .subtitle {
-    font-size: 1.1rem;
-  }
-  .nav {
-    gap: var(--space-sm);
+  .hero h1 {
+    font-size: 2.3rem;
   }
   .featured-grid,
   .product-grid {
@@ -308,11 +214,4 @@ body {
   .brand-logos {
     gap: 2.5rem;
   }
-}
-
-/* === Micro-interacciones visuales (sin JS) === */
-a,
-button,
-img {
-  transition: all 0.3s ease;
 }
