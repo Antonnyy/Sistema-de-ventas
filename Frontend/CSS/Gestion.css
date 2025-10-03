@@ -1,71 +1,134 @@
-:root{
-  --bg:#0f172a;--line:#1f2937;--txt:#e5e7eb;--mut:#9ca3af;
-  --acc:#22d3ee;--acc2:#06b6d4;--ok:#10b981;--warn:#f59e0b;
-  --r:12px;--shadow:0 8px 22px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:radial-gradient(800px 420px at 8% -10%,rgba(34,211,238,.08),transparent),var(--bg);
-  color:var(--txt);
-  font:16px/1.45 system-ui,Segoe UI,Roboto,Arial;
-}
-.wrap{width:min(1040px,92%);margin:28px auto 80px}
-h1,h2{margin:0}
-.muted{color:var(--mut)}
+/* ==============================
+   Gestión · Estilos (Gestion.css)
+   Alineado a clases del HTML (prefijo g-)
+   ============================== */
 
-/* Botones */
-.btn,.icon{
-  display:inline-grid;place-items:center;
-  background:#102137;color:var(--txt);
+:root{
+  --bg:#0f172a;        /* fondo base */
+  --layer:#111827;     /* cartas/paneles */
+  --line:#1f2937;      /* bordes */
+  --txt:#e5e7eb;       /* texto principal */
+  --mut:#9ca3af;       /* texto secundario */
+  --acc:#22d3ee;       /* acento 1 */
+  --acc2:#06b6d4;      /* acento 2 */
+  --ok:#10b981;        /* éxito */
+  --warn:#f59e0b;      /* advertencia */
+  --r:12px;            /* radio base */
+  --shadow:0 8px 22px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{height:100%}
+
+body{
+  background:
+    radial-gradient(800px 420px at 8% -10%,rgba(34,211,238,.08),transparent),
+    var(--bg);
+  color:var(--txt);
+  font:16px/1.45 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ===== Utilidades ===== */
+.g-muted{color:var(--mut)}
+.g-center{text-align:center}
+.g-hidden{display:none}
+
+/* ===== Contenedor principal ===== */
+.g-container{
+  width:min(1100px,92%);
+  margin:28px auto 80px;
+}
+
+/* ===== Encabezado de página ===== */
+.g-page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+  margin-bottom:14px;
+}
+.g-page-head h1{font-size:1.6rem;line-height:1.1}
+
+/* Acciones encabezado */
+.g-head-actions{display:flex;gap:10px}
+
+/* ===== Botones ===== */
+.g-btn,
+.g-icon-btn{
+  display:inline-grid;
+  place-items:center;
+  background:#102137;
+  color:var(--txt);
   border:1px solid var(--line);
   border-radius:10px;
   padding:8px 12px;
   text-decoration:none;
-  transition:.2s;
+  transition:.2s ease;
+  cursor:pointer;
 }
-.btn:hover,.icon:hover{border-color:var(--acc);transform:translateY(-1px)}
-.btn.pri{
+.g-btn:hover,
+.g-icon-btn:hover{
+  border-color:var(--acc);
+  transform:translateY(-1px);
+}
+
+.g-btn-primary{
   background:linear-gradient(180deg,var(--acc),var(--acc2));
   color:#00212a;
   border-color:transparent;
   box-shadow:0 8px 20px rgba(34,211,238,.25);
 }
-.icon{width:34px;height:34px;padding:0}
 
-/* Encabezado */
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.g-btn-secondary{
+  background:#0b1424;
+  color:var(--txt);
+}
 
-/* Barra de herramientas */
-.tools{
-  margin:12px 0;padding:10px;
-  display:flex;gap:10px;align-items:center;
+.g-icon-btn{
+  width:36px;height:36px;padding:0;font-size:18px;
+}
+
+/* ===== Barra de herramientas ===== */
+.g-toolbar{
+  margin:12px 0 16px;
+  padding:10px;
+  display:flex;
+  gap:10px;
+  align-items:center;
   background:rgba(17,24,39,.9);
   border:1px solid var(--line);
   border-radius:var(--r);
   box-shadow:var(--shadow);
 }
-.tools input,.tools select,
-.form input,.form select,.form textarea{
-  background:#0b1424;color:var(--txt);
+.g-toolbar input[type="search"],
+.g-toolbar select{
+  background:#0b1424;
+  color:var(--txt);
   border:1px solid var(--line);
   border-radius:10px;
   padding:8px 10px;
 }
-.tools input{flex:1}
+#searchInput{flex:1;min-width:180px}
 
-/* Tarjeta */
-.card{
+/* ===== Panel listado ===== */
+.g-panel{
   background:rgba(17,24,39,.9);
   border:1px solid var(--line);
   border-radius:var(--r);
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-.card-head{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px;border-bottom:1px solid var(--line);
+.g-panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
 }
-.badge{
+.g-panel-head h2{font-size:1.1rem}
+
+.g-badge{
   background:rgba(34,211,238,.12);
   color:var(--acc);
   border:1px solid rgba(34,211,238,.45);
@@ -74,49 +137,117 @@ h1,h2{margin:0}
   font-size:.85rem;
 }
 
-/* Tabla */
-.table-wrap{overflow:auto}
-.table{width:100%;border-collapse:collapse}
-.table th{
-  background:#0e1627;color:var(--mut);
-  text-align:left;font-weight:600;font-size:.9rem;
-  padding:12px 14px;border-bottom:1px solid var(--line);
-}
-.table td{
+/* ===== Tabla ===== */
+.g-table-wrapper{overflow:auto}
+.g-table{width:100%;border-collapse:collapse}
+.g-table th{
+  background:#0e1627;
+  color:var(--mut);
+  text-align:left;
+  font-weight:600;
+  font-size:.9rem;
   padding:12px 14px;
   border-bottom:1px solid var(--line);
+  white-space:nowrap;
 }
-.table tr:hover{background:rgba(34,211,238,.05)}
-.center{text-align:center}
-
-/* Estado */
-.tag{
-  padding:4px 9px;border-radius:999px;font-size:.8rem;border:1px solid transparent;
+.g-table td{
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  vertical-align:middle;
 }
-.tag.ok{color:var(--ok);background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.35)}
-.tag.warn{color:var(--warn);background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.35)}
+.g-table tr:hover{background:rgba(34,211,238,.05)}
 
-/* Acciones */
-.row{display:flex;gap:6px;justify-content:center}
+/* Píldoras de estado opcionales si decides usarlas en la celda “Estado” */
+.g-tag{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:.8rem;
+  border:1px solid transparent;
+}
+.g-tag.ok{
+  color:var(--ok);
+  background:rgba(16,185,129,.12);
+  border-color:rgba(16,185,129,.35);
+}
+.g-tag.warn{
+  color:var(--warn);
+  background:rgba(245,158,11,.12);
+  border-color:rgba(245,158,11,.35);
+}
 
-/* Formulario con details */
-details{margin-top:12px}
-summary{list-style:none;cursor:pointer}
-summary::-webkit-details-marker{display:none}
-.box{
-  background:rgba(17,24,39,.9);
+/* Acciones en fila */
+.g-row-actions{display:flex;gap:6px;justify-content:center}
+
+/* ===== Modal Crear/Editar ===== */
+.g-modal{
+  position:fixed;inset:0;z-index:50;
+  display:grid;place-items:center;
+}
+.g-modal-backdrop{
+  position:absolute;inset:0;background:rgba(0,0,0,.55);
+}
+.g-modal-card{
+  position:relative;z-index:1;
+  width:min(720px,92%);
+  background:var(--layer);
   border:1px solid var(--line);
-  border-radius:var(--r);
+  border-radius:16px;
   box-shadow:var(--shadow);
-  padding:12px;
-  margin-top:10px;
+  overflow:hidden;
 }
-.form .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.form label{display:flex;flex-direction:column;gap:6px}
-.span-2{grid-column:span 2}
-.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
+.g-modal-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;border-bottom:1px solid var(--line);
+}
+.g-modal-head h3{font-size:1.15rem}
 
-/* Responsive */
+/* ===== Formulario del modal ===== */
+.g-form{padding:14px 16px}
+.g-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.g-form label{display:flex;flex-direction:column;gap:6px}
+.g-form input,
+.g-form select,
+.g-form textarea{
+  background:#0b1424;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 10px;
+}
+.g-col-span-2{grid-column:span 2}
+
+.g-form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:12px;
+}
+
+/* ===== Toast ===== */
+.g-toast{
+  position:fixed;
+  right:18px; bottom:18px; z-index:60;
+  background:#0b1424;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  box-shadow:var(--shadow);
+  max-width:min(420px,90vw);
+}
+
+/* ===== Responsive ===== */
+@media (max-width:860px){
+  .g-page-head{flex-direction:column;align-items:flex-start}
+  .g-head-actions{align-self:flex-end}
+}
 @media (max-width:720px){
-  .form .grid{grid-template-columns:1fr}
+  .g-grid{grid-template-columns:1fr}
+  .g-toolbar{flex-wrap:wrap}
+  #searchInput{flex:1 1 100%}
 }
