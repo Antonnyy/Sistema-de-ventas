@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Delivery – Sistema de Ventas</title>
   <link rel="stylesheet" href="../CSS/Delivery.css"/>
   <link rel="stylesheet" href="../CSS/Navbar.css"/>
   <link rel="stylesheet" href="../CSS/Footer.css"/>
-  <script defer src="../JS/includes.js"></script>
-  <script defer src="../JS/Bodeguero.js"></script>
+  <style>
+    /* Numeración de filas con CSS (decorativa) */
+    .items-grid{counter-reset: fila}
+    .item-row{display:grid; grid-template-columns: 1.4fr .4fr .6fr; gap:10px; align-items:center}
+    .item-row::before{
+      counter-increment:fila; content: counter(fila) ".";
+      color:#9fb1c6; margin-right:6px; font-variant-numeric:tabular-nums;
+      grid-column: 1 / 1; display:none; /* ocúltalo si no quieres numeración visual */
+    }
+    .items .head-row{display:grid; grid-template-columns: 1.4fr .4fr .6fr; gap:10px; color:#9fb1c6; margin-bottom:6px}
+    .totales .field input{ text-align:right }
+    @media print{
+      #navbar,#footer,.actions,.note,.filters{display:none}
+      body{background:#fff}
+      .card,.card-lite,.form{box-shadow:none; border:1px solid #ddd}
+      .hero{border:none; padding:6px 0 0}
+      .wrapper{width:100%; margin:0; padding:0 8mm}
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar dinámico (no necesitas modificar el archivo existente) -->
-  <div data-include="../HTML/Navbar.Bodega.html"></div>
+  <!-- Navbar (estático) -->
+  <header id="navbar">
+    <!-- Pega tu Navbar si no usas includes -->
+  </header>
 
   <header class="hero">
     <h1>Delivery</h1>
-    <p>Registra pedidos a domicilio y gestiona su historial.</p>
+    <p>Registra pedidos y genera un comprobante imprimible.</p>
+    <small style="color:#9fb1c6">Versión solo HTML+CSS (sin cálculos automáticos ni guardado).</small>
   </header>
 
   <main class="wrapper">
-    <!-- Formulario de nuevo pedido -->
+    <!-- Pedido -->
     <section class="form card">
       <h2 class="section-title">Nuevo pedido</h2>
 
+      <!-- Sin acción (no enviamos a servidor); sirve como ficha imprimible -->
       <form id="form-delivery" autocomplete="on">
         <div class="grid-3">
           <div class="field">
-            <input id="cliente" name="cliente" placeholder=" " required>
+            <input id="cliente" name="cliente" required placeholder=" "/>
             <label for="cliente">Cliente</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="telefono" name="telefono" placeholder=" ">
+            <input id="telefono" name="telefono" inputmode="tel" pattern="[0-9+\s-]{6,}" placeholder=" "/>
             <label for="telefono">Teléfono</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="metodoPago" name="metodoPago" placeholder=" " list="metodos" required>
+            <input id="metodoPago" name="metodoPago" list="metodos" required placeholder=" "/>
             <label for="metodoPago">Método de pago</label><span class="focus-ring"></span>
             <datalist id="metodos">
               <option value="EFECTIVO"></option>
@@ -48,80 +69,121 @@
 
         <div class="grid-2">
           <div class="field">
-            <input id="direccion" name="direccion" placeholder=" " required>
+            <input id="direccion" name="direccion" required placeholder=" "/>
             <label for="direccion">Dirección</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="referencia" name="referencia" placeholder=" ">
+            <input id="referencia" name="referencia" placeholder=" "/>
             <label for="referencia">Referencia</label><span class="focus-ring"></span>
           </div>
         </div>
 
-        <!-- Items -->
+        <!-- Ítems (hasta 10 filas) -->
         <div class="items card-lite">
           <div class="items-head">
             <h3>Ítems</h3>
-            <button class="btn sm" type="button" id="btn-add-item">+ Agregar ítem</button>
+            <p class="note">Completa las filas necesarias. Totales se ingresan abajo.</p>
           </div>
-          <div id="items-container" class="items-grid">
-            <!-- Fila de ítem dinámica -->
+
+          <div class="head-row">
+            <div>Descripción / producto</div>
+            <div>Cant.</div>
+            <div>Precio (S/)</div>
+          </div>
+
+          <div class="items-grid">
+            <!-- Repite 10 filas sin JS -->
+            <!-- Fila 1 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" placeholder="Gaseosa 500ml" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 2 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 3 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 4 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 5 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 6 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 7 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 8 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 9 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
+            <!-- Fila 10 -->
+            <div class="item-row">
+              <input class="input" name="desc[]" />
+              <input class="input" name="cant[]" inputmode="decimal" />
+              <input class="input" name="prec[]" inputmode="decimal" />
+            </div>
           </div>
         </div>
 
-        <!-- Extras -->
-        <div class="grid-3">
+        <!-- Totales (manuales) -->
+        <div class="grid-3 totales">
           <div class="field">
-            <input id="repartidor" name="repartidor" placeholder=" ">
-            <label for="repartidor">Repartidor</label><span class="focus-ring"></span>
+            <input id="subTotal" name="subTotal" inputmode="decimal" placeholder="0.00"/>
+            <label for="subTotal">Subt. (S/)</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <input id="costoDelivery" name="costoDelivery" placeholder="0.00" inputmode="decimal" value="0">
-            <label for="costoDelivery">Costo delivery (S/)</label><span class="focus-ring"></span>
+            <input id="costoDelivery" name="costoDelivery" inputmode="decimal" placeholder="0.00"/>
+            <label for="costoDelivery">Delivery (S/)</label><span class="focus-ring"></span>
           </div>
           <div class="field">
-            <select id="estado" name="estado" class="select">
-              <option value="PENDIENTE" selected>PENDIENTE</option>
-              <option value="EN_CAMINO">EN CAMINO</option>
-              <option value="ENTREGADO">ENTREGADO</option>
-              <option value="CANCELADO">CANCELADO</option>
-            </select>
-            <label for="estado" class="label-select">Estado</label>
+            <input id="total" name="total" inputmode="decimal" placeholder="0.00"/>
+            <label for="total">Total (S/)</label><span class="focus-ring"></span>
           </div>
-        </div>
-
-        <!-- Totales -->
-        <div class="totales">
-          <div><span>Subt. (S/):</span><strong id="subTotal">0.00</strong></div>
-          <div><span>Delivery (S/):</span><strong id="dlv">0.00</strong></div>
-          <div><span>Total (S/):</span><strong id="total">0.00</strong></div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" type="submit">Guardar pedido</button>
-          <button class="btn" type="reset" id="btn-reset">Limpiar</button>
+          <!-- Sin JS: sugerimos imprimir o guardar como PDF -->
+          <button class="btn primary" type="submit" formaction="#" onclick="return false" title="Sin envío automático en esta versión">Guardar (no disponible)</button>
+          <span class="note">Para registrar este pedido: <strong>Imprimir</strong> (Ctrl/Cmd + P) o “Guardar como PDF”.</span>
         </div>
       </form>
     </section>
 
-    <!-- Historial -->
+    <!-- “Historial” imprimible (manual) -->
     <section class="card">
-      <div class="hist-head">
-        <h2 class="section-title">Historial de pedidos</h2>
-        <div class="filters">
-          <input id="filtroTexto" class="input sm" placeholder="Buscar cliente/dirección…">
-          <select id="filtroEstado" class="select sm">
-            <option value="">Todos</option>
-            <option value="PENDIENTE">PENDIENTE</option>
-            <option value="EN_CAMINO">EN CAMINO</option>
-            <option value="ENTREGADO">ENTREGADO</option>
-            <option value="CANCELADO">CANCELADO</option>
-          </select>
-          <input id="fDesde" type="date" class="input sm">
-          <input id="fHasta" type="date" class="input sm">
-          <button id="btn-export" class="btn sm">Exportar CSV</button>
-        </div>
-      </div>
-
+      <h2 class="section-title">Historial (manual)</h2>
+      <p class="note">Versión sin JS: el historial se gestiona imprimiendo/archivando los pedidos en PDF.</p>
       <div class="table-wrap">
         <table class="table">
           <thead>
@@ -131,20 +193,19 @@
               <th>Dirección</th>
               <th>Ítems</th>
               <th>Total (S/)</th>
-              <th>Estado</th>
-              <th>Repartidor</th>
-              <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="tbody-historial"></tbody>
+          <tbody>
+            <tr><td colspan="5" style="color:#9fb1c6">Sin registro automático (requiere JS o servidor).</td></tr>
+          </tbody>
         </table>
       </div>
     </section>
   </main>
 
-  <!-- Footer dinámico -->
-  <footer id="footer"></footer>
-
-  <script src="../JS/delivery.js"></script>
+  <!-- Footer -->
+  <footer id="footer">
+    <!-- Pega tu Footer HTML si no usas includes -->
+  </footer>
 </body>
 </html>
