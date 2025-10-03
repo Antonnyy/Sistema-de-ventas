@@ -1,135 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ventas | Sistema</title>
-
-  <!-- Estilos base existentes en tu proyecto -->
-  <link rel="stylesheet" href="../CSS/Navbar.css">
-  <link rel="stylesheet" href="../CSS/Footer.css">
-  <link rel="stylesheet" href="../CSS/Venta.css?v=9"> <!-- ruta correcta -->
-  <script defer src="../JS/includes.js"></script>
-  <script defer src="../JS/Bodeguero.js"></script>
-</head>
-  <!-- Estilos SOLO de esta página -->
-  <link rel="stylesheet" href="../CSS/Venta.css?v=1">
+  <link rel="stylesheet" href="../CSS/Venta.css">
 </head>
 <body data-page="ventas">
-  <!-- Navbar (si usas includes.js, se carga desde Navbar.html) -->
-  <div data-include="../HTML/Navbar.Bodega.html"></div>
-
-  <main class="v-container">
-    <!-- Encabezado -->
-    <section class="v-head">
+  <main class="wrap">
+    <header class="top">
       <div>
         <h1>Ventas</h1>
-        <p class="v-muted">Registra una nueva venta y genera el comprobante.</p>
+        <p class="muted">Registra productos y visualiza totales.</p>
       </div>
-      <div class="v-head-actions">
-        <label class="v-switch">
-          <input type="checkbox" checked disabled>
-          <span>Precios incluyen IGV (18%)</span>
-        </label>
-      </div>
+      <label class="chip"><input type="checkbox" checked disabled> IGV 18% incluido</label>
+    </header>
+
+    <section class="bar">
+      <input type="search" placeholder="Código o nombre…">
+      <input type="number" min="1" value="1" title="Cant.">
+      <button class="btn pri" disabled>+ Agregar</button>
+      <span class="grow"></span>
+      <label class="inline">Desc. % <input type="number" min="0" max="100" value="0" disabled></label>
     </section>
 
-    <!-- Barra para agregar (solo UI) -->
-    <section class="v-toolbar">
-      <input type="search" placeholder="Código o nombre del producto…" list="productList" autocomplete="off">
-      <datalist id="productList"><!-- opciones de ejemplo -->
-        <option value="P-0001">Audífonos Pro</option>
-        <option value="P-0002">Mouse Gamer</option>
-        <option value="P-0003">Teclado Mecánico</option>
-      </datalist>
-
-      <input type="number" min="1" value="1" title="Cantidad">
-      <button class="v-btn v-btn-primary" type="button" disabled>+ Agregar</button>
-
-      <div class="v-grow"></div>
-      <label class="v-inline">
-        <span>Desc. %</span>
-        <input type="number" min="0" max="100" value="0" disabled>
-      </label>
-    </section>
-
-    <!-- Layout principal -->
-    <section class="v-grid">
+    <section class="grid">
       <!-- Detalle -->
-      <div class="v-panel">
-        <div class="v-panel-head">
-          <h2>Detalle de venta</h2>
-          <span class="v-badge">0</span>
+      <div class="card">
+        <div class="cardh">
+          <h2>Detalle de venta</h2><span class="badge">1</span>
         </div>
-
-        <div class="v-table-wrap">
-          <table class="v-table">
+        <div class="tblwrap">
+          <table class="tbl">
             <thead>
-            <tr>
-              <th>Código</th>
-              <th>Producto</th>
-              <th>Precio (S/)</th>
-              <th>Cant.</th>
-              <th>Subtotal</th>
-              <th class="v-center">Acciones</th>
-            </tr>
+              <tr><th>Código</th><th>Producto</th><th>Precio</th><th>Cant.</th><th>Subtotal</th><th class="c">Acciones</th></tr>
             </thead>
             <tbody>
-            <!-- Fila de ejemplo (solo UI) -->
-            <!--
-            <tr>
-              <td>P-0001</td>
-              <td>Audífonos Pro</td>
-              <td><input class="v-price" type="number" step="0.01" value="89.90" disabled></td>
-              <td><input class="v-qty" type="number" value="1" disabled></td>
-              <td class="v-sub">S/ 89.90</td>
-              <td class="v-center"><button class="v-icon-btn" disabled>🗑</button></td>
-            </tr>
-            -->
+              <tr>
+                <td>P-0001</td><td>Audífonos Pro</td>
+                <td><input class="in in-sm" type="number" step="0.01" value="89.90" disabled></td>
+                <td><input class="in in-sm" type="number" value="1" disabled></td>
+                <td class="b">S/ 89.90</td>
+                <td class="c"><button class="icon" disabled>🗑</button></td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Resumen / Pago (solo UI) -->
-      <aside class="v-summary">
-        <div class="v-card">
+      <!-- Resumen -->
+      <aside class="side">
+        <div class="card pad">
           <h3>Totales</h3>
-          <div class="v-row"><span>Sub. sin IGV</span><b>S/ 0.00</b></div>
-          <div class="v-row"><span>IGV (18%)</span><b>S/ 0.00</b></div>
-          <div class="v-row"><span>Descuento</span><b>- S/ 0.00</b></div>
-          <div class="v-row v-total"><span>Total a pagar</span><b>S/ 0.00</b></div>
+          <div class="row"><span>Sub. sin IGV</span><b>S/ 76.19</b></div>
+          <div class="row"><span>IGV (18%)</span><b>S/ 13.71</b></div>
+          <div class="row"><span>Descuento</span><b>- S/ 0.00</b></div>
+          <div class="row total"><span>Total a pagar</span><b>S/ 89.90</b></div>
         </div>
 
-        <div class="v-card">
+        <div class="card pad">
           <h3>Pago</h3>
-          <label class="v-field">
-            <span>Método</span>
-            <select disabled>
-              <option>Efectivo</option>
-              <option>Tarjeta</option>
-              <option>Yape/Plin</option>
-              <option>Transferencia</option>
-            </select>
+          <label class="field"><span>Método</span>
+            <select disabled><option>Efectivo</option><option>Tarjeta</option><option>Yape/Plin</option></select>
           </label>
-          <label class="v-field">
-            <span>Recibido (S/)</span>
-            <input type="number" min="0" step="0.10" value="0" disabled>
+          <label class="field"><span>Recibido (S/)</span>
+            <input class="in" type="number" min="0" step="0.10" value="0" disabled>
           </label>
-          <div class="v-row"><span>Vuelto</span><b>S/ 0.00</b></div>
+          <div class="row"><span>Vuelto</span><b>S/ 0.00</b></div>
         </div>
 
-        <div class="v-actions">
-          <button class="v-btn" type="button" disabled>Nueva venta</button>
-          <button class="v-btn v-btn-primary" type="button" disabled>Registrar venta</button>
-          <button class="v-btn v-btn-secondary" type="button" disabled>Imprimir ticket</button>
-          <button class="v-btn v-btn-secondary" type="button" disabled>Exportar JSON</button>
+        <div class="actions">
+          <button class="btn" disabled>Nueva venta</button>
+          <button class="btn pri" disabled>Registrar</button>
+          <button class="btn sec" disabled>Imprimir</button>
+          <button class="btn sec" disabled>Exportar</button>
         </div>
       </aside>
     </section>
   </main>
-
-  <!-- Si ya usas includes.js para cargar header/footer, déjalo al final -->
-  <script src="../JS/includes.js"></script>
 </body>
 </html>
