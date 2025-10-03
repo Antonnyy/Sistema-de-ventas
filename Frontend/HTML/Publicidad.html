@@ -3,164 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sección de Publicidad · Promociones</title>
+  <title>Publicidad · Sistema de Ventas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
   <link rel="stylesheet" href="../CSS/Publicidad.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css" />
-  <link rel="stylesheet" href="../CSS/Footer.css" />
-  <script defer src="../JS/includes.js"></script>
-  <script defer src="../JS/Publicidad.js"></script>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="logo">Sistema de Ventas</div>
-  <ul class="nav-links">
-    <li><a class="nav-link" href="Main.html">Inicio</a></li>
-    <li><a class="nav-link" href="Catalogo.html">Catálogo</a></li>
-    <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
-    <li><a class="nav-link" href="Publicidad.html">Publicidad</a></li>
-    <li><a class="btn nav-link" href="Login.html">Login</a></li>
-  </ul>
-  <button class="menu-toggle" aria-label="Menú">☰</button>
-</nav>
-  
-  <section class="wrap" aria-label="Publicidad y Promociones">
-    <header class="promo-header in-view">
-      <div>
-        <h1 class="promo-title underline">Promociones</h1>
-        <p class="promo-sub">Las Mejores promociones que podras encontrar en la ciudad.</p>
+  <!-- TU NAVBAR EXACTO (sin cambios) -->
+  <nav class="navbar">
+    <div class="logo">Sistema de Ventas</div>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="Main.html">Inicio</a></li>
+      <li><a class="nav-link" href="Catalogo.html">Catálogo</a></li>
+      <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
+      <li><a class="nav-link" href="Publicidad.html">Publicidad</a></li>
+      <li><a class="btn nav-link" href="Login.html">Login</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menú">☰</button>
+  </nav>
+
+  <!-- Contenido principal rediseñado -->
+  <main class="main-content">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Promociones<br>del Mes</h1>
+        <p class="subtitle">Ofertas seleccionadas con precisión para tu negocio.</p>
       </div>
-      <a class="btn" href="#catalogo" aria-label="Ver catálogo completo">
-        Ver catálogo
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
-      </a>
-    </header>
+    </section>
 
-    <!-- Carrusel principal -->
-    <div class="carousel reveal" id="carousel">
-      <button class="ctrl prev" aria-label="Anterior" data-dir="-1"><svg viewBox="0 0 24 24"><path d="M14.828 12l-4.95 4.95-1.414-1.414L12 12 8.464 8.464l1.414-1.414z"/></svg></button>
-      <div class="carousel-track" id="track">
-        <!-- Slide 1 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
-          <div class="slide-media"><img src="../Imagenes/Aseo-Personal.jpg" alt="Producto premium en fondo azul" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">-25% Aseo Personal</span>
-            <h2 class="h2">Aseo Personal</h2>
-            <p class="lead">Los mejores productos de aseo personal para el uso de cada persona</p>
-            <div class="cta"><a class="btn" href="#">Ver Productos</a></div>
-          </div>
+    <section class="featured-grid">
+      <div class="feature-card">
+        <img src="../Imagenes/Aseo-Personal.jpg" alt="Productos de aseo personal en oferta" loading="lazy">
+        <div class="card-content">
+          <span class="badge">-25%</span>
+          <h2>Aseo Personal</h2>
+          <p>Lo esencial para el cuidado diario, al mejor precio.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="../Imagenes/Gaseosa.jpg" alt="Gaseosas en variedad de sabores" loading="lazy">
+        <div class="card-content">
+          <span class="badge">Oferta</span>
+          <h2>Gaseosas</h2>
+          <p>Refresca tu inventario con nuestras gaseosas favoritas.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="../Imagenes/útiles-escolares.jpg" alt="Útiles escolares de calidad" loading="lazy">
+        <div class="card-content">
+          <span class="badge">Escolar</span>
+          <h2>Útiles Escolares</h2>
+          <p>Todo lo necesario para el regreso a clases.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog-section">
+      <h2 class="section-title">Catálogo de Promociones</h2>
+      <div class="product-grid">
+        <article class="product-item">
+          <img src="../Imagenes/Electronicos.webp" alt="Electrónicos en promoción" loading="lazy">
+          <h3>Electrónicos</h3>
+          <p>Tecnología para tu negocio.</p>
         </article>
-        <!-- Slide 2 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
-          <div class="slide-media"><img src="../Imagenes/Gaseosa.jpg" alt="Tecnología en tonos azules" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">Gaseosa</span>
-            <h2 class="h2">Encuentra del sabor que desees</h2>
-            <p class="lead">encuentra gaseosas de todo tamaño y a un precio al bolsillo.</p>
-            <div class="cta"><a class="btn" href="#">Ver variedad</a></div>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Bebidas.jpg" alt="Bebidas alcohólicas seleccionadas" loading="lazy">
+          <h3>Bebidas</h3>
+          <p>Variedad para todo tipo de cliente.</p>
         </article>
-        <!-- Slide 3 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
-          <div class="slide-media"><img src="../Imagenes/útiles-escolares.jpg" alt="Minimal workspace azul" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">Utiles Escolares</span>
-            <h2 class="h2">todo tipo de utilez Escolares</h2>
-            <p class="lead">Encuentra variedad de utlizes escolares al por mayor y menor con los mejores precios del mercado.</p>
-            <div class="cta"><a class="btn" href="#">Utilez</a></div>
-          </div>
+        <article class="product-item">
+          <img src="../Imagenes/Dulces.png" alt="Dulces surtidos" loading="lazy">
+          <h3>Dulces</h3>
+          <p>Los favoritos de tus consumidores.</p>
+        </article>
+        <article class="product-item">
+          <img src="../Imagenes/Recargas.jpg" alt="Recargas de celular" loading="lazy">
+          <h3>Recargas</h3>
+          <p>Todas las operadoras, sin complicaciones.</p>
+        </article>
+        <article class="product-item">
+          <img src="../Imagenes/Pelota.webp" alt="Artículos deportivos" loading="lazy">
+          <h3>Deportivos</h3>
+          <p>Equipamiento para entusiastas.</p>
+        </article>
+        <article class="product-item">
+          <img src="../Imagenes/Regalos.jpg" alt="Ideas de regalo" loading="lazy">
+          <h3>Regalos</h3>
+          <p>Detalles que generan fidelidad.</p>
         </article>
       </div>
-      <button class="ctrl next" aria-label="Siguiente" data-dir="1"><svg viewBox="0 0 24 24"><path d="M9.172 12l4.95-4.95 1.414 1.414L12 12l3.536 3.536-1.414 1.414z"/></svg></button>
-    </div>
+    </section>
 
-    <!-- Rejilla de tarjetas de promoción -->
-    <div class="grid reveal" id="promos">
-      <!-- Producto 1 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Electronicos.webp" alt="Teclado mecánico azul" loading="lazy">
-        </div>
-        <h3>Electronicos</h3>
-        <p class="meta">Variedad de Productos electronicos</p>
-        <div class="price-row"><span class="price">S/---</span><span class="old">S/ </span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 2 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Bebidas.jpg" alt="Auriculares profesionales en azul" loading="lazy">
-        </div>
-        <h3>Bebidas</h3>
-        <p class="meta">Variedad de bebidas alcoholicas</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 3 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Dulces.png" alt="Monitor 27 pulgadas en setup azul" loading="lazy">
-        </div>
-        <h3>Dulces</h3>
-        <p class="meta">Variedad de Dulces de todo sabor a su elección</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ -----</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 4 -->
-      <article class="card product" tabindex="0">
-        <span class="save">-16%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Recargas.jpg" alt="Silla ergonómica oficina azul y blanco" loading="lazy">
-        </div>
-        <h3>Recargas</h3>
-        <p class="meta">Encontraras recargas de Claro, Entel, Bitel y Movistar</p>
-        <div class="price-row"><span class="price">S/ 5</span><span class="old">S/ 5</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 5 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Pelota.webp" alt="Hub USB-C 8 en 1 metálico" loading="lazy">
-        </div>
-        <h3>Productos Deportivos</h3>
-        <p class="meta">Encuentra lo mas que desees en deportivos.</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 6 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Regalos.jpg" alt="Mouse inalámbrico minimal azul" loading="lazy">
-        </div>
-        <h3>Regalos</h3>
-        <p class="meta">Encuentra variedad de regalo para toda ocasión</p>
-        <div class="price-row"><span class="price">S/ --</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-    </div>
-
-    <!-- Marquee de confianza / marcas -->
-    <div class="marquee reveal" aria-label="Marcas aliadas">
-      <div class="marquee-track">
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
-        <!-- duplicado para bucle infinito suave -->
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
+    <section class="brands">
+      <p class="brands-label">Marcas destacadas este mes</p>
+      <div class="brand-logos">
+        <img src="https://dummyimage.com/140x50/1fccd2/0f172a&text=EKU" alt="EKU">
+        <img src="https://dummyimage.com/140x50/22d3ee/0f172a&text=BYTE" alt="BYTE">
+        <img src="https://dummyimage.com/140x50/1fccd2/0f172a&text=PRO" alt="PRO">
+        <img src="https://dummyimage.com/140x50/22d3ee/0f172a&text=SHOP" alt="SHOP">
       </div>
-    </div>
+    </section>
+  </main>
 
-  </section>
-  <div data-include="../HTML/Footer.html"></div>
-  <script src="../JS/Publicidad.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Sistema de Ventas. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
