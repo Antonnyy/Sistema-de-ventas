@@ -1,119 +1,253 @@
-/* ===== Gestión (aislado y con prefijo .g- para no chocar con otros CSS) ===== */
+/* ==============================
+   Gestión · Estilos (Gestion.css)
+   Alineado a clases del HTML (prefijo g-)
+   ============================== */
+
 :root{
-  --bg:#0f172a;
-  --panel:#111827;
-  --border:#1f2937;
-  --text:#e2e8f0;
-  --muted:#9ca3af;
-  --accent:#22d3ee;
-  --accent-2:#06b6d4;
-  --success:#10b981;
-  --warn:#f59e0b;
-  --shadow:0 10px 25px rgba(0,0,0,.35);
+  --bg:#0f172a;        /* fondo base */
+  --layer:#111827;     /* cartas/paneles */
+  --line:#1f2937;      /* bordes */
+  --txt:#e5e7eb;       /* texto principal */
+  --mut:#9ca3af;       /* texto secundario */
+  --acc:#22d3ee;       /* acento 1 */
+  --acc2:#06b6d4;      /* acento 2 */
+  --ok:#10b981;        /* éxito */
+  --warn:#f59e0b;      /* advertencia */
+  --r:12px;            /* radio base */
+  --shadow:0 8px 22px rgba(0,0,0,.35);
 }
-body[data-page="gestion"]{
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.08), transparent),
-              radial-gradient(1000px 500px at 110% -20%, rgba(34,211,238,.06), transparent),
-              var(--bg);
-  color:var(--text);
-  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
-}
-.g-container{ width:min(1150px, 92%); margin: 28px auto 80px; }
-.g-page-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px; }
-.g-page-head h1{ margin:0; font-size:1.6rem; letter-spacing:.3px }
-.g-muted{ color:var(--muted); font-size:.95rem }
-.g-head-actions{ display:flex; gap:10px }
 
-/* Botones */
-.g-btn{
-  background:#162033; color:var(--text); border:1px solid var(--border);
-  padding:10px 14px; border-radius:10px; cursor:pointer;
-  transition:transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{height:100%}
+
+body{
+  background:
+    radial-gradient(800px 420px at 8% -10%,rgba(34,211,238,.08),transparent),
+    var(--bg);
+  color:var(--txt);
+  font:16px/1.45 system-ui, Segoe UI, Roboto, Arial, sans-serif;
 }
-.g-btn:hover{ transform: translateY(-1px); border-color: var(--accent) }
-.g-btn:active{ transform: translateY(0) scale(.98) }
+
+/* ===== Utilidades ===== */
+.g-muted{color:var(--mut)}
+.g-center{text-align:center}
+.g-hidden{display:none}
+
+/* ===== Contenedor principal ===== */
+.g-container{
+  width:min(1100px,92%);
+  margin:28px auto 80px;
+}
+
+/* ===== Encabezado de página ===== */
+.g-page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+  margin-bottom:14px;
+}
+.g-page-head h1{font-size:1.6rem;line-height:1.1}
+
+/* Acciones encabezado */
+.g-head-actions{display:flex;gap:10px}
+
+/* ===== Botones ===== */
+.g-btn,
+.g-icon-btn{
+  display:inline-grid;
+  place-items:center;
+  background:#102137;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 12px;
+  text-decoration:none;
+  transition:.2s ease;
+  cursor:pointer;
+}
+.g-btn:hover,
+.g-icon-btn:hover{
+  border-color:var(--acc);
+  transform:translateY(-1px);
+}
+
 .g-btn-primary{
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  color:#001821; font-weight:600; border-color: transparent;
-  box-shadow: 0 8px 20px rgba(34,211,238,.25);
-}
-.g-btn-primary:hover{ box-shadow: 0 10px 28px rgba(34,211,238,.35) }
-.g-btn-secondary{ background:#0e1a2c; border-color:#213046; }
-
-/* Toolbar */
-.g-toolbar{
-  display:flex; gap:12px; align-items:center;
-  background:rgba(17,24,39,.6);
-  padding:12px; border:1px solid var(--border); border-radius:14px;
-  backdrop-filter: saturate(120%) blur(4px);
-  margin-bottom:16px; box-shadow: var(--shadow);
-}
-.g-toolbar input[type="search"], .g-toolbar select{
-  background:#0b1424; color:var(--text);
-  border:1px solid var(--border); padding:10px 12px; border-radius:10px; outline:none;
-}
-.g-toolbar input[type="search"]{ flex:1; }
-
-/* Panel + Tabla */
-.g-panel{ background: rgba(17,24,39,.85); border:1px solid var(--border); border-radius:18px; box-shadow: var(--shadow); overflow:hidden; }
-.g-panel-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); }
-.g-panel-head h2{ margin:0; font-size:1.1rem }
-.g-badge{
-  background:rgba(34,211,238,.15); color:var(--accent);
-  border:1px solid rgba(34,211,238,.45);
-  padding:4px 10px; border-radius:999px; font-size:.85rem;
+  background:linear-gradient(180deg,var(--acc),var(--acc2));
+  color:#00212a;
+  border-color:transparent;
+  box-shadow:0 8px 20px rgba(34,211,238,.25);
 }
 
-.g-table{ width:100%; border-collapse:collapse }
-.g-table thead th{
-  text-align:left; font-weight:600; font-size:.9rem; color:var(--muted);
-  padding:14px 16px; background:#0e1627; border-bottom:1px solid var(--border);
+.g-btn-secondary{
+  background:#0b1424;
+  color:var(--txt);
 }
-.g-table tbody td{ padding:14px 16px; border-bottom:1px solid var(--border); vertical-align:middle; }
-.g-table tbody tr:hover{ background: rgba(34,211,238,.05) }
-.g-center{ text-align:center }
-.g-status{ padding:6px 10px; border-radius:999px; font-size:.8rem; border:1px solid transparent; }
-.g-status.activo{ color:var(--success); background:rgba(16,185,129,.12); border-color:rgba(16,185,129,.35) }
-.g-status.inactivo{ color:var(--warn); background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35) }
-.g-row-actions{ display:flex; gap:8px; justify-content:center; }
 
 .g-icon-btn{
-  background:#0f1b2f; color:var(--text); border:1px solid var(--border);
-  width:34px; height:34px; border-radius:10px; cursor:pointer;
+  width:36px;height:36px;padding:0;font-size:18px;
 }
-.g-icon-btn:hover{ border-color: var(--accent) }
 
-/* Modal */
-.g-hidden{ display:none !important }
-.g-modal{ position:fixed; inset:0; z-index:50; display:grid; place-items:center; }
-.g-modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.55); }
+/* ===== Barra de herramientas ===== */
+.g-toolbar{
+  margin:12px 0 16px;
+  padding:10px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  background:rgba(17,24,39,.9);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+}
+.g-toolbar input[type="search"],
+.g-toolbar select{
+  background:#0b1424;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 10px;
+}
+#searchInput{flex:1;min-width:180px}
+
+/* ===== Panel listado ===== */
+.g-panel{
+  background:rgba(17,24,39,.9);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.g-panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+}
+.g-panel-head h2{font-size:1.1rem}
+
+.g-badge{
+  background:rgba(34,211,238,.12);
+  color:var(--acc);
+  border:1px solid rgba(34,211,238,.45);
+  padding:3px 9px;
+  border-radius:999px;
+  font-size:.85rem;
+}
+
+/* ===== Tabla ===== */
+.g-table-wrapper{overflow:auto}
+.g-table{width:100%;border-collapse:collapse}
+.g-table th{
+  background:#0e1627;
+  color:var(--mut);
+  text-align:left;
+  font-weight:600;
+  font-size:.9rem;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+.g-table td{
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  vertical-align:middle;
+}
+.g-table tr:hover{background:rgba(34,211,238,.05)}
+
+/* Píldoras de estado opcionales si decides usarlas en la celda “Estado” */
+.g-tag{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:.8rem;
+  border:1px solid transparent;
+}
+.g-tag.ok{
+  color:var(--ok);
+  background:rgba(16,185,129,.12);
+  border-color:rgba(16,185,129,.35);
+}
+.g-tag.warn{
+  color:var(--warn);
+  background:rgba(245,158,11,.12);
+  border-color:rgba(245,158,11,.35);
+}
+
+/* Acciones en fila */
+.g-row-actions{display:flex;gap:6px;justify-content:center}
+
+/* ===== Modal Crear/Editar ===== */
+.g-modal{
+  position:fixed;inset:0;z-index:50;
+  display:grid;place-items:center;
+}
+.g-modal-backdrop{
+  position:absolute;inset:0;background:rgba(0,0,0,.55);
+}
 .g-modal-card{
-  position:relative; width:min(720px, 92%); background:#0e1627;
-  border:1px solid var(--border); border-radius:18px; box-shadow: var(--shadow);
-  padding:14px 16px 16px;
+  position:relative;z-index:1;
+  width:min(720px,92%);
+  background:var(--layer);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
-.g-modal-head{ display:flex; align-items:center; justify-content:space-between; padding-bottom:10px; border-bottom:1px solid var(--border); }
-
-/* Form */
-.g-form{ padding-top:12px }
-.g-grid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
-.g-col-span-2{ grid-column: span 2 }
-.g-form label{ display:flex; flex-direction:column; gap:6px; font-size:.92rem }
-.g-form input, .g-form select, .g-form textarea{
-  background:#0b1424; color:var(--text);
-  border:1px solid var(--border); border-radius:10px; padding:10px 12px; outline:none;
+.g-modal-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;border-bottom:1px solid var(--line);
 }
-.g-form-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:14px }
+.g-modal-head h3{font-size:1.15rem}
 
-/* Toast */
+/* ===== Formulario del modal ===== */
+.g-form{padding:14px 16px}
+.g-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.g-form label{display:flex;flex-direction:column;gap:6px}
+.g-form input,
+.g-form select,
+.g-form textarea{
+  background:#0b1424;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 10px;
+}
+.g-col-span-2{grid-column:span 2}
+
+.g-form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:12px;
+}
+
+/* ===== Toast ===== */
 .g-toast{
-  position:fixed; right:18px; bottom:18px; z-index:60;
-  background:#0e1627; border:1px solid var(--border);
-  color:var(--text); padding:12px 14px; border-radius:12px; box-shadow: var(--shadow);
+  position:fixed;
+  right:18px; bottom:18px; z-index:60;
+  background:#0b1424;
+  color:var(--txt);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  box-shadow:var(--shadow);
+  max-width:min(420px,90vw);
 }
 
-/* Utilidades */
-.g-table-wrapper{ width:100%; overflow:auto }
-@media (max-width: 720px){
-  .g-grid{ grid-template-columns: 1fr }
+/* ===== Responsive ===== */
+@media (max-width:860px){
+  .g-page-head{flex-direction:column;align-items:flex-start}
+  .g-head-actions{align-self:flex-end}
+}
+@media (max-width:720px){
+  .g-grid{grid-template-columns:1fr}
+  .g-toolbar{flex-wrap:wrap}
+  #searchInput{flex:1 1 100%}
 }
