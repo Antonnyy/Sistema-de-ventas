@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sección de Publicidad · Promociones</title>
+  <title>Promociones · TuTienda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/Publicidad.css" />
-    <link rel="stylesheet" href="../CSS/Navbar.css" />
-  <link rel="stylesheet" href="../CSS/Footer.css" />
-  <script defer src="../JS/includes.js"></script>
-  <script defer src="../JS/Publicidad.js"></script>
 </head>
 <body>
 
@@ -36,131 +35,124 @@
       </a>
     </header>
 
-    <!-- Carrusel principal -->
-    <div class="carousel reveal" id="carousel">
-      <button class="ctrl prev" aria-label="Anterior" data-dir="-1"><svg viewBox="0 0 24 24"><path d="M14.828 12l-4.95 4.95-1.414-1.414L12 12 8.464 8.464l1.414-1.414z"/></svg></button>
-      <div class="carousel-track" id="track">
-        <!-- Slide 1 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
-          <div class="slide-media"><img src="../Imagenes/Aseo-Personal.jpg" alt="Producto premium en fondo azul" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">-25% Aseo Personal</span>
-            <h2 class="h2">Aseo Personal</h2>
-            <p class="lead">Los mejores productos de aseo personal para el uso de cada persona</p>
-            <div class="cta"><a class="btn" href="#">Ver Productos</a></div>
+  <main class="main-content">
+    <!-- Hero con tipografía editorial -->
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>Promociones<br>del Mes</h1>
+        <p class="subtitle">Curadas con cuidado. Diseñadas para ti.</p>
+      </div>
+    </section>
+
+    <!-- Featured Promotions: 3 imágenes en formato editorial -->
+    <section class="featured-grid">
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="../Imagenes/Aseo-Personal.jpg" alt="Productos de aseo personal premium" loading="lazy">
+        </div>
+        <div class="feature-content">
+          <span class="badge">-25%</span>
+          <h2>Aseo Personal</h2>
+          <p>Lo esencial, elevado a su máxima expresión.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="../Imagenes/Gaseosa.jpg" alt="Gaseosas artesanales y clásicas" loading="lazy">
+        </div>
+        <div class="feature-content">
+          <span class="badge">Oferta</span>
+          <h2>Gaseosas</h2>
+          <p>Sabores que evocan recuerdos inolvidables.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="../Imagenes/útiles-escolares.jpg" alt="Útiles escolares de diseño" loading="lazy">
+        </div>
+        <div class="feature-content">
+          <span class="badge">Escolar</span>
+          <h2>Útiles Escolares</h2>
+          <p>Calidad que inspira cada día de estudio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo refinado -->
+    <section class="catalog-section">
+      <h2 class="section-heading">Catálogo de Ofertas</h2>
+      <div class="product-grid">
+        <!-- Producto 1 -->
+        <article class="product-card">
+          <img src="../Imagenes/Electronicos.webp" alt="Electrónicos de última generación" loading="lazy">
+          <div class="product-info">
+            <h3>Electrónicos</h3>
+            <p>Tecnología pensada para tu vida.</p>
           </div>
         </article>
-        <!-- Slide 2 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
-          <div class="slide-media"><img src="../Imagenes/Gaseosa.jpg" alt="Tecnología en tonos azules" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">Gaseosa</span>
-            <h2 class="h2">Encuentra del sabor que desees</h2>
-            <p class="lead">encuentra gaseosas de todo tamaño y a un precio al bolsillo.</p>
-            <div class="cta"><a class="btn" href="#">Ver variedad</a></div>
+        <!-- Producto 2 -->
+        <article class="product-card">
+          <img src="../Imagenes/Bebidas.jpg" alt="Bebidas premium seleccionadas" loading="lazy">
+          <div class="product-info">
+            <h3>Bebidas</h3>
+            <p>Para los momentos que merecen celebrarse.</p>
           </div>
         </article>
-        <!-- Slide 3 -->
-        <article class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
-          <div class="slide-media"><img src="../Imagenes/útiles-escolares.jpg" alt="Minimal workspace azul" loading="lazy"></div>
-          <div class="slide-copy">
-            <span class="badge">Utiles Escolares</span>
-            <h2 class="h2">todo tipo de utilez Escolares</h2>
-            <p class="lead">Encuentra variedad de utlizes escolares al por mayor y menor con los mejores precios del mercado.</p>
-            <div class="cta"><a class="btn" href="#">Utilez</a></div>
+        <!-- Producto 3 -->
+        <article class="product-card">
+          <img src="../Imagenes/Dulces.png" alt="Dulces artesanales y clásicos" loading="lazy">
+          <div class="product-info">
+            <h3>Dulces</h3>
+            <p>El placer de lo simple, bien hecho.</p>
+          </div>
+        </article>
+        <!-- Producto 4 -->
+        <article class="product-card">
+          <img src="../Imagenes/Recargas.jpg" alt="Recargas para todas las operadoras" loading="lazy">
+          <div class="product-info">
+            <h3>Recargas</h3>
+            <p>Conectividad sin límites, al instante.</p>
+          </div>
+        </article>
+        <!-- Producto 5 -->
+        <article class="product-card">
+          <img src="../Imagenes/Pelota.webp" alt="Equipamiento deportivo de calidad" loading="lazy">
+          <div class="product-info">
+            <h3>Deportivos</h3>
+            <p>Rendimiento respaldado por diseño.</p>
+          </div>
+        </article>
+        <!-- Producto 6 -->
+        <article class="product-card">
+          <img src="../Imagenes/Regalos.jpg" alt="Regalos con significado" loading="lazy">
+          <div class="product-info">
+            <h3>Regalos</h3>
+            <p>Porque lo que importa es la intención.</p>
           </div>
         </article>
       </div>
-      <button class="ctrl next" aria-label="Siguiente" data-dir="1"><svg viewBox="0 0 24 24"><path d="M9.172 12l4.95-4.95 1.414 1.414L12 12l3.536 3.536-1.414 1.414z"/></svg></button>
-    </div>
+    </section>
 
-    <!-- Rejilla de tarjetas de promoción -->
-    <div class="grid reveal" id="promos">
-      <!-- Producto 1 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Electronicos.webp" alt="Teclado mecánico azul" loading="lazy">
-        </div>
-        <h3>Electronicos</h3>
-        <p class="meta">Variedad de Productos electronicos</p>
-        <div class="price-row"><span class="price">S/---</span><span class="old">S/ </span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 2 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Bebidas.jpg" alt="Auriculares profesionales en azul" loading="lazy">
-        </div>
-        <h3>Bebidas</h3>
-        <p class="meta">Variedad de bebidas alcoholicas</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 3 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Dulces.png" alt="Monitor 27 pulgadas en setup azul" loading="lazy">
-        </div>
-        <h3>Dulces</h3>
-        <p class="meta">Variedad de Dulces de todo sabor a su elección</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ -----</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 4 -->
-      <article class="card product" tabindex="0">
-        <span class="save">-16%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Recargas.jpg" alt="Silla ergonómica oficina azul y blanco" loading="lazy">
-        </div>
-        <h3>Recargas</h3>
-        <p class="meta">Encontraras recargas de Claro, Entel, Bitel y Movistar</p>
-        <div class="price-row"><span class="price">S/ 5</span><span class="old">S/ 5</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 5 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Pelota.webp" alt="Hub USB-C 8 en 1 metálico" loading="lazy">
-        </div>
-        <h3>Productos Deportivos</h3>
-        <p class="meta">Encuentra lo mas que desees en deportivos.</p>
-        <div class="price-row"><span class="price">S/ ---</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-      <!-- Producto 6 -->
-      <article class="card product" tabindex="0">
-        <span class="save">---%</span>
-        <div class="card-media">
-          <img src="../Imagenes/Regalos.jpg" alt="Mouse inalámbrico minimal azul" loading="lazy">
-        </div>
-        <h3>Regalos</h3>
-        <p class="meta">Encuentra variedad de regalo para toda ocasión</p>
-        <div class="price-row"><span class="price">S/ --</span><span class="old">S/ ---</span></div>
-        <a class="btn" href="#">Comprar</a>
-      </article>
-    </div>
-
-    <!-- Marquee de confianza / marcas -->
-    <div class="marquee reveal" aria-label="Marcas aliadas">
-      <div class="marquee-track">
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
-        <!-- duplicado para bucle infinito suave -->
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=EKU" alt="Marca 1" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=BYTE" alt="Marca 2" />
-        <img class="logo" src="https://dummyimage.com/120x36/2b87ff/ffffff&text=PRO" alt="Marca 3" />
-        <img class="logo" src="https://dummyimage.com/120x36/79aaff/ffffff&text=SHOP" alt="Marca 4" />
+    <!-- Marcas: diseño editorial -->
+    <section class="brands-section">
+      <p class="brands-label">En colaboración con</p>
+      <div class="brand-logos">
+        <img src="https://dummyimage.com/140x50/2563eb/ffffff&text=EKU" alt="EKU">
+        <img src="https://dummyimage.com/140x50/7dd3fc/1e40af&text=BYTE" alt="BYTE">
+        <img src="https://dummyimage.com/140x50/2563eb/ffffff&text=PRO" alt="PRO">
+        <img src="https://dummyimage.com/140x50/7dd3fc/1e40af&text=SHOP" alt="SHOP">
       </div>
-    </div>
+    </section>
+  </main>
 
-  </section>
-  <div data-include="../HTML/Footer.html"></div>
-  <script src="../JS/Publicidad.js"></script>
+  <!-- Footer: minimalista, centrado -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 TuTienda. Hecho con atención al detalle.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
