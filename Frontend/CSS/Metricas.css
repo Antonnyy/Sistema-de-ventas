@@ -21,3 +21,6 @@
   background:linear-gradient(135deg,#22c55e,#06b6d4);
   border:1px solid rgba(255,255,255,.1);
 }
+.trend:nth-of-type(2) .bars div {
+  background: linear-gradient(to top, #4CAF50, #81C784); /* Verde delivery */
+}

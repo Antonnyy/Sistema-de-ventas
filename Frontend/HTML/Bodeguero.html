@@ -1,54 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel del Bodeguero</title>
+
+  <!-- Paleta y tipografías existentes -->
   <link rel="stylesheet" href="../CSS/Bodeguero.css" />
   <link rel="stylesheet" href="../CSS/Navbar.css" />
   <link rel="stylesheet" href="../CSS/Footer.css" />
-  <script defer src="../JS/includes.js"></script>
-  <script defer src="../JS/Bodeguero.js"></script>
+  <!-- SIN JS en maqueta: quitamos includes.js y Bodeguero.js -->
 </head>
+
 <body class="bodega-page">
 
-  <header id="navbar">
-<nav class="navbar sv-navbar">
-  <div class="logo">Sistema · Bodega</div>
-  <ul class="nav-links">
-    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
-    <li><a class="nav-link" href="Venta.html">Ventas</a></li>
-    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
-    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+  <!-- NAVBAR (post-login) -->
+  <nav class="navbar sv-navbar">
+    <div class="logo">Sistema · Bodega</div>
+    <ul class="nav-links">
+      <li><a class="nav-link active" href="Bodeguero.html">Bodega</a></li>
+      <li><a class="nav-link" href="Venta.html">Ventas</a></li>
+      <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
+      <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
 
-    <!-- Submenú -->
-    <li class="has-sub">
-      <a class="nav-link" href="#">Productos ▾</a>
-      <ul class="sub">
-        <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
-        <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
-      </ul>
-    </li>
+      <!-- Submenú de Productos -->
+      <li class="has-sub">
+        <a class="nav-link" href="#">Productos ▾</a>
+        <ul class="sub">
+          <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
+          <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
+        </ul>
+      </li>
 
-    <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
-    <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
-  </ul>
-  <button class="menu-toggle" aria-label="Menú">☰</button>
-</nav>
-
-  </header>
+      <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
+      <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menú">☰</button>
+  </nav>
 
   <div class="bodega-wrap">
+    <!-- Título + acciones -->
     <div class="bodega-top">
       <div class="bodega-title">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3 3h18v4H3V3zm2 6h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9z" fill="url(#g)"/>
-          <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
-              <stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/>
-            </linearGradient>
-          </defs>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
+            <stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div>
           <div style="font-size:22px; line-height:1;">Bodega</div>
@@ -56,109 +53,97 @@
         </div>
       </div>
       <div class="actions">
-        <button onclick="location.href='Producto-Crear.html'" class="btn" id="btnEntrada">+ Nueva entrada</button>
-        <button class="btn outline" id="btnSalida">- Nueva salida</button>
+        <a href="Producto-Crear.html" class="btn" id="btnEntrada">+ Nueva entrada</a>
+        <a href="Producto-Editar.html" class="btn outline" id="btnSalida">- Nueva salida</a>
       </div>
     </div>
 
-    <!-- KPIs -->
+    <!-- KPIs estáticos -->
     <div class="kpis">
-      <div class="card kpi"><div class="label">Productos</div><div class="value" id="kpiProductos">0</div></div>
-      <div class="card kpi"><div class="label">Bajo stock</div><div class="value" id="kpiBajoStock">0</div></div>
-      <div class="card kpi"><div class="label">Pedidos delivery</div><div class="value" id="kpiDelivery">0</div></div>
-      <div class="card kpi"><div class="label">Ventas hoy</div><div class="value" id="kpiVentas">S/ 0.00</div></div>
+      <div class="card kpi"><div class="label">Productos</div><div class="value">6</div></div>
+      <div class="card kpi"><div class="label">Bajo stock</div><div class="value">1</div></div>
+      <div class="card kpi"><div class="label">Pedidos delivery</div><div class="value">0</div></div>
+      <div class="card kpi"><div class="label">Ventas hoy</div><div class="value">S/ 0.00</div></div>
     </div>
 
-    <!-- Tabs -->
+    <!-- Tabs (maqueta; sin navegación dinámica) -->
     <div class="tabs">
-      <button class="tab active" data-tab="stock">Stock</button>
-      <button class="tab" data-tab="movs">Movimientos</button>
-      <button class="tab" data-tab="delivery">Pedidos Delivery</button>
-      <button class="tab" data-tab="ventas">Ventas</button>
+      <span class="tab active">Stock</span>
+      <span class="tab">Movimientos</span>
+      <span class="tab">Pedidos Delivery</span>
+      <span class="tab">Ventas</span>
     </div>
 
-    <!-- Stock -->
-    <section id="tab-stock" class="section active">
+    <!-- STOCK (como en tu captura) -->
+    <section class="section active">
       <div class="tools">
-        <input class="input" id="q" type="search" placeholder="Buscar por nombre o SKU...">
-        <select id="fcat">
+        <input class="input" type="search" placeholder="Buscar por nombre o SKU...">
+        <select class="select">
           <option value="">Todas las categorías</option>
+          <option>Accesorios</option><option>Cómputo</option>
+          <option>Audio</option><option>Monitores</option><option>Almacenamiento</option>
         </select>
-        <button class="btn outline" id="btnExport">Exportar CSV</button>
+        <button class="btn outline">Exportar CSV</button>
       </div>
+
       <div class="table-wrap">
-        <table class="table" id="tblStock">
+        <table class="table">
           <thead>
             <tr>
               <th>SKU</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mín.</th><th>Estado</th><th style="text-align:right;">Acciones</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <tr>
+              <td>MOU-001</td><td>Mouse Inalámbrico Pro</td><td>Accesorios</td><td>18</td><td>5</td>
+              <td><span class="status ok">OK</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+            <tr>
+              <td>TEC-002</td><td>Teclado Mecánico RGB</td><td>Accesorios</td><td>7</td><td>6</td>
+              <td><span class="status ok">OK</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+            <tr>
+              <td>LAP-014</td><td>Laptop 14" Ultraligera</td><td>Cómputo</td><td>3</td><td>3</td>
+              <td><span class="status low">Bajo</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+            <tr>
+              <td>AUD-020</td><td>Audífonos Bluetooth</td><td>Audio</td><td>12</td><td>5</td>
+              <td><span class="status ok">OK</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+            <tr>
+              <td>MON-027</td><td>Monitor 27" 144Hz</td><td>Monitores</td><td>5</td><td>4</td>
+              <td><span class="status ok">OK</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+            <tr>
+              <td>SSD-101</td><td>Disco SSD 1TB</td><td>Almacenamiento</td><td>10</td><td>6</td>
+              <td><span class="status ok">OK</span></td>
+              <td style="text-align:right;"><a class="btn tiny" href="Producto-Crear.html">+ Entrada</a> <a class="btn tiny outline" href="Producto-Editar.html">- Salida</a></td>
+            </tr>
+          </tbody>
         </table>
       </div>
+
       <p class="note">Consejo: usa “Nueva salida” para descontar stock cuando Ventas/Delivery confirmaron una operación.</p>
     </section>
-
-    <!-- Movimientos -->
-    <section id="tab-movs" class="section">
-      <div class="timeline" id="timeline"></div>
-    </section>
-
-    <!-- Delivery -->
-    <section id="tab-delivery" class="section">
-      <p class="note">Cola de pedidos desde Ventas. Sincroniza con la Interfaz de Delivery para estados “Pendiente → En ruta → Entregado”.</p>
-      <div class="table-wrap">
-        <table class="table" id="tblDelivery">
-          <thead><tr><th>ID</th><th>Cliente</th><th>Items</th><th>Estado</th><th>Creado</th><th style="text-align:right;">Acciones</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Ventas -->
-    <section id="tab-ventas" class="section">
-      <p class="note">Resumen de ventas (lectura). La interfaz de Ventas actualiza estas cifras; aquí solo se muestra el estado.</p>
-      <div class="table-wrap">
-        <table class="table" id="tblVentas">
-          <thead><tr><th>ID</th><th>Hora</th><th>Items</th><th>Total</th><th>Método</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
   </div>
 
-  <div data-include="../HTML/Footer.html"></div>
-
-  <!-- Modales -->
-  <div class="modal" id="modalEntrada">
-    <div class="pane">
-      <h3>Nueva entrada</h3>
-      <div class="row">
-        <div><label>SKU</label><input id="eSku" class="input" placeholder="SKU..."></div>
-        <div><label>Cantidad</label><input id="eQty" type="number" class="input" min="1" value="1"></div>
-        <div class="full"><label>Referencia</label><input id="eRef" class="input" placeholder="Compra / Proveedor / Nota"></div>
-      </div>
-      <div class="actions">
-        <button class="btn outline" data-close="#modalEntrada">Cancelar</button>
-        <button class="btn" id="saveEntrada">Guardar</button>
-      </div>
+  <!-- FOOTER estático -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Sistema de Ventas – Maqueta</p>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
     </div>
-  </div>
-
-  <div class="modal" id="modalSalida">
-    <div class="pane">
-      <h3>Nueva salida</h3>
-      <div class="row">
-        <div><label>SKU</label><input id="sSku" class="input" placeholder="SKU..."></div>
-        <div><label>Cantidad</label><input id="sQty" type="number" class="input" min="1" value="1"></div>
-        <div class="full"><label>Referencia</label><input id="sRef" class="input" placeholder="Venta / Delivery / Nota"></div>
-      </div>
-      <div class="actions">
-        <button class="btn outline" data-close="#modalSalida">Cancelar</button>
-        <button class="btn" id="saveSalida">Guardar</button>
-      </div>
-    </div>
-  </div>
+  </footer>
 
 </body>
 </html>
