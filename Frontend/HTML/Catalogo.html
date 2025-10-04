@@ -1,197 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo — Maqueta</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Catálogo — Maqueta</title>
 
-  <!-- Tus estilos -->
-  <link rel="stylesheet" href="../CSS/Catalogo.css" />
-  <link rel="stylesheet" href="../CSS/Navbar.css" />
-  <link rel="stylesheet" href="../CSS/Footer.css" />
+<!-- Mantiene tu paleta/tipo porque reusa tus CSS -->
+<link rel="stylesheet" href="../CSS/Main.css" />
+<link rel="stylesheet" href="../CSS/Navbar.css" />
+<link rel="stylesheet" href="../CSS/Footer.css" />
 
-  <!-- CONSISTENCIA (opcional, pégalo también en Main/Bodeguero CSS si aún no) -->
-  <style>
-    :root{ --h1:clamp(28px,4vw,40px); --h2:clamp(20px,3vw,28px); --h3:clamp(16px,2.4vw,20px); --radius:14px; }
-    h1{font-size:var(--h1);margin:0 0 6px} h2{font-size:var(--h2)} h3{font-size:var(--h3)}
-    .card{border-radius:var(--radius)} .btn{border-radius:var(--radius)} .input,.select,textarea{border-radius:var(--radius)}
-    /* Fallback de grilla por si tu CSS no define clases de grid */
-    .catalog-wrap{width:min(1100px,92%);margin:16px auto 64px}
-    .filters{display:grid;gap:10px;margin:10px 0}
-    @media(min-width:720px){.filters{grid-template-columns:1fr .7fr .7fr .7fr}}
-    .grid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
-    @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
-    .product-card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-    .thumb img{display:block;width:100%;height:auto;border-radius:12px}
-  </style>
+<style>
+/* —— Estilos SOLO para esta página (scoped) —— */
+.catalogo-page{width:min(1200px,94%);margin:18px auto 72px}
+.catalogo-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text, #e5eefc);padding:6px 10px;border-radius:999px;font-size:12px}
+.title-wrap{display:flex;align-items:center;gap:10px}
+.title{font-weight:800;font-size:clamp(18px,2.2vw,22px)}
+.badge{font-size:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,#34d399,#22d3ee);color:#05202a;font-weight:800;border:1px solid rgba(255,255,255,.1)}
+
+.toolbar{display:grid;gap:10px;margin:10px 0}
+@media(min-width:900px){.toolbar{grid-template-columns:1fr .8fr .8fr .6fr .6fr auto}}
+.input,.select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text, #e5eefc);border-radius:14px;padding:10px 12px}
+.btn{border-radius:14px;border:1px solid rgba(255,255,255,.12);padding:10px 14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;font-weight:800}
+.btn.secondary{background:rgba(255,255,255,.06)}
+.btn.clean{background:linear-gradient(135deg,#6ee7b7,#60a5fa)}
+.cart{display:inline-flex;align-items:center;gap:8px}
+.cart .bubble{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;font-weight:800;padding:0 6px;border:1px solid rgba(0,0,0,.25)}
+
+.grid{display:grid;gap:14px;margin-top:10px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1240px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
+.thumb{position:relative}
+.thumb img{display:block;width:100%;height:180px;object-fit:cover}
+@media(min-width:1240px){.thumb img{height:190px}}
+.cat-chip{position:absolute;left:10px;top:10px;background:rgba(15,23,42,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;font-size:12px;color:#e5eefc}
+.body{padding:12px 14px 14px}
+.body h3{margin:2px 0 6px;font-size:clamp(14px,2vw,16px);font-weight:800}
+.body p{margin:0;color:var(--muted,#a5b4c8);font-size:13px}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.price{font-weight:900}
+.btn.add{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text,#e5eefc)}
+.btn.add:hover{background:linear-gradient(135deg,#22c55e,#06b6d4);color:#05202a;border-color:transparent}
+</style>
 </head>
 <body>
 
-  <!-- NAVBAR estático -->
-  <nav class="navbar">
-    <div class="logo">Sistema de Ventas</div>
-    <ul class="nav-links">
-      <li><a class="nav-link" href="Main.html">Inicio</a></li>
-      <li><a class="nav-link active" href="Catalogo.html">Catálogo</a></li>
-      <li><a class="nav-link" href="Bodeguero.html">Bodeguero</a></li>
-      <li><a class="nav-link" href="Login.html">Login</a></li>
-    </ul>
-    <button class="menu-toggle" aria-label="Menú">☰</button>
-  </nav>
+<!-- NAVBAR con Login (como pediste) -->
+<nav class="navbar">
+  <div class="logo">Sistema de Ventas</div>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="Main.html">Inicio</a></li>
+    <li><a class="nav-link active" href="Catalogo.html">Catálogo</a></li>
+    <li><a class="nav-link" href="Contacto.html">Contacto</a></li>
+    <li><a class="nav-link" href="Publicidad.html">Publicidad</a></li>
+    <li><a class="btn nav-link" href="Login.html">Login</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Menú">☰</button>
+</nav>
 
-  <main class="catalog-wrap">
-    <!-- Encabezado + filtros (maqueta, sin funcionalidad) -->
-    <section class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-      <div>
-        <h2 style="margin:0">Catálogo</h2>
-        <p class="sub">Listado estático para la presentación.</p>
-      </div>
-      <div class="filters" style="max-width:720px">
-        <input class="input" placeholder="Buscar producto… (mock)" />
-        <select class="select"><option>Todas las categorías</option></select>
-        <select class="select"><option>Orden: Relevancia</option></select>
-        <input class="input" placeholder="Precio mín." />
-      </div>
-    </section>
+<main class="catalogo-page">
 
-    <!-- GRID DE PRODUCTOS (reemplaza los nombres de archivo por los tuyos del zip) -->
-    <section class="grid">
-      <!-- 1 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <!-- Reemplaza 'arroz.jpg' por tu archivo real del zip -->
-          <img src="../IMG/arroz.jpg" alt="Arroz 1kg" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Arroz 1kg</h3>
-          <p class="desc">Arroz costo/beneficio.</p>
-          <div class="meta">
-            <span class="price">S/ 5.50</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
+  <!-- fila superior -->
+  <div class="catalogo-top">
+    <span class="pill">6 productos</span>
+    <div class="cart"><span>🛒 Carrito</span> <span class="bubble">6</span></div>
+  </div>
 
-      <!-- 2 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/aceite.jpg" alt="Aceite 1L" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Aceite 1L</h3>
-          <p class="desc">Girasol 1 litro.</p>
-          <div class="meta">
-            <span class="price">S/ 10.90</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 3 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/azucar.jpg" alt="Azúcar 1kg" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Azúcar 1kg</h3>
-          <p class="desc">Rubia, calidad A.</p>
-          <div class="meta">
-            <span class="price">S/ 4.80</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 4 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/gaseosa-500.jpg" alt="Gaseosa 500 ml" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Gaseosa 500 ml</h3>
-          <p class="desc">Pack refrescante.</p>
-          <div class="meta">
-            <span class="price">S/ 3.50</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 5 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/pan.jpg" alt="Pan x10 und" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Pan x10 und</h3>
-          <p class="desc">Bolsa de 10 unidades.</p>
-          <div class="meta">
-            <span class="price">S/ 2.50</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 6 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/detergente.jpg" alt="Detergente 800 g" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Detergente 800 g</h3>
-          <p class="desc">Limpieza profunda.</p>
-          <div class="meta">
-            <span class="price">S/ 6.90</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 7 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/leche.jpg" alt="Leche 1L" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Leche 1L</h3>
-          <p class="desc">Entera, larga vida.</p>
-          <div class="meta">
-            <span class="price">S/ 4.20</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 8 -->
-      <article class="card product-card">
-        <figure class="thumb">
-          <img src="../IMG/galletas.jpg" alt="Galletas" />
-        </figure>
-        <div class="body">
-          <h3 class="title">Galletas</h3>
-          <p class="desc">Clásicas para lonche.</p>
-          <div class="meta">
-            <span class="price">S/ 2.00</span>
-            <a class="btn" href="Producto-Editar.html">Editar</a>
-          </div>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <!-- FOOTER estático -->
-  <footer class="footer">
-    <div class="footer-content">
-      <p>© 2025 Sistema de Ventas – Todos los derechos reservados</p>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">WhatsApp</a></li>
-      </ul>
+  <!-- título + filtros -->
+  <section class="card" style="padding:12px;border-radius:18px;margin-bottom:12px">
+    <div class="title-wrap" style="margin-bottom:10px">
+      <div class="title">Catálogo</div>
+      <span class="badge">Beta</span>
     </div>
-  </footer>
 
-  <!-- Sin scripts: elimina cualquier <script> que tuvieras aquí -->
+    <div class="toolbar">
+      <input class="input" placeholder="Buscar producto… (nombre)" />
+      <select class="select"><option>Todas las categorías</option></select>
+      <select class="select"><option>Orden: Relevancia</option></select>
+      <input class="input" placeholder="Precio mín." />
+      <input class="input" placeholder="Precio máx." />
+      <button class="btn clean" type="button">Limpiar</button>
+    </div>
+  </section>
+
+  <!-- grilla de productos -->
+  <section class="grid">
+
+    <!-- 1 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/aseo-personal.jpg" alt="Productos de aseo personal" />
+        <span class="cat-chip">Aseo Personal</span>
+      </figure>
+      <div class="body">
+        <h3>Productos de aseo personal</h3>
+        <p>Ergonomía y cuidado para la salud.</p>
+        <div class="row">
+          <div class="price">S/ 49.90</div>
+          <a class="btn add" href="Login-ASEO.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/aseo.jpg" alt="Teclado Mecánico RGB" />
+        <span class="cat-chip">Aseo de Limpieza</span>
+      </figure>
+      <div class="body">
+        <h3>Teclado Mecánico RGB</h3>
+        <p>Productos de aseo de limpieza doméstica.</p>
+        <div class="row">
+          <div class="price">S/ 189.00</div>
+          <a class="btn add" href="Login-TEC-RGB.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/Electronicos.webp" alt="Electrodoméstico" />
+        <span class="cat-chip">Electrónicos</span>
+      </figure>
+      <div class="body">
+        <h3>Electrodoméstico</h3>
+        <p>Productos electrodomésticos.</p>
+        <div class="row">
+          <div class="price">S/ 3299.00</div>
+          <a class="btn add" href="Login-ELECTRO.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/bebidas.jpg" alt="Bebidas alcohólicas" />
+        <span class="cat-chip">Bebidas</span>
+      </figure>
+      <div class="body">
+        <h3>Bebidas alcohólicas</h3>
+        <p>Para citas y eventos.</p>
+        <div class="row">
+          <div class="price">S/ 119.90</div>
+          <a class="btn add" href="Login-BEBIDAS.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/regalos.jpg" alt="Regalos para de todo tipo" />
+        <span class="cat-chip">Regalos</span>
+      </figure>
+      <div class="body">
+        <h3>Regalos para de todo tipo</h3>
+        <p>Sorpresa y acompañamiento.</p>
+        <div class="row">
+          <div class="price">S/ 1199.00</div>
+          <a class="btn add" href="Login-REGALOS.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/útiles-escolares.jpg" alt="Productos escolares" />
+        <span class="cat-chip">Útiles Escolares</span>
+      </figure>
+      <div class="body">
+        <h3>Productos escolares</h3>
+        <p>Productos escolares de todo tipo.</p>
+        <div class="row">
+          <div class="price">S/ 499.50</div>
+          <a class="btn add" href="Login-ESCOLAR.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/Gaseosa.jpg" alt="Fanta" />
+        <span class="cat-chip">Gaseosas</span>
+      </figure>
+      <div class="body">
+        <h3>Fanta</h3>
+        <p>Único y delicioso.</p>
+        <div class="row">
+          <div class="price">S/ 59.90</div>
+          <a class="btn add" href="Login-FANTA.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="card">
+      <figure class="thumb">
+        <img src="../Imagenes/Dulces.png" alt="Dulces variados" />
+        <span class="cat-chip">Dulces</span>
+      </figure>
+      <div class="body">
+        <h3>Dulces Variados</h3>
+        <p>Todos los sabores.</p>
+        <div class="row">
+          <div class="price">S/ 349.00</div>
+          <a class="btn add" href="Login-DULCES.html">Agregar</a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>© 2025 Sistema de Ventas – Maqueta</p>
+    <ul class="social-links">
+      <li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li>
+      <li><a href="#">LinkedIn</a></li><li><a href="#">WhatsApp</a></li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>
