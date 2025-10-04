@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Métricas — Sistema de Ventas</title>
+
+  <link rel="stylesheet" href="../CSS/Main.css" />
+  <link rel="stylesheet" href="../CSS/Navbar.css" />
+  <link rel="stylesheet" href="../CSS/Footer.css" />
+  <link rel="stylesheet" href="../CSS/Metricas.css" />
+</head>
+<body>
+<nav class="navbar sv-navbar">
+  <div class="logo">Sistema · Bodega</div>
+  <ul class="nav-links">
+    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
+    <li><a class="nav-link" href="Venta.html">Ventas</a></li>
+    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
+    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+
+    <!-- Submenú -->
+    <li class="has-sub">
+      <a class="nav-link" href="#">Productos ▾</a>
+      <ul class="sub">
+        <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
+        <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
+      </ul>
+    </li>
+
+    <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
+    <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Menú">☰</button>
+</nav>
+
+  <main class="wrap">
+    <header class="page-head">
+      <h2>📊 Métricas</h2>
+      <p class="sub">Panel estático con indicadores clave.</p>
+    </header>
+
+    <!-- KPIs -->
+    <section class="kpis">
+      <div class="kpi card">
+        <div class="kpi-value">12</div>
+        <div class="kpi-label">Pedidos de hoy</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-value">S/ 256.40</div>
+        <div class="kpi-label">Ventas totales</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-value">66%</div>
+        <div class="kpi-label">% cumplimiento</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-value">S/ 21.37</div>
+        <div class="kpi-label">Ticket promedio</div>
+      </div>
+    </section>
+
+    <!-- Tarjeta de tendencia (placeholder visual) -->
+    <section class="card trend">
+      <div class="trend-head">
+        <strong>Ventas (últimos 7 días)</strong>
+        <span class="sub">Mock visual sin JS</span>
+      </div>
+      <div class="bars">
+        <div style="height:65%"></div>
+        <div style="height:40%"></div>
+        <div style="height:80%"></div>
+        <div style="height:55%"></div>
+        <div style="height:70%"></div>
+        <div style="height:45%"></div>
+        <div style="height:90%"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Sistema de Ventas – Maqueta</p>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li><li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

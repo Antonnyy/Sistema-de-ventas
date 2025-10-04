@@ -21,10 +21,22 @@
     <li><a class="nav-link" href="Venta.html">Ventas</a></li>
     <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
     <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+
+    <!-- Submenú -->
+    <li class="has-sub">
+      <a class="nav-link" href="#">Productos ▾</a>
+      <ul class="sub">
+        <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
+        <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
+      </ul>
+    </li>
+
+    <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
     <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
   </ul>
   <button class="menu-toggle" aria-label="Menú">☰</button>
 </nav>
+
   </header>
 
   <div class="bodega-wrap">
@@ -44,7 +56,7 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn" id="btnEntrada">+ Nueva entrada</button>
+        <button onclick="location.href='Producto-Crear.html'" class="btn" id="btnEntrada">+ Nueva entrada</button>
         <button class="btn outline" id="btnSalida">- Nueva salida</button>
       </div>
     </div>

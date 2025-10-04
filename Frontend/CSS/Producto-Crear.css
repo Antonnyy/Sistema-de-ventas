@@ -1,0 +1,17 @@
+/* ==== Producto-Crear (solo layout, respeta tu paleta global) ==== */
+:root{ --radius:14px }
+.wrap{ width:min(1100px,92%); margin:18px auto 72px }
+.page-head h2{ margin:0 0 6px }
+.panel{ border-radius:var(--radius); padding:16px }
+
+/* Formato del formulario */
+.form{ display:grid; gap:12px }
+.row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
+@media(max-width:820px){ .row2,.row3{ grid-template-columns:1fr } }
+.field label{ font-size:12px; opacity:.85 }
+.input, .select, textarea{ border-radius:var(--radius) }
+textarea{ min-height:120px }
+.help{ display:block; font-size:12px; opacity:.7; margin-top:4px }
+.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:4px }
+.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,.15) }
