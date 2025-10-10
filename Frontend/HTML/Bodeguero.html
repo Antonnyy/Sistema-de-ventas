@@ -33,7 +33,7 @@
   </nav>
 
   <div class="bodega-wrap">
-    <!-- Título + acciones principales -->
+    <!-- Título + acción principal -->
     <div class="bodega-top">
       <div class="bodega-title">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -41,13 +41,13 @@
           <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div>
-          <div style="font-size:22px;line-height:1;">Bodega</div>
+          <div style="font-size:22px; line-height:1;">Bodega</div>
           <div class="badge">Operaciones</div>
         </div>
       </div>
       <div class="actions">
-        <a href="Movimiento-Entrada.html" class="btn">+ Nueva entrada</a>
-        <a href="Movimiento-Salida.html" class="btn outline">- Nueva salida</a>
+        <!-- ÚNICO botón global -->
+        <a href="Movimiento-Nuevo.html" class="btn">+ Nuevo movimiento (varios productos)</a>
       </div>
     </div>
 
@@ -62,24 +62,27 @@
     <!-- Tabs (enlaces directos, sin JS) -->
     <div class="tabs">
       <span class="tab active">Stock</span>
-      <a class="tab" href="Movimientos.html">Movimientos</a>
+      <a class="tab" href="Historial.html">Historial</a>
       <a class="tab" href="Delivery.html">Pedidos Delivery</a>
       <a class="tab" href="Venta.html">Ventas</a>
     </div>
 
     <!-- STOCK -->
     <section class="section active">
-      <!-- Filtros + acciones secundarias alineadas a la derecha -->
+      <!-- Filtros + link a historial -->
       <div class="tools" id="stock-tools">
         <input class="input" type="search" placeholder="Buscar por nombre o SKU...">
         <select class="select">
           <option value="">Todas las categorías</option>
           <option>Abarrotes</option>
         </select>
-        <div class="tools-right">
-          <a class="btn light" href="Movimientos.html">Ver historial</a>
-          <button class="btn outline" type="button">Exportar CSV</button>
-        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:10px;">
+        <p class="sub" style="margin:0">
+          Usa <strong>Entrada rápida</strong>/<strong>Salida rápida</strong> por producto.
+          Si te equivocas, en <em>Acciones</em> tienes <strong>Corregir mov.</strong> o <strong>Anular mov.</strong> (maqueta).
+        </p>
       </div>
 
       <div class="table-wrap">
@@ -94,31 +97,37 @@
               <td>P-0001</td><td>Arroz 5Kg</td><td>Abarrotes</td><td>12</td><td>5</td>
               <td><span class="status ok">OK</span></td>
               <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
+                <a class="btn tiny" href="Movimiento-Entrada.html">Entrada rápida</a>
+                <a class="btn tiny outline" href="Movimiento-Salida.html">Salida rápida</a>
+                <a class="btn tiny light" href="Movimiento-Editar.html">Corregir mov.</a>
+                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular mov.</a>
               </td>
             </tr>
             <tr>
               <td>P-0002</td><td>Azúcar 1Kg</td><td>Abarrotes</td><td>40</td><td>10</td>
               <td><span class="status ok">OK</span></td>
               <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
+                <a class="btn tiny" href="Movimiento-Entrada.html">Entrada rápida</a>
+                <a class="btn tiny outline" href="Movimiento-Salida.html">Salida rápida</a>
+                <a class="btn tiny light" href="Movimiento-Editar.html">Corregir mov.</a>
+                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular mov.</a>
               </td>
             </tr>
             <tr>
               <td>P-0003</td><td>Aceite 1L</td><td>Abarrotes</td><td>8</td><td>6</td>
               <td><span class="status off">Inactivo</span></td>
               <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
+                <a class="btn tiny" href="Movimiento-Entrada.html">Entrada rápida</a>
+                <a class="btn tiny outline" href="Movimiento-Salida.html">Salida rápida</a>
+                <a class="btn tiny light" href="Movimiento-Editar.html">Corregir mov.</a>
+                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular mov.</a>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <p class="note">Consejo: usa “Nueva salida” para descontar stock cuando Ventas/Delivery confirmaron una operación.</p>
+      <p class="note">Si necesitas cambiar precio/nombre/estado del producto, ve a <a href="Gestion.html">Gestión</a> (eso no se hace en Bodega).</p>
     </section>
   </div>
 
