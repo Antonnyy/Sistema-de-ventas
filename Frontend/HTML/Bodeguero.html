@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel del Bodeguero</title>
 
-  <!-- Paleta y tipografías existentes -->
   <link rel="stylesheet" href="../CSS/Bodeguero.css" />
   <link rel="stylesheet" href="../CSS/Navbar.css" />
   <link rel="stylesheet" href="../CSS/Footer.css" />
-  <!-- Maqueta: sin JS -->
 </head>
-
 <body class="bodega-page">
 
   <!-- NAVBAR (post-login) -->
@@ -22,8 +19,6 @@
       <li><a class="nav-link" href="Venta.html">Ventas</a></li>
       <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
       <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
-
-      <!-- Submenú de Productos (HTML-only) -->
       <li class="has-sub">
         <a class="nav-link" href="#">Productos ▾</a>
         <ul class="sub">
@@ -31,60 +26,60 @@
           <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
         </ul>
       </li>
-
       <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
-      <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+      <li><a class="btn nav-link" href="Main.html">Salir</a></li>
     </ul>
     <button class="menu-toggle" aria-label="Menú">☰</button>
   </nav>
 
   <div class="bodega-wrap">
-    <!-- Título + acciones -->
+    <!-- Título + acciones principales -->
     <div class="bodega-top">
       <div class="bodega-title">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3 3h18v4H3V3zm2 6h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9z" fill="url(#g)"/>
-          <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
-            <stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div>
-          <div style="font-size:22px; line-height:1;">Bodega</div>
+          <div style="font-size:22px;line-height:1;">Bodega</div>
           <div class="badge">Operaciones</div>
         </div>
       </div>
       <div class="actions">
-        <!-- C del CRUD (crear movimiento) -->
-        <a href="Movimiento-Entrada.html" class="btn" id="btnEntrada">+ Nueva entrada</a>
-        <a href="Movimiento-Salida.html" class="btn outline" id="btnSalida">- Nueva salida</a>
+        <a href="Movimiento-Entrada.html" class="btn">+ Nueva entrada</a>
+        <a href="Movimiento-Salida.html" class="btn outline">- Nueva salida</a>
       </div>
     </div>
 
-    <!-- KPIs estáticos -->
+    <!-- KPIs -->
     <div class="kpis">
-      <div class="card kpi"><div class="label">Productos</div><div class="value">6</div></div>
-      <div class="card kpi"><div class="label">Bajo stock</div><div class="value">1</div></div>
+      <div class="card kpi"><div class="label">Productos</div><div class="value">3</div></div>
+      <div class="card kpi"><div class="label">Bajo stock</div><div class="value">0</div></div>
       <div class="card kpi"><div class="label">Pedidos delivery</div><div class="value">0</div></div>
       <div class="card kpi"><div class="label">Ventas hoy</div><div class="value">S/ 0.00</div></div>
     </div>
 
-    <!-- Tabs (maqueta; sin conmutar) -->
+    <!-- Tabs (enlaces directos, sin JS) -->
     <div class="tabs">
       <span class="tab active">Stock</span>
-      <span class="tab">Movimientos</span>
-      <span class="tab">Pedidos Delivery</span>
-      <span class="tab">Ventas</span>
+      <a class="tab" href="Movimientos.html">Movimientos</a>
+      <a class="tab" href="Delivery.html">Pedidos Delivery</a>
+      <a class="tab" href="Venta.html">Ventas</a>
     </div>
 
     <!-- STOCK -->
     <section class="section active">
-      <div class="tools">
+      <!-- Filtros + acciones secundarias alineadas a la derecha -->
+      <div class="tools" id="stock-tools">
         <input class="input" type="search" placeholder="Buscar por nombre o SKU...">
         <select class="select">
           <option value="">Todas las categorías</option>
-          <option>Accesorios</option><option>Cómputo</option>
-          <option>Audio</option><option>Monitores</option><option>Almacenamiento</option>
+          <option>Abarrotes</option>
         </select>
-        <button class="btn outline">Exportar CSV</button>
+        <div class="tools-right">
+          <a class="btn light" href="Movimientos.html">Ver historial</a>
+          <button class="btn outline" type="button">Exportar CSV</button>
+        </div>
       </div>
 
       <div class="table-wrap">
@@ -96,7 +91,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>MOU-001</td><td>Mouse Inalámbrico Pro</td><td>Accesorios</td><td>18</td><td>5</td>
+              <td>P-0001</td><td>Arroz 5Kg</td><td>Abarrotes</td><td>12</td><td>5</td>
               <td><span class="status ok">OK</span></td>
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
@@ -104,7 +99,7 @@
               </td>
             </tr>
             <tr>
-              <td>TEC-002</td><td>Teclado Mecánico RGB</td><td>Accesorios</td><td>7</td><td>6</td>
+              <td>P-0002</td><td>Azúcar 1Kg</td><td>Abarrotes</td><td>40</td><td>10</td>
               <td><span class="status ok">OK</span></td>
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
@@ -112,32 +107,8 @@
               </td>
             </tr>
             <tr>
-              <td>LAP-014</td><td>Laptop 14&quot; Ultraligera</td><td>Cómputo</td><td>3</td><td>3</td>
-              <td><span class="status low">Bajo</span></td>
-              <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-              </td>
-            </tr>
-            <tr>
-              <td>AUD-020</td><td>Audífonos Bluetooth</td><td>Audio</td><td>12</td><td>5</td>
-              <td><span class="status ok">OK</span></td>
-              <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-              </td>
-            </tr>
-            <tr>
-              <td>MON-027</td><td>Monitor 27&quot; 144Hz</td><td>Monitores</td><td>5</td><td>4</td>
-              <td><span class="status ok">OK</span></td>
-              <td style="text-align:right;">
-                <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
-                <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-              </td>
-            </tr>
-            <tr>
-              <td>SSD-101</td><td>Disco SSD 1TB</td><td>Almacenamiento</td><td>10</td><td>6</td>
-              <td><span class="status ok">OK</span></td>
+              <td>P-0003</td><td>Aceite 1L</td><td>Abarrotes</td><td>8</td><td>6</td>
+              <td><span class="status off">Inactivo</span></td>
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
                 <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
@@ -149,53 +120,9 @@
 
       <p class="note">Consejo: usa “Nueva salida” para descontar stock cuando Ventas/Delivery confirmaron una operación.</p>
     </section>
-
-    <!-- MOVIMIENTOS (R/U/D del CRUD) -->
-    <section class="section">
-      <div class="bodega-top" style="margin-top:14px">
-        <div class="bodega-title">
-          <div style="font-size:18px; line-height:1;">Movimientos de inventario</div>
-          <div class="badge">Historial</div>
-        </div>
-        <div class="actions">
-          <a class="btn" href="Movimiento-Entrada.html">+ Nueva entrada</a>
-          <a class="btn outline" href="Movimiento-Salida.html">- Nueva salida</a>
-          <a class="btn outline" href="Movimientos.html">Ver historial completo</a>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table class="table">
-          <thead>
-            <tr><th>ID</th><th>Fecha</th><th>Tipo</th><th>SKU</th><th>Producto</th><th>Cant.</th><th>Referencia</th><th style="text-align:right">Acciones</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>MV-0007</td><td>05/10/2025 10:40</td><td><span class="chip in">Entrada</span></td>
-              <td>ARZ-1KG</td><td>Arroz 1kg</td><td>20</td><td>Compra prov. 123</td>
-              <td style="text-align:right">
-                <a class="btn tiny" href="Movimiento-Editar.html">Editar</a>
-                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular</a>
-              </td>
-            </tr>
-            <tr>
-              <td>MV-0006</td><td>05/10/2025 09:15</td><td><span class="chip out">Salida</span></td>
-              <td>ACE-1L</td><td>Aceite 1L</td><td>3</td><td>Venta POS #845</td>
-              <td style="text-align:right">
-                <a class="btn tiny" href="Movimiento-Editar.html">Editar</a>
-                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="note">Este bloque muestra el CRUD de Movimientos: Crear (Entrada/Salida), Leer (tabla), Editar y Anular.</p>
-    </section>
-
-    <!-- Puedes dejar “Pedidos Delivery” y “Ventas” igual que estaban o como texto informativo -->
   </div>
 
-  <!-- FOOTER estático -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <p>© 2025 Sistema de Ventas – Maqueta</p>
