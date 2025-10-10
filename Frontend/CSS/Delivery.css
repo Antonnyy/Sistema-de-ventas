@@ -2,186 +2,112 @@
   --bg:#0b1220; --surface:#0f172aee; --text:#e2e8f0; --muted:#cbd5e1;
   --primary:#22d3ee; --primary-2:#06b6d4; --border:#1f2937;
   --shadow:0 20px 60px rgba(0,0,0,.35); --radius:18px; --speed:.45s;
+
+  /* Plantilla única de columnas para ítems */
+  --items-cols: 1.6fr .5fr .7fr 96px; /* Desc | Cant | Precio | Acciones */
+  --items-gap: 18px;
 }
 
-/* ========== BASE ========== */
+/* Base */
 *{ box-sizing:border-box; margin:0; padding:0 }
-html,body{
-  background:var(--bg); color:var(--text);
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  line-height:1.4;
-}
+html,body{ background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; line-height:1.4 }
 .wrapper{ width:min(1100px,92%); margin:16px auto 40px }
 
-/* ========== HERO ========== */
-.hero{
-  text-align:center;
-  padding: clamp(40px,10vh,90px) 16px 20px;
-  border-bottom:1px solid var(--border);
-}
-.hero h1{
-  font-size:clamp(28px,5vw,40px);
-  background:linear-gradient(135deg,var(--primary),#a78bfa);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
+/* Hero */
+.hero{ text-align:center; padding:clamp(40px,10vh,90px) 16px 20px; border-bottom:1px solid var(--border) }
+.hero h1{ font-size:clamp(28px,5vw,40px); background:linear-gradient(135deg,var(--primary),#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
 .hero p{ color:var(--muted) }
 
-/* ========== CARDS ========== */
-.card{
-  background:var(--surface);
-  border:1px solid #1f293733;
-  border-radius:var(--radius);
-  padding:18px;
-  box-shadow:var(--shadow);
-  margin-bottom:14px;
-}
-.card-lite{
-  background:#0b1220aa;
-  border:1px dashed #334155aa;
-  border-radius:14px;
-  padding:12px;
-  margin-top:10px;
-}
+/* Cards */
+.card{ background:var(--surface); border:1px solid #1f293733; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px }
+.card-lite{ background:#0b1220aa; border:1px dashed #334155aa; border-radius:14px; padding:12px; margin-top:10px }
 .section-title{ margin-bottom:10px }
 
-/* ========== GRIDS ========== */
+/* Grids */
 .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
 .grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
-@media (max-width:900px){
-  .grid-3,.grid-2{ grid-template-columns:1fr }
-}
+@media (max-width:900px){ .grid-2,.grid-3{ grid-template-columns:1fr } }
 
-/* ========== CAMPOS + LABEL FLOTANTE ========== */
+/* Campos + label flotante */
 .field{ position:relative }
-.field input, .field textarea, .select, .input{
-  width:100%; padding:12px 14px; border-radius:12px;
-  border:1px solid #334155aa; background:#0b1220; color:var(--text);
-  outline:none; transition:border var(--speed), box-shadow var(--speed);
-  font-size:16px;
+.field input,.field textarea,.select,.input{
+  width:100%; padding:12px 14px; border-radius:12px; border:1px solid #334155aa; background:#0b1220; color:var(--text);
+  outline:none; transition:border var(--speed), box-shadow var(--speed); font-size:16px
 }
 .field textarea{ min-height:92px; resize:vertical }
-.field input::placeholder, .field textarea::placeholder{ color:#94a3b8; opacity:.6 }
-
-.field label, .label-select{
-  position:absolute; left:12px; top:50%; transform:translateY(-50%);
-  padding:0 4px; color:#9fb1c6; pointer-events:none;
-  transition:all .18s ease; background:transparent;
+.field input::placeholder,.field textarea::placeholder{ color:#94a3b8; opacity:.6 }
+.field label,.label-select{
+  position:absolute; left:12px; top:50%; transform:translateY(-50%); padding:0 4px; color:#9fb1c6; pointer-events:none; transition:all .18s ease; background:transparent
 }
-.field input:focus, .field textarea:focus, .select:focus, .input:focus{
-  border-color:var(--primary); box-shadow:0 0 0 6px #22d3ee26;
-}
-.field:focus-within label,
-.field input:not(:placeholder-shown)+label,
-.field textarea:not(:placeholder-shown)+label{
-  top:-8px; font-size:.78rem; color:var(--primary);
-  background:#0b1220; border-radius:6px;
+.field input:focus,.field textarea:focus,.select:focus,.input:focus{ border-color:var(--primary); box-shadow:0 0 0 6px #22d3ee26 }
+.field:focus-within label,.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{
+  top:-8px; font-size:.78rem; color:var(--primary); background:#0b1220; border-radius:6px
 }
 .select{ appearance:none }
-.label-select{
-  top:-8px; font-size:.78rem; color:#9fb1c6;
-  background:#0b1220; border-radius:6px;
-}
+.label-select{ top:-8px; font-size:.78rem; color:#9fb1c6; background:#0b1220; border-radius:6px }
 
-/* ========== BOTONES ========== */
-.btn{
-  display:inline-block; padding:10px 14px; border-radius:12px;
-  border:1px solid #334155aa; font-weight:800; cursor:pointer;
-}
-.btn.primary{
-  background:linear-gradient(135deg,var(--primary),var(--primary-2));
-  color:#05202a; box-shadow:0 0 18px #22d3ee55;
-}
-.btn.sm{ padding:8px 12px; font-weight:700 }
+/* Ítems */
+.items-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px }
 
-/* ========== ÍTEMS (3 columnas alineadas y separadas) ========== */
-.items-head{
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
-}
-.items3-head{
+/* Encabezado con la MISMA grilla que las filas */
+.items-header{
   display:grid;
-  grid-template-columns: 1.6fr .5fr .7fr;
-  gap:18px;
+  grid-template-columns: var(--items-cols);
+  gap: var(--items-gap);
   color:#9fb1c6; font-weight:600; margin-bottom:6px;
 }
-.items-grid{
-  display:grid;
-  grid-template-columns: 1.6fr .5fr .7fr;
-  gap:18px; align-items:center;
-}
-.item-row{ display:contents }
+.center{ text-align:center }
 .num{ text-align:right; font-variant-numeric:tabular-nums }
 
+/* Filas */
+.items-grid{
+  display:grid;
+  grid-template-columns: var(--items-cols);
+  gap: var(--items-gap);
+  align-items:center;
+}
+.item-row{ display:contents }
+
+/* Inputs */
 .items-grid .input{
-  padding:12px 14px;
-  border:1px solid #334155aa;
-  border-radius:10px;
-  background:#0b1220;
-  color:#e2e8f0;
-  transition:border .3s, box-shadow .3s;
+  padding:12px 14px; border:1px solid #334155aa; border-radius:10px; background:#0b1220; color:#e2e8f0; transition:border .3s, box-shadow .3s
 }
 .items-grid .input:hover{ border-color:#475569 }
-.items-grid .input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 6px #22d3ee26;
-}
+.items-grid .input:focus{ border-color:var(--primary); box-shadow:0 0 0 6px #22d3ee26 }
 
-/* ========== TOTALES ========== */
-.totales{
-  display:flex; gap:18px; flex-wrap:wrap; margin:12px 0; align-items:center;
+/* Acciones (columna fija de 96px) */
+.item-actions{ display:flex; justify-content:center; gap:8px }
+.icon-btn{ border:none; background:#111827; padding:8px 10px; border-radius:8px; font-size:18px; cursor:pointer; transition:transform .15s, filter .2s }
+.icon-btn.edit:hover{ background:#3b82f6; color:#fff; transform:scale(1.1) }
+.icon-btn.delete:hover{ background:#ef4444; color:#fff; transform:scale(1.1) }
+
+/* Botón agregar más */
+.product-actions{ display:flex; justify-content:flex-start; margin-top:12px }
+.product-actions .btn.add{
+  background:linear-gradient(135deg,#22d3ee,#06b6d4); color:#05202a; font-weight:700; padding:10px 16px; border:none; border-radius:12px; box-shadow:0 0 12px #22d3ee55; cursor:pointer
 }
+.product-actions .btn.add:hover{ transform:translateY(-2px); filter:brightness(1.1) }
+
+/* Totales */
+.totales{ display:flex; gap:18px; flex-wrap:wrap; margin:12px 0; align-items:center }
 .totales .field input{ text-align:right }
-.totales div{
-  background:#0b1220aa; border:1px solid #33415555;
-  padding:10px 14px; border-radius:10px;
-}
+.totales div{ background:#0b1220aa; border:1px solid #33415555; padding:10px 14px; border-radius:10px }
 
-/* ========== ESTADO DEL DELIVERY ========== */
-.estado-delivery .field{
-  display: flex;
-  flex-direction: column; /* label arriba del campo */
-}
-
+/* Estado del delivery – label arriba del select */
+.estado-delivery .field{ display:flex; flex-direction:column }
 .estado-delivery .label-select{
-  order: 0;
-  position: static !important;
-  transform: none !important;
-  display: block;
-  margin: 0 0 6px 2px; /* separación entre label y select */
-  padding: 0;
-  background: transparent !important;
-  color: #9fb1c6;
-  font-size: .9rem;
-  border-radius: 0;
+  order:0; position:static !important; transform:none !important; display:block; margin:0 0 6px 2px; padding:0; background:transparent !important; color:#9fb1c6; font-size:.9rem
 }
-
 .estado-delivery .select{
-  order: 1;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #334155aa;
-  background: #0b1220;
-  color: var(--text);
-  font-weight: 500;
-  cursor: pointer;
-  transition: border var(--speed), box-shadow var(--speed);
+  order:1; width:100%; padding:12px; border-radius:12px; border:1px solid #334155aa; background:#0b1220; color:var(--text); font-weight:500; cursor:pointer; transition:border var(--speed), box-shadow var(--speed)
 }
-.estado-delivery .select:focus{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 6px #22d3ee26;
-}
+.estado-delivery .select:focus{ border-color:var(--primary); box-shadow:0 0 0 6px #22d3ee26 }
 
-.estado-delivery .field:focus-within .label-select{
-  top: auto !important;
-  font-size: .9rem !important;
-  color: #9fb1c6 !important;
-  background: transparent !important;
-}
+/* Botones generales */
+.btn{ display:inline-block; padding:10px 14px; border-radius:12px; border:1px solid #334155aa; font-weight:800; cursor:pointer }
+.btn.primary{ background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#05202a; box-shadow:0 0 18px #22d3ee55 }
 
-/* ========== ACCIONES ========== */
-.actions{ display:flex; gap:10px; flex-wrap:wrap }
-
-/* ========== IMPRESIÓN ========== */
+/* Impresión */
 @media print{
   #navbar,#footer,.actions,.note{ display:none }
   body{ background:#fff }

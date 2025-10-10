@@ -10,33 +10,17 @@
   <link rel="stylesheet" href="../CSS/Footer.css"/>
   <link rel="stylesheet" href="../CSS/Delivery.css"/>
 
-  <!-- Fallback mínimo si no carga Navbar.css -->
+  <!-- Fallback mínimo si no carga Navbar.css (opcional) -->
   <style>
-    .sv-navbar{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:10px 16px;border-bottom:1px solid rgba(31,41,55,.6);
-      background:#0b1220;
-    }
+    .sv-navbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(31,41,55,.6);background:#0b1220}
     .sv-navbar .logo{font-weight:800;color:#e2e8f0}
-    .sv-navbar .nav-links{
-      list-style:none;display:flex;gap:12px;align-items:center;margin:0;padding:0
-    }
-    .sv-navbar .nav-link{
-      display:inline-block;padding:8px 10px;border-radius:10px;
-      color:#e2e8f0;text-decoration:none
-    }
+    .sv-navbar .nav-links{list-style:none;display:flex;gap:12px;align-items:center;margin:0;padding:0}
+    .sv-navbar .nav-link{display:inline-block;padding:8px 10px;border-radius:10px;color:#e2e8f0;text-decoration:none}
     .sv-navbar .nav-link:hover{background:#111827}
-    .sv-navbar .btn{
-      background:linear-gradient(135deg,#22d3ee,#06b6d4);
-      color:#05202a;font-weight:800
-    }
+    .sv-navbar .btn{background:linear-gradient(135deg,#22d3ee,#06b6d4);color:#05202a;font-weight:800}
     .sv-navbar .has-sub{position:relative}
-    .sv-navbar .has-sub > .sub{
-      position:absolute;top:100%;left:0;min-width:220px;display:none;
-      background:#0f172a;border:1px solid rgba(51,65,85,.5);
-      border-radius:12px;padding:6px;margin-top:6px;z-index:10
-    }
-    .sv-navbar .has-sub:hover > .sub{display:block}
+    .sv-navbar .has-sub>.sub{position:absolute;top:100%;left:0;min-width:220px;display:none;background:#0f172a;border:1px solid rgba(51,65,85,.5);border-radius:12px;padding:6px;margin-top:6px;z-index:10}
+    .sv-navbar .has-sub:hover>.sub{display:block}
     .sv-navbar .sub li{list-style:none}
     .sv-navbar .sub .nav-link{display:block;padding:10px 12px;border-radius:8px}
     .sv-navbar .menu-toggle{display:none}
@@ -83,12 +67,10 @@
           <div class="field">
             <input id="cliente" name="cliente" required placeholder=" "/>
             <label for="cliente">Cliente</label>
-            <span class="focus-ring"></span>
           </div>
           <div class="field">
             <input id="telefono" name="telefono" inputmode="tel" placeholder=" "/>
             <label for="telefono">Teléfono</label>
-            <span class="focus-ring"></span>
           </div>
         </div>
 
@@ -97,12 +79,10 @@
           <div class="field">
             <input id="direccion" name="direccion" required placeholder=" "/>
             <label for="direccion">Dirección</label>
-            <span class="focus-ring"></span>
           </div>
           <div class="field">
             <input id="referencia" name="referencia" placeholder=" "/>
             <label for="referencia">Referencia</label>
-            <span class="focus-ring"></span>
           </div>
         </div>
 
@@ -113,11 +93,12 @@
             <p class="note">Completa descripción, cantidad y precio unitario.</p>
           </div>
 
-          <!-- Encabezados -->
-          <div class="items3-head">
+          <!-- Encabezados (misma grilla que filas) -->
+          <div class="items-header">
             <div>Descripción / producto</div>
             <div class="num">Cant.</div>
             <div class="num">Precio (S/)</div>
+            <div class="center">Acciones</div>
           </div>
 
           <!-- Filas -->
@@ -126,24 +107,36 @@
               <input class="input" name="desc[]" placeholder="Ej: Gaseosa 500ml">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+              <div class="item-actions">
+                <button type="button" class="icon-btn edit" title="Editar">✏️</button>
+                <button type="button" class="icon-btn delete" title="Eliminar">🗑️</button>
+              </div>
             </div>
+
             <div class="item-row">
               <input class="input" name="desc[]" placeholder="Ej: Pan molde">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+              <div class="item-actions">
+                <button type="button" class="icon-btn edit" title="Editar">✏️</button>
+                <button type="button" class="icon-btn delete" title="Eliminar">🗑️</button>
+              </div>
             </div>
+
             <div class="item-row">
               <input class="input" name="desc[]" placeholder="Ej: Leche 1L">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+              <div class="item-actions">
+                <button type="button" class="icon-btn edit" title="Editar">✏️</button>
+                <button type="button" class="icon-btn delete" title="Eliminar">🗑️</button>
+              </div>
             </div>
           </div>
 
-          <!-- NUEVOS BOTONES -->
+          <!-- Agregar más -->
           <div class="product-actions">
             <button type="button" class="btn add">➕ Agregar más productos</button>
-            <button type="button" class="btn edit">✏️ Editar producto</button>
-            <button type="button" class="btn delete">🗑️ Borrar producto</button>
           </div>
         </div>
 
@@ -152,17 +145,14 @@
           <div class="field">
             <input id="subTotal" name="subTotal" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="subTotal">Subt. (S/)</label>
-            <span class="focus-ring"></span>
           </div>
           <div class="field">
             <input id="costoDelivery" name="costoDelivery" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="costoDelivery">Delivery (S/)</label>
-            <span class="focus-ring"></span>
           </div>
           <div class="field">
             <input id="total" name="total" inputmode="decimal" class="num" placeholder="0.00"/>
             <label for="total">Total (S/)</label>
-            <span class="focus-ring"></span>
           </div>
         </div>
 
@@ -172,7 +162,7 @@
             <label for="estadoDelivery" class="label-select">Estado del delivery</label>
             <select id="estadoDelivery" name="estadoDelivery" class="select" required>
               <option value="" selected disabled>Seleccionar estado</option>
-              <option value="PENDIENTE">Pendiente</option>
+              <option value="PENDIENTENTE">Pendiente</option>
               <option value="EN_CAMINO">En camino</option>
               <option value="ENTREGADO">Entregado</option>
               <option value="CANCELADO">Cancelado</option>
@@ -180,7 +170,7 @@
           </div>
         </div>
 
-        <!-- Botones finales -->
+        <!-- Acciones finales -->
         <div class="actions">
           <button class="btn primary" type="button" onclick="window.print()">Imprimir / Guardar PDF</button>
           <button class="btn" type="reset">Limpiar</button>
@@ -189,48 +179,9 @@
     </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- Footer -->
   <footer id="footer">
     <p style="text-align:center;color:#9fb1c6;padding:18px 0">© 2025 Bodega Josdin · Sistema de Ventas</p>
   </footer>
-
-  <!-- ===== ESTILOS DE LOS NUEVOS BOTONES ===== -->
-  <style>
-    .product-actions{
-      display:flex;
-      gap:10px;
-      justify-content:flex-start;
-      margin-top:12px;
-      flex-wrap:wrap;
-    }
-    .product-actions .btn{
-      border:none;
-      padding:10px 16px;
-      font-weight:700;
-      border-radius:12px;
-      cursor:pointer;
-      transition:transform .15s, box-shadow .25s, filter .2s;
-    }
-    .product-actions .btn.add{
-      background:linear-gradient(135deg,#22d3ee,#06b6d4);
-      color:#05202a;
-      box-shadow:0 0 12px #22d3ee55;
-    }
-    .product-actions .btn.edit{
-      background:linear-gradient(135deg,#a78bfa,#7c3aed);
-      color:#fff;
-      box-shadow:0 0 12px #a78bfa55;
-    }
-    .product-actions .btn.delete{
-      background:linear-gradient(135deg,#f87171,#ef4444);
-      color:#fff;
-      box-shadow:0 0 12px #ef444455;
-    }
-    .product-actions .btn:hover{
-      transform:translateY(-2px);
-      filter:brightness(1.1);
-    }
-    .product-actions .btn:active{transform:translateY(0)}
-  </style>
 </body>
 </html>
