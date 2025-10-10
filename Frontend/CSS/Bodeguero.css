@@ -121,3 +121,24 @@
   border:1px solid rgba(255,255,255,.12);
   color:inherit; border-radius:12px; padding:10px 12px;
 }
+
+/* Chips de estado para stock */
+.status{
+  display:inline-block; padding:6px 10px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.15); font-size:12px;
+}
+.status.ok{  background:rgba(16,185,129,.15);  border-color:rgba(16,185,129,.35); color:#86efac; }
+.status.low{ background:rgba(239,68,68,.15);   border-color:rgba(239,68,68,.35); color:#fecaca; }
+
+/* Chips de tipo de movimiento */
+.chip{
+  display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
+  border:1px solid rgba(255,255,255,.12)
+}
+.chip.in{  background:rgba(34,197,94,.15);  color:#86efac;  border-color:rgba(34,197,94,.35) }
+.chip.out{ background:rgba(239,68,68,.15); color:#fecaca;   border-color:rgba(239,68,68,.35) }
+
+/* Botones compactos de tabla */
+.btn.tiny{ padding:6px 10px; font-size:12px; border-radius:10px }
+.btn.tiny.outline{ background:transparent; border:1px solid rgba(255,255,255,.2) }
+.btn.tiny.danger{ background:#b91c1c; border-color:#b91c1c }
