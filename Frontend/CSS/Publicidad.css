@@ -163,31 +163,52 @@ body {
   font-weight: 300;
 }
 
-/* === Marcas === */
+/* === Sección de marcas con desplazamiento automático === */
 .brands {
   text-align: center;
   margin-top: 3rem;
+  overflow: hidden;
+  padding: 1.5rem 0;
 }
+
 .brands-label {
   color: var(--gray);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
   font-size: 1.1rem;
   letter-spacing: 1px;
 }
+
 .brand-logos {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 3.5rem;
+  gap: 2.5rem;
+  padding: 0 1rem;
+  width: max-content;
+  animation: scrollBrands 20s linear infinite;
 }
+
 .brand-logos img {
   height: 50px;
   opacity: 0.85;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
+
 .brand-logos img:hover {
   opacity: 1;
-  transform: scale(1.05);
+}
+
+/* Animación de desplazamiento */
+@keyframes scrollBrands {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pausar al hacer hover (opcional, sin JS) */
+.brand-logos:hover {
+  animation-play-state: paused;
 }
 
 /* === Footer === */
