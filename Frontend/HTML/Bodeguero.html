@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel del Bodeguero</title>
 
-  <!-- Reutiliza tu paleta/typo -->
   <link rel="stylesheet" href="../CSS/Bodeguero.css" />
   <link rel="stylesheet" href="../CSS/Navbar.css" />
   <link rel="stylesheet" href="../CSS/Footer.css" />
 </head>
-
 <body class="bodega-page">
 
   <!-- NAVBAR (post-login) -->
@@ -21,8 +19,6 @@
       <li><a class="nav-link" href="Venta.html">Ventas</a></li>
       <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
       <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
-
-      <!-- Submenú de Productos -->
       <li class="has-sub">
         <a class="nav-link" href="#">Productos ▾</a>
         <ul class="sub">
@@ -30,9 +26,8 @@
           <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
         </ul>
       </li>
-
       <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
-      <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+      <li><a class="btn nav-link" href="Main.html">Salir</a></li>
     </ul>
     <button class="menu-toggle" aria-label="Menú">☰</button>
   </nav>
@@ -43,21 +38,20 @@
       <div class="bodega-title">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3 3h18v4H3V3zm2 6h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9z" fill="url(#g)"/>
-          <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
-            <stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#5eead4"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
         </svg>
         <div>
-          <div style="font-size:22px; line-height:1;">Bodega</div>
+          <div style="font-size:22px;line-height:1;">Bodega</div>
           <div class="badge">Operaciones</div>
         </div>
       </div>
       <div class="actions">
-        <a href="Movimiento-Entrada.html" class="btn" id="btnEntrada">+ Nueva entrada</a>
-        <a href="Movimiento-Salida.html" class="btn outline" id="btnSalida">- Nueva salida</a>
+        <a href="Movimiento-Entrada.html" class="btn">+ Nueva entrada</a>
+        <a href="Movimiento-Salida.html" class="btn outline">- Nueva salida</a>
       </div>
     </div>
 
-    <!-- KPIs estáticos -->
+    <!-- KPIs -->
     <div class="kpis">
       <div class="card kpi"><div class="label">Productos</div><div class="value">3</div></div>
       <div class="card kpi"><div class="label">Bajo stock</div><div class="value">0</div></div>
@@ -65,32 +59,27 @@
       <div class="card kpi"><div class="label">Ventas hoy</div><div class="value">S/ 0.00</div></div>
     </div>
 
-    <!-- Tabs (maqueta) -->
+    <!-- Tabs (enlaces directos, sin JS) -->
     <div class="tabs">
       <span class="tab active">Stock</span>
-      <span class="tab">Movimientos</span>
-      <span class="tab">Pedidos Delivery</span>
-      <span class="tab">Ventas</span>
+      <a class="tab" href="Movimientos.html">Movimientos</a>
+      <a class="tab" href="Delivery.html">Pedidos Delivery</a>
+      <a class="tab" href="Venta.html">Ventas</a>
     </div>
 
-    <!-- ===== Barra CRUD “ahí mismo” (para dejar claro el flujo) ===== -->
-    <div class="crud-bar">
-      <a class="btn" href="Movimiento-Entrada.html">➕ Crear entrada</a>
-      <a class="btn outline" href="Movimiento-Salida.html">➖ Crear salida</a>
-      <a class="btn light" href="Movimientos.html">👁️ Leer historial</a>
-      <a class="btn outline" href="Movimiento-Editar.html">✏️ Editar (demo)</a>
-      <a class="btn danger" href="Movimiento-Anular.html">🗑️ Anular (demo)</a>
-    </div>
-
-    <!-- ========== STOCK (usa los productos de Gestion.html) ========== -->
+    <!-- STOCK -->
     <section class="section active">
-      <div class="tools">
+      <!-- Filtros + acciones secundarias alineadas a la derecha -->
+      <div class="tools" id="stock-tools">
         <input class="input" type="search" placeholder="Buscar por nombre o SKU...">
         <select class="select">
           <option value="">Todas las categorías</option>
           <option>Abarrotes</option>
         </select>
-        <button class="btn outline">Exportar CSV</button>
+        <div class="tools-right">
+          <a class="btn light" href="Movimientos.html">Ver historial</a>
+          <button class="btn outline" type="button">Exportar CSV</button>
+        </div>
       </div>
 
       <div class="table-wrap">
@@ -107,7 +96,6 @@
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
                 <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-                <a class="btn tiny light" href="Movimientos.html#P-0001">Ver</a>
               </td>
             </tr>
             <tr>
@@ -116,7 +104,6 @@
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
                 <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-                <a class="btn tiny light" href="Movimientos.html#P-0002">Ver</a>
               </td>
             </tr>
             <tr>
@@ -125,7 +112,6 @@
               <td style="text-align:right;">
                 <a class="btn tiny" href="Movimiento-Entrada.html">+ Entrada</a>
                 <a class="btn tiny outline" href="Movimiento-Salida.html">- Salida</a>
-                <a class="btn tiny light" href="Movimientos.html#P-0003">Ver</a>
               </td>
             </tr>
           </tbody>
@@ -134,50 +120,6 @@
 
       <p class="note">Consejo: usa “Nueva salida” para descontar stock cuando Ventas/Delivery confirmaron una operación.</p>
     </section>
-
-    <!-- ================= MOVIMIENTOS (R/U/D) ================= -->
-    <section class="section">
-      <div class="bodega-top" style="margin-top:14px">
-        <div class="bodega-title">
-          <div style="font-size:18px; line-height:1;">Movimientos de inventario</div>
-          <div class="badge">Historial</div>
-        </div>
-        <div class="actions">
-          <a class="btn" href="Movimiento-Entrada.html">+ Nueva entrada</a>
-          <a class="btn outline" href="Movimiento-Salida.html">- Nueva salida</a>
-          <a class="btn light" href="Movimientos.html">Ver historial completo</a>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table class="table">
-          <thead>
-            <tr><th>ID</th><th>Fecha</th><th>Tipo</th><th>SKU</th><th>Producto</th><th>Cant.</th><th>Referencia</th><th style="text-align:right">Acciones</th></tr>
-          </thead>
-          <tbody>
-            <tr id="P-0001">
-              <td>MV-0007</td><td>10/10/2025 10:40</td><td><span class="chip in">Entrada</span></td>
-              <td>P-0001</td><td>Arroz 5Kg</td><td>20</td><td>Compra prov. 123</td>
-              <td style="text-align:right">
-                <a class="btn tiny" href="Movimiento-Editar.html">Editar</a>
-                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular</a>
-              </td>
-            </tr>
-            <tr id="P-0003">
-              <td>MV-0006</td><td>10/10/2025 09:15</td><td><span class="chip out">Salida</span></td>
-              <td>P-0003</td><td>Aceite 1L</td><td>3</td><td>Venta POS #845</td>
-              <td style="text-align:right">
-                <a class="btn tiny" href="Movimiento-Editar.html">Editar</a>
-                <a class="btn tiny danger" href="Movimiento-Anular.html">Anular</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="note">Este bloque muestra el CRUD de Movimientos: Crear (Entrada/Salida), Leer (tabla), Editar y Anular.</p>
-    </section>
-
-    <!-- Puedes mantener “Pedidos Delivery” y “Ventas” como informativos si gustas -->
   </div>
 
   <!-- FOOTER -->

@@ -1,24 +1,30 @@
+/* ===== BODEGUERO UI – Limpio y coherente con Bodeguero.html ===== */
 
-/* ====== BODEGUERO UI (scoped) ====== */
+/* Paleta y base */
 .bodega-page{
   --bg:#0b1020;
   --card:#11182d;
   --muted:#8ea3b2;
   --text:#eaf2ff;
   --brand:#5eead4;
-  --brand-2:#7c3aed;
+  --brand-2:#4f46e5;
+  --accent:#7c3aed;
   --danger:#ef4444;
   --ok:#22c55e;
   --shadow: 0 10px 30px rgba(0,0,0,.25);
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), rgba(124,58,237,0)) , var(--bg);
+
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), rgba(124,58,237,0)),
+    var(--bg);
   color: var(--text);
   margin:0;
   min-height:100dvh;
+  font: 16px/1.45 system-ui, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 .bodega-wrap{ width:min(1200px,92%); margin: 18px auto 60px; }
 
-/* Topbar */
+/* ===== Top ===== */
 .bodega-top{
   display:flex; align-items:center; justify-content:space-between; gap:14px;
   margin: 8px 0 14px;
@@ -27,26 +33,49 @@
   display:flex; align-items:center; gap:12px; font-weight:900; letter-spacing:.2px;
 }
 .bodega-title .badge{
-  font-size:12px; padding:4px 8px; border-radius:999px;
+  display:inline-block;
+  font-size:12px; padding:4px 8px; border-radius:999px; font-weight:800;
   background: linear-gradient(135deg, var(--brand), #a8e8ff);
-  color:#04121c; font-weight:800;
+  color:#04121c;
   box-shadow:0 6px 16px rgba(94,234,212,.35);
 }
+
+/* ===== Botones ===== */
 .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
 .btn{
-  background: linear-gradient(135deg, var(--brand-2), #4f46e5);
-  color:#fff; border:none; padding:10px 14px; border-radius:12px; font-weight:800; cursor:pointer;
-  box-shadow: var(--shadow);
-}
-.btn.outline{
-  background: transparent; border:1px solid rgba(255,255,255,.12); color:var(--text);
+  background: linear-gradient(135deg, var(--accent), var(--brand-2));
+  color:#fff; border:1px solid transparent; padding:10px 14px; border-radius:12px;
+  font-weight:800; cursor:pointer; box-shadow: var(--shadow); text-decoration:none; display:inline-block;
+  transition: filter .15s ease, transform .15s ease, border-color .15s ease;
 }
 .btn:hover{ filter:brightness(1.06); transform: translateY(-1px); }
 .btn:active{ transform: translateY(0) scale(.99); }
 
-/* KPI Cards */
-.kpis{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin: 10px 0 18px; }
+.btn.outline{
+  background: transparent; color: var(--text);
+  border-color: rgba(255,255,255,.18);
+}
+.btn.light{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.15);
+}
+.btn.danger{
+  background:#b91c1c; border-color:#b91c1c;
+}
+
+/* Tamaño compacto para tabla */
+.btn.tiny{ padding:6px 10px; font-size:12px; border-radius:10px; }
+.btn.tiny.outline{ background:transparent; border-color:rgba(255,255,255,.2); }
+.btn.tiny.danger{ background:#b91c1c; border-color:#b91c1c; }
+
+/* ===== KPIs ===== */
+.kpis{
+  display:grid; grid-template-columns: repeat(2,1fr);
+  gap:12px; margin: 10px 0 18px;
+}
 @media (min-width: 860px){ .kpis{ grid-template-columns: repeat(4,1fr); } }
+
 .card{
   background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
   border:1px solid rgba(255,255,255,.08);
@@ -57,41 +86,88 @@
 .kpi .value{ font-weight:900; font-size:26px; letter-spacing:.2px; }
 .kpi.low .value{ color: var(--danger); }
 
-/* Tabs */
+/* ===== Tabs ===== */
 .tabs{ display:flex; gap:10px; flex-wrap:wrap; margin: 4px 0 10px; }
-.tab{ padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:#0f172a; cursor:pointer; font-weight:700; }
+.tab{
+  padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:700;
+  border:1px solid rgba(255,255,255,.12); background:#0f172a; color:inherit; text-decoration:none;
+}
 .tab.active{ color:var(--brand); border-color: rgba(94,234,212,.6); }
 .section{ display:none; }
 .section.active{ display:block; }
 
-/* Inventory table */
-.tools{ display:grid; grid-template-columns: 1.2fr .8fr auto; gap:10px; align-items:center; margin: 10px 0; }
+/* ===== Herramientas (filtros + acciones) ===== */
+.tools{
+  display:grid; grid-template-columns: 1.2fr .8fr auto; gap:10px; align-items:center;
+  margin: 10px 0;
+}
 @media (max-width: 680px){ .tools{ grid-template-columns: 1fr; } }
-.input, select{
-  background:#0d1428; color:var(--text); border:1px solid rgba(255,255,255,.08);
+
+#stock-tools{
+  display:grid; gap:10px; grid-template-columns: 1fr .6fr auto; align-items:center;
+}
+#stock-tools .tools-right{ display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap; }
+@media (max-width: 900px){
+  #stock-tools{ grid-template-columns:1fr; }
+  #stock-tools .tools-right{ justify-content:flex-start; }
+}
+
+/* Inputs coherentes con el HTML */
+.input, .select, select{
+  background:#0d1428; color:var(--text);
+  border:1px solid rgba(255,255,255,.10);
   border-radius:12px; padding:10px 12px; outline:none;
 }
-.table{ width:100%; border-collapse: collapse; }
-.table th, .table td{ padding:10px 10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:left; }
-.table th{ color:#dbeafe; font-size:13px; }
+.input::placeholder{ color:#a7b2c2; }
+.input:focus, .select:focus, select:focus{
+  border-color: rgba(94,234,212,.5); box-shadow: 0 0 0 3px rgba(94,234,212,.18);
+}
+
+/* ===== Tabla de stock ===== */
+.table-wrap{ width:100%; overflow-x:auto; border-radius:12px; }
+.table{ width:100%; border-collapse: collapse; min-width:720px; }
+.table th, .table td{
+  padding:10px 10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:left;
+}
+.table th{ color:#dbeafe; font-size:13px; text-transform: none; font-weight:700; letter-spacing:.1px; }
+.table tr:hover td{ background: rgba(255,255,255,.03); }
+
+/* ===== Badges y estados ===== */
 .badge{
   display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:800;
   background:#0d1428; border:1px solid rgba(255,255,255,.12); color:var(--muted);
 }
-.badge.danger{ color:#fff; background: rgba(239,68,68,.25); border-color: rgba(239,68,68,.5); }
 .badge.ok{ color:#042615; background: rgba(34,197,94,.6); border-color: rgba(34,197,94,.75); }
+.badge.danger{ color:#fff; background: rgba(239,68,68,.25); border-color: rgba(239,68,68,.5); }
 
-/* Movements timeline */
+.status{
+  display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
+  border:1px solid rgba(255,255,255,.15);
+}
+.status.ok{  background:rgba(16,185,129,.15);  border-color:rgba(16,185,129,.35); color:#86efac; }
+.status.low{ background:rgba(239,68,68,.15);   border-color:rgba(239,68,68,.35); color:#fecaca; }
+.status.off{ background:rgba(148,163,184,.15); border-color:rgba(148,163,184,.35); color:#cbd5e1; }
+
+/* ===== Chips de movimientos (si los usas en otras pantallas) ===== */
+.chip{
+  display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
+  border:1px solid rgba(255,255,255,.12)
+}
+.chip.in{  background:rgba(34,197,94,.15);  color:#86efac;  border-color:rgba(34,197,94,.35) }
+.chip.out{ background:rgba(239,68,68,.15); color:#fecaca;   border-color:rgba(239,68,68,.35) }
+
+/* ===== Timeline (Movimientos) – por si más adelante ===== */
 .timeline{ display:grid; gap:12px; }
 .move{
   display:grid; grid-template-columns: 110px 1fr auto; gap:10px; align-items:center;
-  padding:10px 12px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.02);
+  padding:10px 12px; border:1px solid rgba(255,255,255,.08); border-radius:12px;
+  background:rgba(255,255,255,.02);
 }
 .move .type.entrada{ color: var(--ok); }
 .move .type.salida{ color: var(--danger); }
 
-/* Simple modal */
-.modal{ position: fixed; inset:0; display:none; place-items:center; background: rgba(3, 6, 12, .6); z-index:999; }
+/* ===== Modal genérico (reutilizable) ===== */
+.modal{ position: fixed; inset:0; display:none; place-items:center; background: rgba(3,6,12,.6); z-index:999; }
 .modal.open{ display:grid; }
 .modal .pane{
   width:min(560px, 92%); background: #0e162b; border:1px solid rgba(255,255,255,.12); border-radius:16px;
@@ -101,70 +177,6 @@
 .modal .row{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin:10px 0; }
 .modal .row .full{ grid-column: 1/-1; }
 .modal .actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }
+
+/* ===== Utilidades ===== */
 .note{ color:var(--muted); font-size:12px; }
-
-/* Badges de estado (OK / Bajo) */
-.status{
-  display:inline-block; padding:6px 10px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.15); font-size:12px;
-}
-.status.ok{ background:rgba(16,185,129,.15); border-color:rgba(16,185,129,.35); color:#86efac; }
-.status.low{ background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.35); color:#fecaca; }
-
-/* Botones pequeños en la tabla */
-.btn.tiny{ padding:6px 10px; border-radius:10px; font-size:12px; }
-.btn.tiny.outline{ background:transparent; border:1px solid rgba(255,255,255,.2); }
-
-/* Select “bonito” en herramientas si no lo tenías */
-.tools .select{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  color:inherit; border-radius:12px; padding:10px 12px;
-}
-
-/* Chips de estado para stock */
-.status{
-  display:inline-block; padding:6px 10px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.15); font-size:12px;
-}
-.status.ok{  background:rgba(16,185,129,.15);  border-color:rgba(16,185,129,.35); color:#86efac; }
-.status.low{ background:rgba(239,68,68,.15);   border-color:rgba(239,68,68,.35); color:#fecaca; }
-
-/* Chips de tipo de movimiento */
-.chip{
-  display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
-  border:1px solid rgba(255,255,255,.12)
-}
-.chip.in{  background:rgba(34,197,94,.15);  color:#86efac;  border-color:rgba(34,197,94,.35) }
-.chip.out{ background:rgba(239,68,68,.15); color:#fecaca;   border-color:rgba(239,68,68,.35) }
-
-/* Botones compactos de tabla */
-.btn.tiny{ padding:6px 10px; font-size:12px; border-radius:10px }
-.btn.tiny.outline{ background:transparent; border:1px solid rgba(255,255,255,.2) }
-.btn.tiny.danger{ background:#b91c1c; border-color:#b91c1c }
-
-/* ==== Barra CRUD y botones variantes ==== */
-.crud-bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.btn.light{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
-.btn.danger{background:#b91c1c;border-color:#b91c1c}
-.btn.tiny{padding:6px 10px;font-size:12px;border-radius:10px}
-.btn.tiny.light{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
-.btn.tiny.outline{background:transparent;border:1px solid rgba(255,255,255,.2)}
-.btn.tiny.danger{background:#b91c1c;border-color:#b91c1c}
-
-/* Estado de stock/gestión */
-.status{
-  display:inline-block; padding:6px 10px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.15); font-size:12px;
-}
-.status.ok{  background:rgba(16,185,129,.15);  border-color:rgba(16,185,129,.35); color:#86efac }
-.status.low{ background:rgba(239,68,68,.15);   border-color:rgba(239,68,68,.35); color:#fecaca }
-.status.off{ background:rgba(148,163,184,.15);border-color:rgba(148,163,184,.35);color:#cbd5e1 }
-
-/* Chips de tipo de movimiento */
-.chip{
-  display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
-  border:1px solid rgba(255,255,255,.12)
-}
-.chip.in{  background:rgba(34,197,94,.15);  color:#86efac;  border-color:rgba(34,197,94,.35) }
-.chip.out{ background:rgba(239,68,68,.15); color:#fecaca;   border-color:rgba(239,68,68,.35) }
