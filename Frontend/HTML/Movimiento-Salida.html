@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>✏️ Editar movimiento — Bodega</title>
+<title>➖ Nueva salida — Bodega</title>
 <link rel="stylesheet" href="../CSS/Main.css">
 <link rel="stylesheet" href="../CSS/Navbar.css">
 <link rel="stylesheet" href="../CSS/Footer.css">
@@ -12,24 +12,31 @@
   <nav class="navbar sv-navbar">
     <div class="logo">Sistema · Bodega</div>
     <ul class="nav-links">
-      <li><a class="nav-link" href="Movimientos.html">Movimientos</a></li>
+      <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
+      <li><a class="nav-link active" href="Movimientos.html">Movimientos</a></li>
       <li><a class="btn nav-link" href="Main.html">Salir</a></li>
     </ul>
   </nav>
 
   <main class="wrap">
-    <header class="page-head"><h2>✏️ Editar movimiento</h2><p class="sub">MV-0007 • Entrada</p></header>
+    <header class="page-head"><h2>➖ Nueva salida</h2><p class="sub">Usando productos de Gestión</p></header>
     <section class="card form-pane">
       <form class="form" action="#" method="post">
         <div class="row3">
-          <div class="field"><label>SKU</label><input class="input" value="P-0001"></div>
-          <div class="field"><label>Cantidad</label><input class="input" type="number" min="1" value="20"></div>
+          <div class="field"><label>Producto (SKU · Nombre)</label>
+            <select class="input">
+              <option>P-0001 · Arroz 5Kg</option>
+              <option>P-0002 · Azúcar 1Kg</option>
+              <option>P-0003 · Aceite 1L</option>
+            </select>
+          </div>
+          <div class="field"><label>Cantidad</label><input class="input" type="number" min="1" value="1"></div>
           <div class="field"><label>Fecha</label><input class="input" type="date" value="2025-10-10"></div>
         </div>
-        <div class="field"><label>Referencia</label><input class="input" value="Compra prov. 123"></div>
+        <div class="field"><label>Referencia</label><input class="input" placeholder="Venta/Delivery/Nota"></div>
         <div class="actions">
-          <a class="btn ghost" href="Movimientos.html">Cancelar</a>
-          <button class="btn primary" disabled>Actualizar (mock)</button>
+          <a class="btn ghost" href="Bodeguero.html">Cancelar</a>
+          <button class="btn primary" disabled>Guardar (mock)</button>
         </div>
       </form>
     </section>
