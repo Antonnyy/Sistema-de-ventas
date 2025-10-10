@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Delivery – Bodega Josdin</title>
 
-  <!-- Estilos globales (si los usas) -->
+  <!-- Hojas de estilo globales -->
   <link rel="stylesheet" href="../CSS/Navbar.css"/>
   <link rel="stylesheet" href="../CSS/Footer.css"/>
   <link rel="stylesheet" href="../CSS/Delivery.css"/>
 
-  <!-- Fallback mínimo del navbar (opcional) -->
+  <!-- Fallback mínimo del navbar (opcional, por si no carga el CSS externo) -->
   <style>
     .sv-navbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(31,41,55,.6);background:#0b1220}
     .sv-navbar .logo{font-weight:800;color:#e2e8f0}
@@ -28,7 +28,9 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
+  <!-- ================= NAVBAR =================
+       Menú principal del sistema. Contiene enlaces
+       a secciones y un submenú para productos. -->
   <nav class="navbar sv-navbar">
     <div class="logo">Sistema · Bodega</div>
     <ul class="nav-links">
@@ -36,6 +38,8 @@
       <li><a class="nav-link" href="Venta.html">Ventas</a></li>
       <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
       <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+
+      <!-- Submenú de productos -->
       <li class="has-sub">
         <a class="nav-link" href="#">Productos ▾</a>
         <ul class="sub">
@@ -43,54 +47,71 @@
           <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
         </ul>
       </li>
+
       <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
       <li><a class="btn nav-link" href="Main.html">Salir</a></li>
     </ul>
     <button class="menu-toggle" aria-label="Menú">☰</button>
   </nav>
 
-  <!-- HERO -->
+  <!-- ================= HERO =================
+       Cabecera/encabezado de la página de Delivery. -->
   <header class="hero">
     <h1>Registro de Delivery</h1>
   </header>
 
+  <!-- ================= CONTENIDO PRINCIPAL ================= -->
   <main class="wrapper">
     <section class="form card">
       <h2 class="section-title">Datos del Pedido</h2>
 
+      <!-- Formulario principal del pedido de delivery -->
       <form autocomplete="on">
-        <!-- Datos del cliente -->
+
+        <!-- ===== Datos del cliente ===== -->
         <div class="grid-2">
+          <!-- Cliente (obligatorio) con label flotante -->
           <div class="field">
             <input id="cliente" name="cliente" required placeholder=" "/>
             <label for="cliente">Cliente</label>
           </div>
+
+          <!-- Teléfono (opcional) con inputmode para facilitar entrada numérica en móviles -->
           <div class="field">
             <input id="telefono" name="telefono" inputmode="tel" placeholder=" "/>
             <label for="telefono">Teléfono</label>
           </div>
         </div>
 
-        <!-- Dirección -->
+        <!-- ===== Dirección y referencia ===== -->
         <div class="grid-2">
+          <!-- Dirección de entrega (obligatoria) -->
           <div class="field">
             <input id="direccion" name="direccion" required placeholder=" "/>
             <label for="direccion">Dirección</label>
           </div>
+
+          <!-- Referencia adicional (opcional) -->
           <div class="field">
             <input id="referencia" name="referencia" placeholder=" "/>
             <label for="referencia">Referencia</label>
           </div>
         </div>
 
-        <!-- ÍTEMS -->
+        <!-- ===== Ítems del pedido =====
+             Lista de productos en formato de grilla:
+             - Descripción
+             - Cantidad
+             - Precio
+             - Acciones (editar/borrar sin JS mediante checkboxes/labels)
+        -->
         <div class="items card-lite">
           <div class="items-head">
             <h3>Ítems</h3>
             <p class="note">Descripción, cantidad, precio y acciones por fila (sin JS).</p>
           </div>
 
-          <!-- Encabezados -->
+          <!-- Encabezados de la tabla/grilla -->
           <div class="items-header">
             <div>Descripción / producto</div>
             <div class="num">Cant.</div>
@@ -98,18 +119,20 @@
             <div class="center">Acciones</div>
           </div>
 
-          <!-- Filas visibles por defecto -->
+          <!-- Filas visibles por defecto (3 filas base) -->
           <div class="items-grid">
             <!-- ROW 1 -->
             <div class="item-row">
-              <!-- toggles ocultos -->
+              <!-- toggles ocultos: edit/borrar (activados por los labels con íconos) -->
               <input type="checkbox" id="e1" class="toggle edit-toggle" hidden>
               <input type="checkbox" id="r1" class="toggle remove-toggle" hidden name="remove_row_1">
-              <!-- campos -->
+
+              <!-- Campos de la fila -->
               <input class="input" name="desc[]" placeholder="Ej: Gaseosa 500ml">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
-              <!-- acciones -->
+
+              <!-- Acciones por fila (labels que apuntan a los checkboxes) -->
               <div class="item-actions">
                 <label for="e1" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                 <label for="r1" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -120,9 +143,11 @@
             <div class="item-row">
               <input type="checkbox" id="e2" class="toggle edit-toggle" hidden>
               <input type="checkbox" id="r2" class="toggle remove-toggle" hidden name="remove_row_2">
+
               <input class="input" name="desc[]" placeholder="Ej: Pan molde">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+
               <div class="item-actions">
                 <label for="e2" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                 <label for="r2" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -133,9 +158,11 @@
             <div class="item-row">
               <input type="checkbox" id="e3" class="toggle edit-toggle" hidden>
               <input type="checkbox" id="r3" class="toggle remove-toggle" hidden name="remove_row_3">
+
               <input class="input" name="desc[]" placeholder="Ej: Leche 1L">
               <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
               <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+
               <div class="item-actions">
                 <label for="e3" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                 <label for="r3" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -143,7 +170,9 @@
             </div>
           </div>
 
-          <!-- Más filas (sin JS) usando details/summary -->
+          <!-- Más filas sin JS usando <details>:
+               Al abrir, se muestran ítems adicionales (predefinidos).
+          -->
           <details class="more">
             <summary class="btn add">➕ Agregar más productos</summary>
 
@@ -152,9 +181,11 @@
               <div class="item-row">
                 <input type="checkbox" id="e4" class="toggle edit-toggle" hidden>
                 <input type="checkbox" id="r4" class="toggle remove-toggle" hidden name="remove_row_4">
+
                 <input class="input" name="desc[]" placeholder="Producto adicional 1">
                 <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
                 <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+
                 <div class="item-actions">
                   <label for="e4" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                   <label for="r4" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -165,9 +196,11 @@
               <div class="item-row">
                 <input type="checkbox" id="e5" class="toggle edit-toggle" hidden>
                 <input type="checkbox" id="r5" class="toggle remove-toggle" hidden name="remove_row_5">
+
                 <input class="input" name="desc[]" placeholder="Producto adicional 2">
                 <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
                 <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+
                 <div class="item-actions">
                   <label for="e5" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                   <label for="r5" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -178,9 +211,11 @@
               <div class="item-row">
                 <input type="checkbox" id="e6" class="toggle edit-toggle" hidden>
                 <input type="checkbox" id="r6" class="toggle remove-toggle" hidden name="remove_row_6">
+
                 <input class="input" name="desc[]" placeholder="Producto adicional 3">
                 <input class="input num" name="cant[]" inputmode="decimal" placeholder="0">
                 <input class="input num" name="prec[]" inputmode="decimal" placeholder="0.00">
+
                 <div class="item-actions">
                   <label for="e6" class="icon-btn edit" title="Editar (resalta fila)">✏️</label>
                   <label for="r6" class="icon-btn delete" title="Borrar (oculta fila)">🗑️</label>
@@ -190,7 +225,7 @@
           </details>
         </div>
 
-        <!-- Totales -->
+        <!-- ===== Totales (ingreso manual sin JS) ===== -->
         <div class="grid-3 totales">
           <div class="field">
             <input id="subTotal" name="subTotal" inputmode="decimal" class="num" placeholder="0.00"/>
@@ -206,10 +241,13 @@
           </div>
         </div>
 
-        <!-- Estado -->
+        <!-- ===== Estado del delivery ===== -->
         <div class="grid-2 estado-delivery">
           <div class="field">
+            <!-- Label fijo arriba del select (no flotante) -->
             <label for="estadoDelivery" class="label-select">Estado del delivery</label>
+
+            <!-- Select con las opciones de estado -->
             <select id="estadoDelivery" name="estadoDelivery" class="select" required>
               <option value="" selected disabled>Seleccionar estado</option>
               <option value="PENDIENTE">Pendiente</option>
@@ -220,7 +258,9 @@
           </div>
         </div>
 
-        <!-- Acciones finales -->
+        <!-- ===== Acciones finales del formulario =====
+             - Imprimir/guardar PDF con la función nativa del navegador.
+             - Limpiar el formulario (reset nativo). -->
         <div class="actions">
           <button class="btn primary" type="button" onclick="window.print()">Imprimir / Guardar PDF</button>
           <button class="btn" type="reset">Limpiar</button>
@@ -229,6 +269,7 @@
     </section>
   </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer id="footer">
     <p style="text-align:center;color:#9fb1c6;padding:18px 0">© 2025 Bodega Josdin · Sistema de Ventas</p>
   </footer>
