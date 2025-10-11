@@ -9,15 +9,14 @@
 
 <body>
 
-  <!-- ===== NAVBAR BODEGUERO ===== -->
-  <nav class="navbar sv-navbar">
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
     <div class="logo">Sistema · Bodega</div>
     <ul class="nav-links">
       <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
       <li><a class="nav-link" href="Venta.html">Ventas</a></li>
       <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
       <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
-
       <li class="has-sub">
         <a class="nav-link" href="#">Productos ▾</a>
         <ul class="sub">
@@ -25,11 +24,9 @@
           <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
         </ul>
       </li>
-
       <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
-      <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
+      <li><a class="btn nav-link" href="Main.html">Salir</a></li>
     </ul>
-    <button class="menu-toggle" aria-label="Menú">☰</button>
   </nav>
   <!-- ===== /NAVBAR ===== -->
 
@@ -49,28 +46,67 @@
       <input class="in small" type="number" min="1" value="1">
       <a href="#m-agregar" class="btn">+ Agregar</a>
       <div class="grow"></div>
-      <label class="muted">Desc. %</label>
-      <input class="in small" type="number" min="0" value="0">
     </section>
 
     <!-- Layout -->
     <section class="grid">
       <!-- Tabla -->
       <div class="card">
-        <div class="cardh"><h2>Detalle de venta</h2><span class="badge">1</span></div>
+        <div class="cardh">
+          <h2>Detalle de venta</h2>
+          <span class="badge">3 ítems</span>
+        </div>
+
         <table class="tbl">
           <thead>
             <tr>
-              <th>Código</th><th>Producto</th><th>Precio</th>
-              <th>Cant.</th><th>Subtotal</th><th class="c">Acciones</th>
+              <th>Código</th>
+              <th>Producto</th>
+              <th class="c">Cant.</th>
+              <th class="r">Precio</th>
+              <th class="c">Desc.</th>
+              <th class="r">Subtotal</th>
+              <th class="c">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>P-0001</td><td>Audífonos Pro</td><td>89.90</td><td>1</td><td>89.90</td>
+              <td>P-0001</td>
+              <td>Arroz 5Kg</td>
+              <td class="c">2</td>
+              <td class="r">S/ 12.40</td>
+              <td class="c"><span class="disc-tag">5%</span></td>
+              <td class="r"><b>S/ 23.56</b></td>
               <td class="c">
-                <a href="#m-editar" class="icon">✎</a>
-                <a href="#m-borrar" class="icon">🗑</a>
+                <a href="#m-editar" class="icon" title="Editar">✎</a>
+                <a href="#m-borrar" class="icon" title="Borrar">🗑</a>
+                <a href="#m-desc-producto" class="icon" title="Descuento">% </a>
+              </td>
+            </tr>
+            <tr>
+              <td>P-0002</td>
+              <td>Azúcar 1Kg</td>
+              <td class="c">3</td>
+              <td class="r">S/ 4.90</td>
+              <td class="c">—</td>
+              <td class="r"><b>S/ 14.70</b></td>
+              <td class="c">
+                <a href="#m-editar" class="icon" title="Editar">✎</a>
+                <a href="#m-borrar" class="icon" title="Borrar">🗑</a>
+                <a href="#m-desc-producto" class="icon" title="Descuento">% </a>
+              </td>
+            </tr>
+            <tr>
+              <td>P-0003</td>
+              <td>Aceite 1L</td>
+              <td class="c">1</td>
+              <td class="r">S/ 15.90</td>
+              <td class="c"><span class="disc-tag">10%</span></td>
+              <td class="r"><b>S/ 14.31</b></td>
+              <td class="c">
+                <a href="#m-editar" class="icon" title="Editar">✎</a>
+                <a href="#m-borrar" class="icon" title="Borrar">🗑</a>
+                <a href="#m-desc-producto" class="icon" title="Descuento">% </a>
               </td>
             </tr>
           </tbody>
@@ -81,101 +117,231 @@
       <aside class="side">
         <div class="card">
           <h3>Totales</h3>
-          <div class="row"><span>Sub. sin IGV</span><b>S/ 0.00</b></div>
-          <div class="row"><span>IGV (18%)</span><b>S/ 0.00</b></div>
-          <div class="row"><span>Descuento</span><b>- S/ 0.00</b></div>
-          <div class="row total"><span>Total a pagar</span><b>S/ 0.00</b></div>
+          <div class="row"><span>Subtotal bruto</span><b class="money r">S/ 55.40</b></div>
+          <div class="row"><span>Descuento</span><b class="money disc r">– S/ 3.83</b></div>
+          <div class="row"><span>Importe total</span><b class="money r">S/ 51.57</b></div>
+          <hr style="margin:8px 0; border:0; border-top:1px dashed var(--line);">
+          <div class="row"><span>OP. GRAVADA</span><b class="money r">S/ 43.74</b></div>
+          <div class="row"><span>I.G.V.</span><b class="money r">S/ 7.83</b></div>
+          <div class="row total"><span>Total a pagar</span><b class="money total-amount r">S/ 51.57</b></div>
         </div>
 
-        <!-- SOLO Registrar e Imprimir con borde celeste -->
         <div class="actions two">
           <a href="#m-registrar" class="btn outline acc">Registrar venta</a>
-          <a href="#m-imprimir"  class="btn outline acc">Imprimir</a>
+          <a href="#m-imprimir" class="btn outline acc">Imprimir</a>
         </div>
       </aside>
     </section>
   </main>
 
   <!-- ================= MODALES ================= -->
-  <section id="m-agregar" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Agregar producto</h3>
-    <p class="muted">Simulación de agregado (maqueta).</p>
-    <div class="grid-mini">
-      <input class="in" placeholder="Código o nombre">
-      <input class="in" type="number" min="1" value="1">
-      <input class="in" type="number" step="0.01" value="0.00">
-    </div>
-    <div class="actions r">
-      <a href="#" class="btn">Cancelar</a>
-      <a href="#m-ok" class="btn pri">Agregar</a>
-    </div>
-  </div></section>
 
-  <section id="m-editar" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Editar producto</h3>
-    <div class="grid-mini">
-      <input class="in" value="P-0001">
-      <input class="in" value="Audífonos Pro">
-      <input class="in" type="number" value="89.90">
+  <!-- Agregar producto -->
+  <section id="m-agregar" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Agregar producto</h3>
+      <div class="grid-add">
+        <div class="field autocomplete">
+          <label>Producto (código o nombre)</label>
+          <input class="in" placeholder="Buscar producto...">
+          <div class="suggest">
+            <a href="#" class="opt"><span class="name">Arroz 5Kg</span><span class="price">S/ 12.40</span></a>
+            <a href="#" class="opt"><span class="name">Azúcar 1Kg</span><span class="price">S/ 4.90</span></a>
+            <a href="#" class="opt"><span class="name">Aceite 1L</span><span class="price">S/ 15.90</span></a>
+          </div>
+        </div>
+        <div class="field">
+          <label>Cantidad</label>
+          <input class="in" type="number" min="1" value="1">
+        </div>
+        <div class="field">
+          <label>Precio unitario</label>
+          <input class="in" type="text" value="S/ 0.00" readonly>
+        </div>
+        <div class="field span-3">
+          <label>Total</label>
+          <div class="total-box">S/ 0.00</div>
+        </div>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok" class="btn pri">Agregar</a>
+      </div>
     </div>
-    <div class="actions r">
-      <a href="#" class="btn">Cerrar</a>
-      <a href="#m-ok" class="btn pri">Guardar</a>
-    </div>
-  </div></section>
+  </section>
 
-  <section id="m-borrar" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Eliminar producto</h3>
-    <p>Esta acción es de maqueta.</p>
-    <div class="actions r">
-      <a href="#" class="btn">Cancelar</a>
-      <a href="#m-ok" class="btn pri">Eliminar</a>
+  <!-- Nueva venta -->
+  <section id="m-nueva" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Nueva venta</h3>
+      <p>Se limpiará el detalle actual. ¿Deseas continuar?</p>
+      <div class="actions r">
+        <a href="#" class="btn">No</a>
+        <a href="#m-ok" class="btn pri">Sí</a>
+      </div>
     </div>
-  </div></section>
+  </section>
 
-  <section id="m-nueva" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Nueva venta</h3>
-    <p>Se limpiará el detalle (solo demo).</p>
-    <div class="actions r">
-      <a href="#" class="btn">No</a>
-      <a href="#m-ok" class="btn pri">Sí</a>
+  <!-- Registrar -->
+  <section id="m-registrar" class="modal">
+    <div class="box centered">
+      <a href="#" class="x">×</a>
+      <h3>Registrar venta</h3>
+      <div class="summary-items">
+        <div class="item-row">
+          <span>P-0001 · Arroz 5Kg x2</span>
+          <span class="money r">S/ 23.56</span>
+        </div>
+        <div class="item-row">
+          <span>P-0002 · Azúcar 1Kg x3</span>
+          <span class="money r">S/ 14.70</span>
+        </div>
+        <div class="item-row">
+          <span>P-0003 · Aceite 1L x1</span>
+          <span class="money r">S/ 14.31</span>
+        </div>
+      </div>
+      <hr style="margin:16px 0; border:0; border-top:1px dashed var(--line);">
+      <div class="summary-totals">
+        <div class="row"><span>Subtotal bruto</span><b class="money r">S/ 55.40</b></div>
+        <div class="row"><span>Descuento</span><b class="money disc r">– S/ 3.83</b></div>
+        <div class="row"><span>Importe total</span><b class="money r">S/ 51.57</b></div>
+        <hr style="margin:8px 0; border:0; border-top:1px dashed var(--line);">
+        <div class="row"><span>OP. GRAVADA</span><b class="money r">S/ 43.74</b></div>
+        <div class="row"><span>I.G.V.</span><b class="money r">S/ 7.83</b></div>
+        <div class="row total"><span>Total a pagar</span><b class="money total-amount r">S/ 51.57</b></div>
+      </div>
+      <div class="actions r" style="margin-top:20px">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok" class="btn pri">Confirmar venta</a>
+      </div>
     </div>
-  </div></section>
+  </section>
 
-  <section id="m-registrar" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Registrar venta</h3>
-    <ul class="summary"><li>Items: 1</li><li>Total: S/ 0.00</li></ul>
-    <div class="actions r">
-      <a href="#" class="btn">Cancelar</a>
-      <a href="#m-ok" class="btn pri">Confirmar</a>
+  <!-- Imprimir -->
+  <section id="m-imprimir" class="modal">
+    <div class="box print-box">
+      <a href="#" class="x">×</a>
+      <div class="ticket">
+        <div class="ticket-header">
+          <strong>Sistema · Bodega</strong><br>
+          <small>RUC: 10456789012</small><br>
+          <small>Av. Industrial 456 - Lima</small>
+        </div>
+        <hr>
+        <div class="ticket-items">
+          <div class="item-row">
+            <span>P-0001 · Arroz 5Kg x2</span>
+            <span class="money r">S/ 23.56</span>
+          </div>
+          <div class="item-row">
+            <span>P-0002 · Azúcar 1Kg x3</span>
+            <span class="money r">S/ 14.70</span>
+          </div>
+          <div class="item-row">
+            <span>P-0003 · Aceite 1L x1</span>
+            <span class="money r">S/ 14.31</span>
+          </div>
+        </div>
+        <hr>
+        <div class="ticket-totals">
+          <div class="row"><span>Importe total</span><b class="money r">S/ 51.57</b></div>
+          <hr style="margin:8px 0; border:0; border-top:1px dashed var(--line);">
+          <div class="row"><span>OP. GRAVADA</span><b class="money r">S/ 43.74</b></div>
+          <div class="row"><span>I.G.V.</span><b class="money r">S/ 7.83</b></div>
+          <div class="row total"><span>Total a pagar</span><b class="money total-amount r">S/ 51.57</b></div>
+        </div>
+        <div class="ticket-footer">
+          <small>¡Gracias por tu compra!</small><br>
+          <small>Fecha: 11/10/2025 • Hora: 14:30</small>
+        </div>
+      </div>
+      <div class="actions r" style="margin-top:20px">
+        <a href="#" class="btn">Cerrar</a>
+        <a href="#m-ok" class="btn pri">Imprimir ticket</a>
+      </div>
     </div>
-  </div></section>
+  </section>
 
-  <section id="m-imprimir" class="modal"><div class="box">
-    <a href="#" class="x">×</a>
-    <h3>Imprimir ticket</h3>
-    <div class="ticket">
-      <b>Sistema · Bodega</b><hr>
-      Audífonos Pro x1 — S/ 89.90<hr>
-      <b>Total: S/ 89.90</b>
+  <!-- OK genérico -->
+  <section id="m-ok" class="modal">
+    <div class="box ok">
+      <a href="#" class="x">×</a>
+      <h3>¡Venta registrada!</h3>
+      <p>La operación se completó con éxito.</p>
+      <div class="actions r"><a href="#" class="btn pri">Volver</a></div>
     </div>
-    <div class="actions r">
-      <a href="#" class="btn">Cerrar</a>
-      <a href="#m-ok" class="btn pri">Imprimir</a>
-    </div>
-  </div></section>
+  </section>
 
-  <section id="m-ok" class="modal"><div class="box ok">
-    <a href="#" class="x">×</a>
-    <h3>Acción completada</h3>
-    <p>Operación simulada correctamente.</p>
-    <div class="actions r"><a href="#" class="btn pri">Volver</a></div>
-  </div></section>
+  <!-- Editar -->
+  <section id="m-editar" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Editar ítem</h3>
+      <div class="grid-edit">
+        <div class="field span-3">
+          <label>Producto o código</label>
+          <input class="in" type="text" value="Arroz 5Kg">
+        </div>
+        <div class="field">
+          <label>Cantidad</label>
+          <input class="in" type="number" min="1" value="2">
+        </div>
+        <div class="field">
+          <label>Precio unitario</label>
+          <input class="in readonly" type="text" value="S/ 12.40" readonly>
+        </div>
+        <div class="field">
+          <label>Descuento (%)</label>
+          <input class="in" type="number" min="0" max="100" value="5">
+        </div>
+        <div class="field">
+          <label>Total con descuento</label>
+          <div class="total-box readonly">S/ 23.56</div>
+        </div>
+        <div class="field span-3">
+          <label>Nota (opcional)</label>
+          <textarea class="in area" placeholder="Ej. descuento por cliente frecuente"></textarea>
+        </div>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok" class="btn pri">Guardar cambios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Borrar -->
+  <section id="m-borrar" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Eliminar ítem</h3>
+      <p>¿Seguro que deseas eliminar este producto del detalle?</p>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok" class="btn pri">Eliminar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Descuento por producto -->
+  <section id="m-desc-producto" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Aplicar descuento</h3>
+      <p>Este descuento se aplicará solo a este producto.</p>
+      <div class="field">
+        <label>Porcentaje de descuento</label>
+        <input class="in big center" type="number" min="0" max="100" value="5" step="1">
+      </div>
+      <div class="actions r" style="margin-top:16px">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok" class="btn pri">Aplicar</a>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
