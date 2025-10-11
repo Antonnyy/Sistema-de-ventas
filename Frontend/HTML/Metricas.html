@@ -31,7 +31,7 @@
 
   <!-- ================= CONTENIDO PRINCIPAL ================= -->
   <main class="wrap">
-    <!-- Cabecera del panel -->
+    <!-- Cabecera -->
     <header class="page-head">
       <h2>📊 Métricas</h2>
       <p class="page-sub">Panel estático con indicadores clave del sistema de ventas.</p>
@@ -39,104 +39,54 @@
 
     <!-- === Indicadores (KPIs) === -->
     <section class="kpis">
-      <div class="kpi card">
-        <div class="kpi-value">12</div>
-        <div class="kpi-label">Pedidos de hoy</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-value">S/ 256.40</div>
-        <div class="kpi-label">Ventas totales</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-value">66%</div>
-        <div class="kpi-label">% cumplimiento</div>
-      </div>
-      <div class="kpi card">
-        <div class="kpi-value">S/ 21.37</div>
-        <div class="kpi-label">Ticket promedio</div>
-      </div>
+      <div class="kpi"><div class="kpi-value">12</div><div class="kpi-label">Pedidos de hoy</div></div>
+      <div class="kpi"><div class="kpi-value">S/ 256.40</div><div class="kpi-label">Ventas totales</div></div>
+      <div class="kpi"><div class="kpi-value">66%</div><div class="kpi-label">% cumplimiento</div></div>
+      <div class="kpi"><div class="kpi-value">S/ 21.37</div><div class="kpi-label">Ticket promedio</div></div>
     </section>
 
     <!-- === Gráfico: Ventas por día === -->
     <section class="card chart-section" style="--cols:7;">
       <h3>Ventas por día — Últimos 7 días</h3>
-      <div class="chart-container">
-        <div class="chart-bar">
-          <div class="bar" style="height:65%" title="S/ 84.20"></div>
-          <div class="bar-label">Lunes<br><small>15</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:40%" title="S/ 52.10"></div>
-          <div class="bar-label">Martes<br><small>16</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:80%" title="S/ 104.50"></div>
-          <div class="bar-label">Miércoles<br><small>17</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:55%" title="S/ 71.80"></div>
-          <div class="bar-label">Jueves<br><small>18</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:70%" title="S/ 91.30"></div>
-          <div class="bar-label">Viernes<br><small>19</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:45%" title="S/ 58.60"></div>
-          <div class="bar-label">Sábado<br><small>20</small></div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:90%" title="S/ 116.80"></div>
-          <div class="bar-label">Domingo<br><small>21</small></div>
+      <div class="ywrap">
+        <ul class="yaxis"><li>0</li><li>50</li><li>100</li><li>150</li><li>200</li></ul>
+
+        <div class="chart-container">
+          <div class="chart-bar"><div class="bar" style="height:65%"></div><div class="bar-label">Lunes<br><small>15</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:40%"></div><div class="bar-label">Martes<br><small>16</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:80%"></div><div class="bar-label">Miércoles<br><small>17</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:55%"></div><div class="bar-label">Jueves<br><small>18</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:70%"></div><div class="bar-label">Viernes<br><small>19</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:45%"></div><div class="bar-label">Sábado<br><small>20</small></div></div>
+          <div class="chart-bar"><div class="bar" style="height:90%"></div><div class="bar-label">Domingo<br><small>21</small></div></div>
         </div>
       </div>
+
       <div class="chart-values">
-        <span>S/ 84.20</span>
-        <span>S/ 52.10</span>
-        <span>S/ 104.50</span>
-        <span>S/ 71.80</span>
-        <span>S/ 91.30</span>
-        <span>S/ 58.60</span>
-        <span>S/ 116.80</span>
+        <span>S/ 84.20</span><span>S/ 52.10</span><span>S/ 104.50</span>
+        <span>S/ 71.80</span><span>S/ 91.30</span><span>S/ 58.60</span><span>S/ 116.80</span>
       </div>
     </section>
 
     <!-- === Gráfico: Ventas por semana === -->
     <section class="card chart-section" style="--cols:6;">
       <h3>Ventas por semana — Últimas 12 semanas</h3>
-      <div class="chart-container week-chart">
-        <div class="chart-bar">
-          <div class="bar" style="height:30%" title="S/ 420"></div>
-          <div class="bar-label">Sem 10</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:45%" title="S/ 630"></div>
-          <div class="bar-label">Sem 11</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:60%" title="S/ 840"></div>
-          <div class="bar-label">Sem 12</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:50%" title="S/ 700"></div>
-          <div class="bar-label">Sem 13</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:75%" title="S/ 1,050"></div>
-          <div class="bar-label">Sem 14</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:90%" title="S/ 1,260"></div>
-          <div class="bar-label">Sem 15</div>
+      <div class="ywrap">
+        <ul class="yaxis"><li>0</li><li>250</li><li>500</li><li>750</li><li>1000</li><li>1250</li><li>1500</li></ul>
+
+        <div class="chart-container week-chart">
+          <div class="chart-bar"><div class="bar" style="height:30%"></div><div class="bar-label">Sem 10</div></div>
+          <div class="chart-bar"><div class="bar" style="height:45%"></div><div class="bar-label">Sem 11</div></div>
+          <div class="chart-bar"><div class="bar" style="height:60%"></div><div class="bar-label">Sem 12</div></div>
+          <div class="chart-bar"><div class="bar" style="height:50%"></div><div class="bar-label">Sem 13</div></div>
+          <div class="chart-bar"><div class="bar" style="height:75%"></div><div class="bar-label">Sem 14</div></div>
+          <div class="chart-bar"><div class="bar" style="height:90%"></div><div class="bar-label">Sem 15</div></div>
         </div>
       </div>
+
       <div class="chart-values">
-        <span>S/ 420</span>
-        <span>S/ 630</span>
-        <span>S/ 840</span>
-        <span>S/ 700</span>
-        <span>S/ 1,050</span>
-        <span>S/ 1,260</span>
+        <span>S/ 420</span><span>S/ 630</span><span>S/ 840</span>
+        <span>S/ 700</span><span>S/ 1050</span><span>S/ 1260</span>
       </div>
       <p class="chart-note">Rango: Semana 10 a Semana 15 (abril - mayo 2025)</p>
     </section>
@@ -144,72 +94,70 @@
     <!-- === Gráfico: Ventas por mes === -->
     <section class="card chart-section" style="--cols:6;">
       <h3>Ventas por mes — Últimos 6 meses</h3>
-      <div class="chart-container month-chart">
-        <div class="chart-bar">
-          <div class="bar" style="height:40%" title="S/ 1,800"></div>
-          <div class="bar-label">Dic</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:50%" title="S/ 2,250"></div>
-          <div class="bar-label">Ene</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:55%" title="S/ 2,475"></div>
-          <div class="bar-label">Feb</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:60%" title="S/ 2,700"></div>
-          <div class="bar-label">Mar</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:70%" title="S/ 3,150"></div>
-          <div class="bar-label">Abr</div>
-        </div>
-        <div class="chart-bar">
-          <div class="bar" style="height:85%" title="S/ 3,825"></div>
-          <div class="bar-label">May</div>
+      <div class="ywrap">
+        <ul class="yaxis"><li>0</li><li>1000</li><li>2000</li><li>3000</li><li>4000</li><li>5000</li></ul>
+
+        <div class="chart-container month-chart">
+          <div class="chart-bar"><div class="bar" style="height:40%"></div><div class="bar-label">Dic</div></div>
+          <div class="chart-bar"><div class="bar" style="height:50%"></div><div class="bar-label">Ene</div></div>
+          <div class="chart-bar"><div class="bar" style="height:55%"></div><div class="bar-label">Feb</div></div>
+          <div class="chart-bar"><div class="bar" style="height:60%"></div><div class="bar-label">Mar</div></div>
+          <div class="chart-bar"><div class="bar" style="height:70%"></div><div class="bar-label">Abr</div></div>
+          <div class="chart-bar"><div class="bar" style="height:85%"></div><div class="bar-label">May</div></div>
         </div>
       </div>
       <div class="chart-values">
-        <span>S/ 1,800</span>
-        <span>S/ 2,250</span>
-        <span>S/ 2,475</span>
-        <span>S/ 2,700</span>
-        <span>S/ 3,150</span>
-        <span>S/ 3,825</span>
+        <span>S/ 1800</span><span>S/ 2250</span><span>S/ 2475</span>
+        <span>S/ 2700</span><span>S/ 3150</span><span>S/ 3825</span>
       </div>
       <p class="chart-note">Rango: Diciembre 2024 – Mayo 2025</p>
     </section>
 
-    <!-- === Productos más vendidos === -->
-    <section class="card chart-section">
-      <h3>Los 5 Productos más vendidos en los últimos 30 días</h3>
-      <ul class="product-value-list">
-        <li><span class="product-name">Cerveza Pilsen 625ml</span><span class="product-value">S/ 1,240.50</span></li>
-        <li><span class="product-name">Gaseosa Coca-Cola 3L</span><span class="product-value">S/ 980.20</span></li>
-        <li><span class="product-name">Snack Doritos 200g</span><span class="product-value">S/ 720.80</span></li>
-        <li><span class="product-name">Agua San Mateo 2.5L</span><span class="product-value">S/ 640.00</span></li>
-        <li><span class="product-name">Cerveza Cusqueña Negra</span><span class="product-value">S/ 580.30</span></li>
-      </ul>
+    <!-- === MÉTRICAS DE DELIVERY === -->
+    <section class="card">
+      <h3 style="margin-bottom:10px">Métricas de Delivery</h3>
+
+      <div class="kpis kpis-delivery">
+        <div class="kpi"><div class="kpi-value">34</div><div class="kpi-label">Pedidos delivery (hoy)</div></div>
+        <div class="kpi"><div class="kpi-value">18</div><div class="kpi-label">Entregados</div></div>
+        <div class="kpi"><div class="kpi-value">6</div><div class="kpi-label">En camino</div></div>
+        <div class="kpi"><div class="kpi-value">8</div><div class="kpi-label">Pendientes</div></div>
+        <div class="kpi"><div class="kpi-value">2</div><div class="kpi-label">Cancelados</div></div>
+      </div>
+
+      <div class="delivery-states">
+        <div class="prog-row"><span class="prog-label">Pendiente</span><progress value="8" max="34"></progress><span class="prog-val">8</span></div>
+        <div class="prog-row"><span class="prog-label">En camino</span><progress value="6" max="34"></progress><span class="prog-val">6</span></div>
+        <div class="prog-row"><span class="prog-label">Entregado</span><progress value="18" max="34"></progress><span class="prog-val">18</span></div>
+        <div class="prog-row"><span class="prog-label">Cancelado</span><progress value="2" max="34"></progress><span class="prog-val">2</span></div>
+        <p class="chart-note"><code></code><code></code></p>
+      </div>
+
+      <h3 style="margin-top:20px">Cumplimiento de entrega</h3>
+      <div class="ring-wrap">
+        <div class="ring" style="--pct:0.82" data-pct="82%"></div>
+        <ul class="ring-legend">
+          <li><span class="dot dot-ok"></span> Entregadas: 28</li>
+          <li><span class="dot dot-pend"></span> Pendientes: 4</li>
+          <li><span class="dot dot-cancel"></span> Canceladas: 2</li>
+          <li><span class="muted">Total: 34</span></li>
+        </ul>
+      </div>
+
+      <div class="bar-compl-wrap">
+        <div class="bar-compl"><div class="bar-compl-fill" style="--pct:82%"></div></div>
+        <div class="bar-compl-meta"><span>Meta: 90%</span><span><strong>Actual: 82%</strong></span></div>
+      </div>
     </section>
 
-    <!-- Botones finales -->
     <div style="text-align:center;margin-top:20px;">
       <button class="btn primary" type="button" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
     </div>
-
   </main>
 
-  <!-- ================= FOOTER ================= -->
   <footer class="footer">
     <div class="footer-content">
       <p>© 2025 Sistema de Ventas – Maqueta</p>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">WhatsApp</a></li>
-      </ul>
     </div>
   </footer>
 

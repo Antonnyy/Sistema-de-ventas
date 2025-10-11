@@ -1,394 +1,173 @@
-/* ============================================================
-   MÉTRICAS — Sistema de Ventas · Bodega Josdin
-   ------------------------------------------------------------
-   Estilo moderno, responsivo y ordenado (solo HTML + CSS)
-   Incluye: Navbar, KPIs, Gráficas y Footer
-   ============================================================ */
+:root{
+  --primary:#1fccd2; --primary-light:#22d3ee;
+  --dark-bg:#1e293b; --light-bg:#1e293b;
+  --text:#f1f5f9; --text-light:#cbd5e1; --gray:#64748b;
+  --radius:12px; --shadow:0 4px 12px rgba(0,0,0,.25);
+  --navbar-bg:#1e293b; --border-color:#1f2937;
 
-:root {
-  /* Paleta principal */
-  --primary: #1fccd2;
-  --primary-light: #22d3ee;
-  --dark-bg: #1e293b;
-  --text: #f1f5f9;
-  --text-light: #cbd5e1;
-  --gray: #64748b;
-  --light-bg: #1e293b;
-  --radius: 12px;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --navbar-bg: #1e293b;
-  --border-color: #1f2937;
+  /* Gráficos */
+  --yaxis-w:64px;        /* ancho del eje Y */
+  --yaxis-gap:10px;      /* separación eje Y ↔ barras */
+  --bars-gap:18px;       /* separación entre columnas */
+  --bars-pad-x:12px;     /* padding lateral del área de barras */
+  --chart-h:260px;       /* ALTO del área donde crecen las barras */
+  --xlabels-h:42px;      /* altura reservada para las etiquetas inferiores */
 }
 
-/* ================= RESET GENERAL ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Reset / base */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0b1120;color:var(--text)}
+.wrap{width:min(92%,1200px);margin:auto;padding:2rem 1rem 4rem}
+
+/* Navbar */
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:var(--navbar-bg);border-bottom:1px solid var(--border-color)}
+.logo{font-weight:700;font-size:1.3rem;color:var(--primary-light)}
+.nav-links{display:flex;list-style:none;gap:1.5rem}
+.nav-link{color:var(--text);text-decoration:none}
+.nav-link:hover{color:var(--primary-light)}
+.btn{background:var(--primary);color:#fff;padding:.4rem .9rem;border-radius:8px;font-weight:600;text-decoration:none}
+
+/* Encabezado */
+.page-head{text-align:center;margin-bottom:2rem}
+.page-sub{color:var(--text-light)}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin:2rem 0}
+.kpi{background:#1e293b;padding:1rem;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)}
+.kpi-value{font-size:1.8rem;color:var(--primary-light);font-weight:700}
+.kpi-label{color:var(--text-light)}
+
+/* Sección de gráfico */
+.chart-section{margin:2rem 0;padding:1.5rem;background:var(--dark-bg);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart-section h3{margin-bottom:1rem}
+
+/* Layout eje Y + área de barras */
+.ywrap{
+  display:grid;
+  grid-template-columns:var(--yaxis-w) minmax(0,1fr);
+  column-gap:var(--yaxis-gap);
+  align-items:start;
+  /* Dejamos espacio bajo el gráfico para las etiquetas */
+  margin-bottom:var(--xlabels-h);
 }
 
-body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: #0b1120;
-  color: var(--text);
-  line-height: 1.6;
+/* Eje Y (labels) */
+.yaxis{
+  list-style:none;
+  padding:16px 0 0;
+  height:var(--chart-h);
+  display:flex;flex-direction:column-reverse;justify-content:space-between;
+  color:#9fb1c6;font-size:.85rem;line-height:1;
+}
+.yaxis li{position:relative;padding-right:8px;text-align:right}
+.yaxis li::after{
+  content:"";position:absolute;right:calc(-1 * var(--yaxis-gap));
+  top:50%;width:8px;height:1px;background:#314157;transform:translateY(-50%);
 }
 
-.wrap {
-  width: min(92%, 1200px);
-  margin-inline: auto;
-  padding: 2rem 1rem 4rem;
+/* Contenedor de columnas (barras) */
+.chart-container{
+  position:relative;isolation:isolate;overflow:visible; /* permite que salgan las etiquetas */
+  display:grid;grid-template-columns:repeat(var(--cols,7),1fr);
+  gap:var(--bars-gap);align-items:end;
+  height:var(--chart-h);
+  padding:16px var(--bars-pad-x) 0; /* SIN padding-bottom (clave) */
 }
 
-/* ================= NAVBAR ================= */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: var(--navbar-bg);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--primary-light);
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.nav-link:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--primary-light);
-}
-
-.btn {
-  background: var(--primary);
-  color: white !important;
-  padding: 0.4rem 1rem !important;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none !important;
-  display: inline-block;
-  text-align: center;
-}
-
-.has-sub {
-  position: relative;
-}
-
-.sub {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--light-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  list-style: none;
-  padding: 0.5rem 0;
-  min-width: 180px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.2s ease;
-}
-
-.has-sub:hover .sub {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.sub .nav-link {
-  display: block;
-  padding: 0.5rem 1rem !important;
-  color: var(--text) !important;
-}
-
-.sub .nav-link:hover {
-  background: rgba(30, 41, 59, 0.7) !important;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* ================= CABECERA ================= */
-.page-head {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.page-head h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: var(--text);
-}
-
-.page-sub {
-  color: var(--text-light);
-  font-size: 1.1rem;
-}
-
-/* ================= KPIs ================= */
-.kpis {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-  margin: 2rem 0;
-}
-
-.kpi {
-  text-align: center;
-  padding: 1.25rem;
-  background: var(--light-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.kpi-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary-light);
-  margin-bottom: 0.5rem;
-}
-
-.kpi-label {
-  font-size: 1rem;
-  color: var(--text-light);
-}
-
-/* ============================================================
-   GRÁFICOS DE BARRAS (Ventas por día, semana, mes)
-   ============================================================ */
-.chart-section {
-  overflow: hidden;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: var(--dark-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-/* Título de cada gráfico */
-.chart-section h3 {
-  margin-bottom: 12px;
-  font-size: 1.3rem;
-  color: var(--text);
-}
-
-/* Contenedor principal de las barras */
-.chart-container {
-  display: grid;
-  grid-template-columns: repeat(var(--cols, 7), 1fr);
-  gap: 12px;
-  align-items: end;
-  height: 220px; /* <- clave para que el % funcione */
-  padding: 16px 8px 34px;
-  position: relative;
+/* Guías horizontales detrás de barras (incluye línea de base en el fondo) */
+.chart-container::before{
+  content:"";
+  position:absolute;inset:0;
+  margin:16px var(--bars-pad-x) 0; /* SIN margen inferior; llega al fondo */
   background:
-    linear-gradient(to top, #111827 0, #111827 1px, transparent 1px) left bottom/100% 1px no-repeat,
-    repeating-linear-gradient(to top,
-      transparent 0, transparent 39px,
-      #0f172a 40px, #0f172a 41px);
+    linear-gradient(to top,#0f172a 0,#0f172a 1px,transparent 1px) bottom/100% 1px no-repeat,
+    repeating-linear-gradient(to top,transparent 0,transparent 49px,#0f172a 50px,#0f172a 51px);
+  z-index:0;border-radius:8px;
 }
 
-/* Columna de gráfico: una barra y su etiqueta */
-.chart-bar {
-  height: 100%; /* <- referencia para height:% de la barra */
-  display: grid;
-  grid-template-rows: 1fr auto;
-  align-items: end;
-  justify-items: center;
+/* Columna (barra + etiqueta) */
+.chart-bar{
+  height:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  position:relative;z-index:1;
 }
 
-/* Barra individual */
-.bar {
-  width: clamp(22px, 60%, 44px);
-  height: 40%; /* se sobrescribe en el HTML */
-  border-radius: 10px 10px 0 0;
-  background: linear-gradient(180deg, var(--primary-light), var(--primary));
-  border: 1px solid #37c7d944;
-  box-shadow: 0 10px 18px rgba(34, 211, 238, .15);
-  transition: transform .18s ease;
+/* Barra (altura en %) TOCA el 0 porque no hay padding inferior */
+.bar{
+  width:clamp(26px,55%,50px);
+  border-radius:10px 10px 0 0;
+  background:linear-gradient(180deg,var(--primary-light),var(--primary));
+  border:1px solid #37c7d944;
+  box-shadow:0 10px 18px rgba(34,211,238,.15);
+  transition:transform .18s ease,filter .18s ease;
+  margin-bottom:0; /* ya no hace falta truco de -1px */
 }
+.bar:hover{transform:translateY(-3px);filter:brightness(1.05)}
 
-.bar:hover {
-  transform: translateY(-2px);
+/* Etiquetas bajo la barra: posicionadas ABSOLUTAS por fuera del área */
+.bar-label{
+  position:absolute;
+  bottom:calc(-1 * var(--xlabels-h) + 6px); /* empuja claramente por debajo */
+  left:50%;transform:translateX(-50%);
+  width:max-content;max-width:120px;
+  text-align:center;font-size:.85rem;color:var(--text-light);line-height:1.15;
 }
+.bar-label small{display:block;color:#64748b;font-size:.75rem}
 
-/* Etiqueta de cada barra */
-.bar-label {
-  margin-top: 8px;
-  font-size: .9rem;
-  color: var(--text-light);
-  text-align: center;
+/* Valores (S/ …) alineados con el área de barras */
+.chart-values{
+  margin-left:calc(var(--yaxis-w) + var(--yaxis-gap));
+  width:calc(100% - (var(--yaxis-w) + var(--yaxis-gap)));
+  padding:0 var(--bars-pad-x);
+  display:grid;grid-template-columns:repeat(var(--cols,7),1fr);
+  gap:var(--bars-gap);justify-items:center;align-items:center;
+  margin-top:6px;color:var(--primary-light);font-weight:700;font-size:.95rem;
+  font-variant-numeric:tabular-nums;
 }
+.chart-values span{display:inline-block;min-width:48px;text-align:center;white-space:nowrap;line-height:1.4}
 
-.bar-label small {
-  display: block;
-  color: var(--gray);
-  font-size: .78rem;
+/* Lista de productos (si la usas) */
+.product-value-list{list-style:none;display:grid;gap:1rem;margin-top:1rem}
+.product-value-list li{display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.product-value-list li:last-child{border-bottom:none}
+.product-name{color:var(--text);font-weight:500}
+.product-value{color:var(--primary-light);font-weight:600}
+
+/* KPIs de Delivery */
+.kpis-delivery{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.delivery-states{margin-top:12px}
+.prog-row{display:grid;grid-template-columns:140px 1fr 48px;gap:10px;align-items:center;margin:8px 0}
+.prog-label{color:#cbd5e1}.prog-val{text-align:right;color:#9fb1c6}
+progress{width:100%;height:14px;border:none;border-radius:999px;overflow:hidden;background:#111827}
+progress::-webkit-progress-bar{background:#111827}
+progress::-webkit-progress-value{background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+progress::-moz-progress-bar{background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+
+/* Cumplimiento (anillo + barra) */
+.ring-wrap{display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:center}
+.ring{--pct:.82;--size:140px;background:conic-gradient(var(--primary-light) calc(var(--pct)*1turn),#0f172a 0);width:var(--size);height:var(--size);border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 0 0 6px #0f172a inset,0 10px 18px rgba(34,211,238,.12)}
+.ring::after{content:"";position:absolute;inset:10px;background:#0b1120;border-radius:50%}
+/* Porcentaje centrado dentro del anillo */
+.ring::before{
+  content:attr(data-pct);
+  position:absolute;inset:0;display:grid;place-items:center;z-index:2;
+  color:#e2e8f0;font-weight:800;font-size:1.25rem;letter-spacing:.5px;
 }
+.ring-center{display:none}
+.ring-legend{list-style:none;margin:0;padding:0;color:#cbd5e1;display:grid;gap:6px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.dot-ok{background:#22c55e}.dot-pend{background:#eab308}.dot-cancel{background:#ef4444}
+.muted{color:#9fb1c6}
+.bar-compl-wrap{margin-top:14px}
+.bar-compl{height:14px;background:#111827;border-radius:999px;overflow:hidden;border:1px solid #1f2a3a}
+.bar-compl-fill{--pct:82%;width:var(--pct);height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.bar-compl-meta{display:flex;justify-content:space-between;margin-top:6px;color:#cbd5e1}
 
-/* Valores debajo del gráfico */
-.chart-values {
-  display: grid;
-  grid-template-columns: repeat(var(--cols, 7), 1fr);
-  gap: 12px;
-  margin-top: 10px;
-  padding: 0 6px;
-  color: var(--primary-light);
-  font-weight: 700;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
+/* Footer */
+.footer{background:#111827;text-align:center;color:#9fb1c6;padding:1.5rem;margin-top:3rem}
 
-/* Notas inferiores (rango temporal) */
-.chart-note {
-  text-align: center;
-  font-size: .9rem;
-  color: var(--gray);
-  margin-top: 1rem;
-  font-style: italic;
-}
-
-/* Ajustes por tipo */
-.week-chart { height: 200px; }
-.month-chart { height: 200px; }
-
-/* ================= PRODUCTOS MÁS VENDIDOS ================= */
-.product-value-list {
-  list-style: none;
-  display: grid;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding: 0;
-}
-
-.product-value-list li {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.product-value-list li:last-child {
-  border-bottom: none;
-}
-
-.product-name {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.product-value {
-  color: var(--primary-light);
-  font-weight: 600;
-}
-
-/* ================= FOOTER ================= */
-.footer {
-  background: rgba(15, 23, 42, 0.7);
-  padding: 2rem 1rem;
-  border-top: 1px solid var(--border-color);
-  margin-top: 3rem;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.footer-content p {
-  color: var(--text-light);
-  margin-bottom: 1rem;
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.social-links a {
-  color: var(--text-light);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.social-links a:hover {
-  color: var(--primary-light);
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
-    padding: 1rem;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .wrap {
-    padding: 1.5rem 0.8rem 3rem;
-  }
-
-  .chart-container {
-    height: 180px;
-    gap: 8px;
-  }
-
-  .bar {
-    max-width: 30px;
-  }
-
-  .bar-label {
-    font-size: 0.75rem;
-  }
-
-  .chart-values span {
-    font-size: 0.75rem;
-    min-width: 50px;
-  }
-
-  .kpis {
-    grid-template-columns: 1fr;
-  }
-
-  .page-head h2 {
-    font-size: 1.7rem;
-  }
+/* Responsive */
+@media (max-width:768px){
+  :root{--chart-h:220px;--xlabels-h:50px}
+  .bar{max-width:32px}
 }
