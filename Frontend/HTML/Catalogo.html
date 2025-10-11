@@ -22,9 +22,12 @@
 .toolbar{display:grid;gap:10px;margin:10px 0}
 @media(min-width:900px){.toolbar{grid-template-columns:1fr .8fr .8fr .6fr .6fr auto}}
 .input,.select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text, #e5eefc);border-radius:14px;padding:10px 12px}
-.btn{border-radius:14px;border:1px solid rgba(255,255,255,.12);padding:10px 14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;font-weight:800}
+.btn{border-radius:14px;border:1px solid rgba(255,255,255,.12);padding:10px 14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;font-weight:800;cursor:pointer}
 .btn.secondary{background:rgba(255,255,255,.06)}
 .btn.clean{background:linear-gradient(135deg,#6ee7b7,#60a5fa)}
+/* Estilo para .btn.outline (usada en admin) */
+.btn.outline{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:#e5eefc}
+
 .cart{display:inline-flex;align-items:center;gap:8px}
 .cart .bubble{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;font-weight:800;padding:0 6px;border:1px solid rgba(0,0,0,.25)}
 
@@ -44,10 +47,55 @@
 .price{font-weight:900}
 .btn.add{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text,#e5eefc)}
 .btn.add:hover{background:linear-gradient(135deg,#22c55e,#06b6d4);color:#05202a;border-color:transparent}
+
+/* ======= MODALES SIN JS (via :target) ======= */
+:root{ --overlay: rgba(15,23,42,.72); --border: rgba(255,255,255,.12); }
+.modal{ position:fixed; inset:0; display:none; background:var(--overlay); backdrop-filter:blur(2px); z-index:9999; }
+.modal:target{ display:block; }
+.modal .dialog{
+  width:min(900px,92%); margin:6vh auto; background:rgba(17,24,39,1);
+  border:1px solid var(--border); border-radius:18px; padding:16px;
+}
+.modal-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.modal .close{
+  text-decoration:none; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center;
+  border-radius:10px; border:1px solid var(--border); color:#e5eefc;
+}
+.modal .close:hover{ background:rgba(255,255,255,.06); }
+.modal .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+.table{ width:100%; border-collapse:collapse; }
+.table th,.table td{ padding:10px; border-bottom:1px solid var(--border); text-align:left; }
+.card-actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+/* ======= DEMO LOGIN SIN JS (checkbox + CSS) ======= */
+.admin-only{ display:none; }                 /* por defecto oculto */
+#demoLogin:checked ~ main .admin-only{ display:inline-flex; } /* visible si “logeado” */
+
+/* Barra superior para alternar ON/OFF */
+.demo-auth{
+  position:sticky; top:0; z-index:1100;
+  display:flex; justify-content:center; align-items:center; gap:8px;
+  padding:6px 10px; background:rgba(2,6,23,.55);
+  border-bottom:1px solid rgba(255,255,255,.08); backdrop-filter:blur(4px);
+}
+.demo-auth .btn{ padding:6px 10px; font-size:12px; border-radius:10px; }
+#demoLogin ~ .demo-auth .on{ display:none; }
+#demoLogin:checked ~ .demo-auth .off{ display:none; }
+#demoLogin:checked ~ .demo-auth .on{ display:inline; }
 </style>
 </head>
 
 <body id="topCatalogo">
+
+  <!-- Toggle de DEMO sin JS: marca login ON/OFF (debe ir ANTES de <main>) -->
+  <input type="checkbox" id="demoLogin" hidden>
+  <div class="demo-auth">
+    <label for="demoLogin" class="btn outline">
+      <span class="off">Simular login (bodeguero): OFF</span>
+      <span class="on">Simular login (bodeguero): ON</span>
+    </label>
+    <span class="sub" style="font-size:12px;color:#a5b4c8">* Demo sin JS: al activarlo verás botones de admin.</span>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -108,8 +156,13 @@
       <div class="body">
         <h3>Paquete de Aseo Personal</h3>
         <p>Incluye jabón, pasta dental y shampoo.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 49.90</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 49.90</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -122,8 +175,13 @@
       <div class="body">
         <h3>Teclado Mecánico RGB</h3>
         <p>Productos de aseo de limpieza doméstica.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 189.00</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 189.00</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -136,8 +194,13 @@
       <div class="body">
         <h3>Electrodoméstico</h3>
         <p>Electrodomésticos en oferta.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 259.00</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 259.00</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -150,8 +213,13 @@
       <div class="body">
         <h3>Bebidas alcohólicas</h3>
         <p>Para citas y eventos.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 119.90</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 119.90</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -164,8 +232,13 @@
       <div class="body">
         <h3>Regalos</h3>
         <p>Detalles para toda ocasión.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 79.90</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 79.90</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -178,8 +251,13 @@
       <div class="body">
         <h3>Pack Higiene</h3>
         <p>Incluye alcohol y gel antibacterial.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 29.90</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 29.90</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -192,8 +270,13 @@
       <div class="body">
         <h3>Detergente Premium</h3>
         <p>Rinde más por carga.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 18.00</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 18.00</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -206,8 +289,13 @@
       <div class="body">
         <h3>Audífonos Inalámbricos</h3>
         <p>Bluetooth, con estuche.</p>
-        <div class="row" style="display:flex;justify-content:space-between;align-items:center;"><div class="price">S/ 99.00</div>
-          <div class="card-actions"><a class="btn" href="#carrito">Comprar</a> <a class="btn outline" href="Venta.html">Agregar (admin)</a></div></div>
+        <div class="row">
+          <div class="price">S/ 99.00</div>
+          <div class="card-actions">
+            <a class="btn" href="#carrito">Comprar</a>
+            <a class="btn outline admin-only" href="Venta.html">Agregar (admin)</a>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -245,11 +333,11 @@
           <input class="input" placeholder="Dirección"/>
           <input class="input" placeholder="Referencia (opcional)"/>
         </div>
-        <div class="actions">
+        <div class="actions" style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;">
           <a class="btn secondary" href="#topCatalogo">← Seguir comprando</a>
           <a class="btn" href="#pedido-ok">Confirmar pedido</a>
         </div>
-        <p class="note" style="margin-top:8px;">Maqueta: al confirmar, el pedido pasaría a Ventas (admin) para validación.</p>
+        <p class="note" style="margin-top:8px;color:#a5b4c8">Maqueta: al confirmar, el pedido pasaría a Ventas (admin) para validación.</p>
       </div>
     </div>
   </section>
@@ -262,7 +350,7 @@
         <a class="close" href="#topCatalogo" aria-label="Cerrar">✕</a>
       </div>
 
-      <p class="sub" style="margin:6px 0 14px;">
+      <p class="sub" style="margin:6px 0 14px;color:#e5eefc">
         Tu número de pedido es <strong>PED-001</strong>. El bodeguero confirmará stock y coordinará la entrega.
       </p>
       <div class="actions" style="justify-content:center;">
@@ -271,7 +359,7 @@
       </div>
 
       <div class="card" style="padding:10px;border-radius:12px;margin-top:14px;">
-        <p class="note" style="margin:0;">
+        <p class="note" style="margin:0;color:#a5b4c8">
           Se conserva el botón <em>Agregar (admin)</em> para el flujo interno en <strong>Venta.html</strong>.
         </p>
       </div>

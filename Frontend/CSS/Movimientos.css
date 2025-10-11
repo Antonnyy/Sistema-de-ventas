@@ -1,62 +1,303 @@
-/* Layout base (respeta tu paleta global) */
-:root{ --radius:14px }
-.wrap{ width:min(1100px,92%); margin:18px auto 72px }
-.page-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px }
-.card{ border-radius:var(--radius); padding:14px }
+/* =========================================================
+   VARIABLES Y RESETEOS SUAVES
+   - Centraliza radios, colores y timing.
+   - Facilita cambiar tema/estilos desde un solo lugar.
+   ========================================================= */
+:root{
+  --radius: 14px;                /* Radio de bordes global */
+  --gap-sm: 10px;                /* Espaciado pequeño */
+  --gap-md: 12px;                /* Espaciado medio */
+  --gap-lg: 18px;                /* Espaciado grande */
+  --card-pad: 14px;              /* Padding estándar para tarjetas */
 
-.tools{ display:grid; gap:10px; margin:10px 0 }
-@media(min-width:820px){ .tools{ grid-template-columns:1fr .5fr } }
-.input,.select{ border-radius:var(--radius) }
+  /* Colores base pensados para fondo oscuro (ajusta si usas claro) */
+  --border: rgba(255,255,255,.15);
+  --border-strong: rgba(255,255,255,.25);
+  --border-soft: rgba(255,255,255,.10);
+  --text-dim: rgba(255,255,255,.85);
 
-.table{ width:100%; border-collapse:collapse }
-.table th,.table td{ padding:10px; border-bottom:1px solid rgba(255,255,255,.1); text-align:left }
+  /* Estados (verde y rojo con transparencia) */
+  --ok-bg:  rgba(34,197,94,.15);
+  --ok-bd:  rgba(34,197,94,.35);
+  --ok-tx:  #86efac;
 
-.chip{ display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.12) }
-.chip.in{  background:rgba(34,197,94,.15);  color:#86efac; border-color:rgba(34,197,94,.35) }
-.chip.out{ background:rgba(239,68,68,.15); color:#fecaca; border-color:rgba(239,68,68,.35) }
+  --bad-bg: rgba(239,68,68,.15);
+  --bad-bd: rgba(239,68,68,.35);
+  --bad-tx: #fecaca;
 
-.btn{ border-radius:var(--radius) }
-.btn.outline{ background:transparent; border:1px solid rgba(255,255,255,.25) }
-.btn.tiny{ padding:6px 10px; font-size:12px; border-radius:10px }
-.btn.danger{ background:#b91c1c; border-color:#b91c1c }
+  /* Botón peligro */
+  --danger: #b91c1c;
 
-.form-pane .form{ display:grid; gap:12px }
-.row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
-@media(max-width:900px){ .row3{ grid-template-columns:1fr } }
-.field label{ font-size:12px; opacity:.85 }
-.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px }
+  /* Efectos */
+  --shadow: 0 6px 20px rgba(0,0,0,.18);
+  --focus: 0 0 0 3px rgba(59,130,246,.35); /* anillo de foco accesible */
+  --transition: 140ms ease;
+}
 
-:root{ --radius:14px }
-.wrap{ width:min(1100px,92%); margin:18px auto 72px }
-.page-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px }
-.card{ border-radius:var(--radius); padding:14px }
-.form-pane .form{ display:grid; gap:12px }
-.row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
-@media(max-width:900px){ .row3{ grid-template-columns:1fr } }
-.field label{ font-size:12px; opacity:.85 }
-.input, select, textarea{ border-radius:var(--radius); padding:10px 12px }
-.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px }
-.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,.2) }
+/* Quita outlines feos pero conserva accesibilidad con :focus-visible */
+*:focus{ outline: none; }
+*:focus-visible{ box-shadow: var(--focus); border-color: transparent; }
 
-:root{ --radius:14px }
-.wrap{ width:min(1100px,92%); margin:18px auto 72px }
-.page-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px }
-.card{ border-radius:var(--radius); padding:14px }
-.tools{ display:grid; gap:10px; margin:10px 0 }
-@media(min-width:820px){ .tools{ grid-template-columns:1fr .5fr } }
-.input, .select{ border-radius:var(--radius); padding:10px 12px }
-.table{ width:100%; border-collapse:collapse }
-.table th,.table td{ padding:10px; border-bottom:1px solid rgba(255,255,255,.1); text-align:left }
-.btn{ border-radius:var(--radius) }
-.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,.2) }
-.btn.outline{ background:transparent; border:1px solid rgba(255,255,255,.25) }
-.btn.tiny{ padding:6px 10px; font-size:12px; border-radius:10px }
-.btn.danger{ background:#b91c1c; border-color:#b91c1c }
-.chip{ display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.12) }
-.chip.in{  background:rgba(34,197,94,.15);  color:#86efac;  border-color:rgba(34,197,94,.35) }
-.chip.out{ background:rgba(239,68,68,.15); color:#fecaca;   border-color:rgba(239,68,68,.35) }
-.form-pane .form{ display:grid; gap:12px }
-.row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
-@media(max-width:900px){ .row3{ grid-template-columns:1fr } }
-.field label{ font-size:12px; opacity:.85 }
-.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px }
+/* Reduce animaciones si el usuario lo pide (accesibilidad) */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none!important; transition: none!important; }
+}
+
+/* =========================================================
+   LAYOUT GENERAL
+   ========================================================= */
+.wrap{
+  /* Contenedor central con ancho máximo y margen vertical amplio */
+  width: min(1100px, 92%);
+  margin: var(--gap-lg) auto 72px;
+}
+
+.page-head{
+  /* Cabecera con título a la izquierda y acciones a la derecha */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  margin-bottom: 10px;
+}
+
+/* Tarjeta genérica para paneles/containers */
+.card{
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  box-shadow: var(--shadow);             /* sutil elevación */
+  background: rgba(255,255,255,.03);     /* velo suave (en dark) */
+  border: 1px solid var(--border);
+}
+
+/* =========================================================
+   ZONA DE HERRAMIENTAS / FILTROS
+   - Grid que en desktop divide filtros y acciones.
+   ========================================================= */
+.tools{
+  display: grid;
+  gap: var(--gap-sm);
+  margin: 10px 0;
+}
+/* En anchos >= 820px, 2 columnas: filtros grandes + acciones pequeñas */
+@media (min-width: 820px){
+  .tools{ grid-template-columns: 1fr .5fr; }
+}
+
+/* =========================================================
+   CAMPOS DE FORMULARIO
+   - Unifica inputs, selects y textareas.
+   ========================================================= */
+.input,
+.select,
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select{
+  width: 100%;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  color: inherit;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+/* Hover/focus sutil para campos */
+.input:hover,
+.select:hover,
+textarea:hover,
+input[type="text"]:hover,
+input[type="number"]:hover,
+input[type="date"]:hover,
+select:hover{
+  background: rgba(255,255,255,.06);
+}
+.input:focus-visible,
+.select:focus-visible,
+textarea:focus-visible,
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
+input[type="date"]:focus-visible,
+select:focus-visible{
+  background: rgba(255,255,255,.08);
+}
+
+/* Etiquetas de campos más discretas */
+.field label{
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Formularios en paneles con separación vertical uniforme */
+.form-pane .form{
+  display: grid;
+  gap: var(--gap-md);
+}
+
+/* Filas de 3 columnas que colapsan a 1 en móviles */
+.row3{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap-md);
+}
+@media (max-width: 900px){
+  .row3{ grid-template-columns: 1fr; }
+}
+
+/* Contenedor de botones/acciones alineadas a la derecha */
+.actions{
+  display: flex;
+  gap: var(--gap-sm);
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+/* =========================================================
+   BOTONES
+   - Variantes: base, ghost, outline, tiny, danger.
+   ========================================================= */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  background: rgba(255,255,255,.10);
+  color: inherit;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
+}
+.btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); }
+.btn:active{ transform: translateY(0); }
+
+/* Botón con fondo transparente y borde sutil */
+.btn.ghost{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.20);
+}
+.btn.ghost:hover{ background: rgba(255,255,255,.06); }
+
+/* Borde más fuerte, sin relleno */
+.btn.outline{
+  background: transparent;
+  border: 1px solid var(--border-strong);
+}
+.btn.outline:hover{ background: rgba(255,255,255,.08); }
+
+/* Botón pequeño para acciones de fila */
+.btn.tiny{
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+/* Botón peligro (eliminar) */
+.btn.danger{
+  background: var(--danger);
+  border-color: var(--danger);
+}
+.btn.danger:hover{ filter: brightness(1.05); }
+.btn.danger:disabled{ opacity: .6; cursor: not-allowed; }
+
+/* =========================================================
+   CHIPS / PASTELES DE ESTADO
+   - .chip.in = ingreso (verde), .chip.out = egreso (rojo).
+   ========================================================= */
+.chip{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  white-space: nowrap;     /* evita saltos raros */
+}
+.chip.in{
+  background: var(--ok-bg);
+  color: var(--ok-tx);
+  border-color: var(--ok-bd);
+}
+.chip.out{
+  background: var(--bad-bg);
+  color: var(--bad-tx);
+  border-color: var(--bad-bd);
+}
+
+/* =========================================================
+   TABLAS
+   - Tabla full width con divisores, zebra y manejo de overflow.
+   ========================================================= */
+.table{
+  width: 100%;
+  border-collapse: collapse;  /* une bordes para líneas limpias */
+}
+
+/* Cabeceras: tipografía clara y separador inferior */
+.table th{
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-dim);
+  position: sticky;    /* se mantiene visible al hacer scroll */
+  top: 0;
+  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,.25);
+  z-index: 1;
+}
+
+/* Celdas: padding uniforme y línea base suave */
+.table td{
+  padding: 10px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+}
+
+/* Zebra rows para legibilidad */
+.table tr:nth-child(odd) td{
+  background: rgba(255,255,255,.02);
+}
+
+/* Filas “hover” para resaltar */
+.table tbody tr:hover td{
+  background: rgba(255,255,255,.04);
+}
+
+/* Truncado elegante para celdas con textos largos */
+.table .truncate{
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   UTILIDADES OPCIONALES
+   ========================================================= */
+
+/* Contenedor con scroll horizontal solo cuando sea necesario (tablas anchas) */
+.scroll-x{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.scroll-x::-webkit-scrollbar{ height: 8px; }
+.scroll-x::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.2); border-radius: 20px; }
+
+/* Ayuda visual para secciones separadas dentro de una .card */
+.divider{
+  height: 1px;
+  background: var(--border-soft);
+  margin: 12px 0;
+}
+
+/* Texto secundario */
+.muted{ color: var(--text-dim); }
+
+/* Espaciados rápidos */
+.mt-sm{ margin-top: var(--gap-sm); }
+.mt-md{ margin-top: var(--gap-md); }
+.mt-lg{ margin-top: var(--gap-lg); }

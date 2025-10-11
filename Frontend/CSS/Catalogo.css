@@ -1,31 +1,53 @@
-
+/* =========================================================
+   VARIABLES Y BASE
+   - Ajusta colores/espaciados desde un solo lugar.
+   - Mantiene tu estética oscura con acentos teal/violeta.
+   ========================================================= */
 :root{
   --bg:#0b1020;
   --card:#11182d;
   --muted:#8ea3b2;
   --text:#eaf2ff;
-  --brand:#5eead4; /* teal-300 */
-  --brand-2:#7c3aed; /* violet-600 */
+  --brand:#5eead4;    /* teal-300 */
+  --brand-2:#7c3aed;  /* violet-600 */
   --danger:#ef4444;
   --ok:#22c55e;
+  --radius-lg:18px;   /* radios principales */
+  --radius-md:12px;   /* radios medios */
   --shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), rgba(124,58,237,0)) , var(--bg);
-  color:var(--text);
+  /* Fondo con gradiente radial + color base */
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), rgba(124,58,237,0)), var(--bg);
+  color: var(--text);
 }
 
+/* Accesibilidad: outline bonito sólo cuando navegas con teclado */
+*:focus{ outline: none; }
+*:focus-visible{ box-shadow: 0 0 0 3px rgba(94,234,212,.35); border-color: transparent; }
+
+/* Respeta usuarios que piden menos animación */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+
+/* Contenedor principal centrado y fluido */
 .container{
-  width:min(1200px, 92%);
+  width: min(1200px, 92%);
   margin: 24px auto 64px;
 }
 
-/* Header / Controls */
+/* =========================================================
+   CABECERA / CONTROLES
+   - Título a la izquierda, filtros/acciones a la derecha.
+   - En móvil todo en una sola columna.
+   ========================================================= */
 .catalogo-header{
   display:grid;
   grid-template-columns: 1fr;
@@ -33,9 +55,13 @@ body{
   margin-bottom:16px;
 }
 @media (min-width: 720px){
-  .catalogo-header{ grid-template-columns: 1fr 1fr; align-items:center; }
+  .catalogo-header{
+    grid-template-columns: 1fr 1fr;
+    align-items:center;
+  }
 }
 
+/* Título y "badge" para totales o estado */
 .title{
   display:flex;
   gap:12px;
@@ -53,6 +79,7 @@ body{
   box-shadow:0 6px 16px rgba(94,234,212,.35);
 }
 
+/* Grupo de filtros/acciones: buscador, selects, botón */
 .controls{
   display:grid;
   grid-template-columns: 1fr;
@@ -60,36 +87,51 @@ body{
 }
 @media (min-width: 720px){
   .controls{
+    /* Busca ser flexible: 1 campo largo + 3 cortos + botón */
     grid-template-columns: 1.4fr .8fr .8fr .8fr auto;
     align-items:center;
   }
 }
-.input, .select{
-  background: #0d1428;
+
+/* Campos (input/select) con estilo unificado */
+.input,
+.select,
+input[type="text"],
+select{
+  background:#0d1428;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:12px;
+  border-radius: var(--radius-md);
   padding:12px 12px;
   color:var(--text);
   outline:none;
-  transition:.2s border;
+  transition: border-color .2s, background .2s;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
-.input:focus, .select:focus{ border-color: rgba(94,234,212,.65); }
+.input::placeholder{ color: rgba(234,242,255,.55); } /* placeholder legible */
 
+.input:hover, .select:hover{ background:#0f1a33; }
+.input:focus-visible, .select:focus-visible{ border-color: rgba(94,234,212,.65); }
+
+/* Botón principal con gradiente y ligera compresión al hacer click */
 .btn{
   background: linear-gradient(135deg, var(--brand-2), #4f46e5);
   color:#fff;
   border:none;
   padding:12px 14px;
-  border-radius:12px;
+  border-radius: var(--radius-md);
   font-weight:700;
   cursor:pointer;
   box-shadow: var(--shadow);
-  transition: transform .06s ease-in-out, opacity .2s;
+  transition: transform .06s ease-in-out, opacity .2s, filter .2s;
 }
+.btn:hover{ filter: brightness(1.05); }
 .btn:active{ transform: translateY(1px) scale(.99); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
 
-/* Grid */
+/* =========================================================
+   GRID DE TARJETAS
+   - Columnas responsivas 2/3/4 con gaps crecientes.
+   ========================================================= */
 .grid{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
@@ -103,19 +145,28 @@ body{
   .grid{ grid-template-columns: repeat(4, 1fr); gap:20px; }
 }
 
-/* Card */
+/* =========================================================
+   CARD DE PRODUCTO
+   - Hover sutil, cabecera con imagen, cuerpo con título,
+     descripción, precio y botón "Agregar".
+   ========================================================= */
 .card{
   background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
   border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
+  border-radius: var(--radius-lg);
   overflow:hidden;
   box-shadow: var(--shadow);
   display:flex;
   flex-direction:column;
   transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
 }
-.card:hover{ transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0,0,0,.35); }
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(0,0,0,.35);
+}
 
+/* Contenedor de imagen: respeta proporción 4:3 */
 .thumb-wrap{
   position:relative;
   aspect-ratio: 4/3;
@@ -129,6 +180,8 @@ body{
   display:block;
   filter: saturate(1.1);
 }
+
+/* Badge superior (p. ej., "Nuevo", "% OFF") */
 .badge-top{
   position:absolute;
   top:10px; left:10px;
@@ -142,12 +195,13 @@ body{
   box-shadow: 0 6px 16px rgba(0,0,0,.35);
 }
 
+/* Cuerpo de la tarjeta: layout en columna y spacing */
 .card-body{
   padding:12px 12px 14px;
   display:flex;
   gap:10px;
   flex-direction:column;
-  flex:1;
+  flex:1; /* empuja el footer (precio+botón) al fondo */
 }
 .card-title{
   font-size:15px;
@@ -158,14 +212,22 @@ body{
   color: var(--muted);
   font-size:12px;
   line-height:1.45;
-  min-height: 34px;
+  min-height: 34px; /* asegura 2 líneas aprox para uniformidad */
 }
+
+/* Fila inferior con precio a la izquierda y acción a la derecha */
 .price-row{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 .price{
-  font-weight:900; font-size:18px; letter-spacing:.2px;
+  font-weight:900;
+  font-size:18px;
+  letter-spacing:.2px;
 }
+
+/* Botón "Agregar" secundario (dentro de card) */
 .add{
   border:1px solid rgba(255,255,255,.12);
   background:#0f172a;
@@ -174,10 +236,17 @@ body{
   border-radius:10px;
   padding:8px 10px;
   cursor:pointer;
+  transition: border-color .2s, color .2s, transform .06s;
 }
-.add:hover{ border-color: rgba(94,234,212,.6); color: var(--brand); }
+.add:hover{
+  border-color: rgba(94,234,212,.6);
+  color: var(--brand);
+}
+.add:active{ transform: translateY(1px); }
 
-/* Topbar */
+/* =========================================================
+   TOPBAR (filtros rápidos / vista de carrito)
+   ========================================================= */
 .topbar{
   display:flex;
   gap:10px;
@@ -193,11 +262,13 @@ body{
   color:var(--muted);
   font-size:12px;
 }
+
+/* Botón/estado del carrito con contador (dot) */
 .cart{
   position:relative;
   border:1px solid rgba(255,255,255,.12);
   background:#0d1428;
-  border-radius:12px;
+  border-radius: var(--radius-md);
   padding:8px 12px;
   font-weight:800;
 }
@@ -211,11 +282,41 @@ body{
   border:2px solid #0d1428;
 }
 
-/* Empty state */
+/* =========================================================
+   ESTADO VACÍO
+   ========================================================= */
 .empty{
-  text-align:center; color:var(--muted);
+  text-align:center;
+  color:var(--muted);
   border:1px dashed rgba(255,255,255,.12);
   border-radius:14px;
   padding:28px;
   margin-top:10px;
 }
+
+/* =========================================================
+   UTILIDADES (opcionales y reusables)
+   ========================================================= */
+
+/* Truncar textos sin romper layout */
+.truncate{
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Línea divisora suave para separar bloques dentro de una card */
+.divider{
+  height:1px;
+  background: rgba(255,255,255,.08);
+  margin: 8px 0;
+}
+
+/* Espaciados rápidos */
+.mt-8{  margin-top:8px;  }
+.mt-12{ margin-top:12px; }
+.mt-16{ margin-top:16px; }
+
+/* Helper: resalta con color de marca (puede usarse en textos/puntos) */
+.brand{ color: var(--brand); }
