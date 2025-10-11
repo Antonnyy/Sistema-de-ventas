@@ -5,125 +5,450 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Gestión de Productos</title>
   <link rel="stylesheet" href="../CSS/Gestion.css">
-  <link rel="stylesheet" href="../CSS/Navbar.css">
 </head>
-<body data-page="gestion">
-  <header>
-<nav class="navbar sv-navbar">
-  <div class="logo">Sistema · Bodega</div>
-  <ul class="nav-links">
-    <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
-    <li><a class="nav-link" href="Venta.html">Ventas</a></li>
-    <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
-    <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
 
-    <!-- Submenú -->
-    <li class="has-sub">
-      <a class="nav-link" href="#">Productos ▾</a>
-      <ul class="sub">
-        <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
-        <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
-      </ul>
-    </li>
+<body>
 
-    <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
-    <li><a class="btn nav-link" href="Main.html" id="logoutBtn">Salir</a></li>
-  </ul>
-  <button class="menu-toggle" aria-label="Menú">☰</button>
-</nav>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">Sistema · Bodega</div>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="Bodeguero.html">Bodega</a></li>
+      <li><a class="nav-link" href="Venta.html">Ventas</a></li>
+      <li><a class="nav-link" href="Delivery.html">Delivery</a></li>
+      <li><a class="nav-link" href="Gestion.html">Gestión</a></li>
+      <li class="has-sub">
+        <a class="nav-link" href="#">Productos ▾</a>
+        <ul class="sub">
+          <li><a class="nav-link" href="Producto-Crear.html">Crear producto</a></li>
+          <li><a class="nav-link" href="Producto-Editar.html">Editar producto</a></li>
+        </ul>
+      </li>
+      <li><a class="nav-link" href="Metricas.html">Métricas</a></li>
+      <li><a class="btn nav-link" href="Main.html">Salir</a></li>
+    </ul>
+  </nav>
+  <!-- ===== /NAVBAR ===== -->
 
-  </header>
   <main class="wrap">
-
     <!-- Encabezado -->
     <header class="top">
       <div>
         <h1>Gestión de Productos</h1>
         <p class="muted">Catálogo, stock y precios. (Solo HTML + CSS)</p>
       </div>
-      <a href="#nuevo" class="btn pri">+ Nuevo</a>
+      <a href="#m-nuevo" class="btn pri">+ Nuevo producto</a>
     </header>
 
-    <!-- Barra de búsqueda -->
-    <section class="bar">
-      <input class="in" type="search" placeholder="Buscar por nombre o código…">
-      <select class="in">
-        <option>Todos</option>
-        <option>Activos</option>
-        <option>Inactivos</option>
-      </select>
-      <a class="btn" href="#">Exportar JSON</a>
-    </section>
+    <!-- Barra de búsqueda y filtros -->
+<section class="bar">
+  <input class="in search" type="search" placeholder="Buscar por nombre o código..." style="flex: 1; min-width: 200px;">
+  <select class="in filter" style="min-width: 160px;">
+    <option>Todos</option>
+    <option>Abarrotes</option>
+    <option>Bebidas</option>
+    <option>Limpieza</option>
+    <option>Snacks</option>
+  </select>
+  <select class="in filter" style="min-width: 180px;">
+    <option>Todos los estados</option>
+    <option>Activos</option>
+    <option>Inactivos</option>
+  </select>
+  <div class="grow"></div>
+</section>
 
-    <!-- Tabla de productos -->
-    <section class="card">
-      <div class="cardh">
-        <h2>Listado</h2>
-        <span class="badge">3</span>
-      </div>
-      <div class="tblwrap">
+    <!-- Listado de productos -->
+    <section class="grid">
+      <div class="card">
+        <div class="cardh">
+          <h2>Listado</h2>
+          <span class="badge">4 ítems</span>
+        </div>
+
         <table class="tbl">
           <thead>
             <tr>
               <th>Código</th>
               <th>Nombre</th>
-              <th>Precio (S/)</th>
-              <th>Stock</th>
-              <th>Estado</th>
+              <th class="r">Precio (S/)</th>
+              <th class="c">Stock</th>
+              <th class="c">Categoría</th>
+              <th class="c">Estado</th>
+              <th class="c">Última modificación</th>
               <th class="c">Acciones</th>
             </tr>
           </thead>
           <tbody>
+            <!-- Arroz -->
             <tr>
               <td>P-0001</td>
               <td>Arroz 5Kg</td>
-              <td>24.90</td>
-              <td>12</td>
-              <td><span class="tag ok">Activo</span></td>
-              <td class="c"><span class="icon">✎</span><span class="icon">🗑</span></td>
+              <td class="r">24.90</td>
+              <td class="c">12</td>
+              <td class="c">Abarrotes</td>
+              <td class="c">
+                <div class="toggle-state">
+                  <input type="checkbox" id="state-p0001" class="state-toggle" checked>
+                  <label for="state-p0001" class="status active">Activo</label>
+                  <label for="state-p0001" class="status inactive">Inactivo</label>
+                </div>
+              </td>
+              <td class="c">10/10/2025</td>
+              <td class="c">
+                <a href="#m-editar-p0001" class="action-icon edit" title="Editar">✎</a>
+                <a href="#m-borrar-p0001" class="action-icon delete" title="Eliminar">🗑</a>
+              </td>
             </tr>
+            <!-- Azúcar -->
             <tr>
               <td>P-0002</td>
               <td>Azúcar 1Kg</td>
-              <td>4.20</td>
-              <td>40</td>
-              <td><span class="tag ok">Activo</span></td>
-              <td class="c"><span class="icon">✎</span><span class="icon">🗑</span></td>
+              <td class="r">4.20</td>
+              <td class="c">40</td>
+              <td class="c">Abarrotes</td>
+              <td class="c">
+                <div class="toggle-state">
+                  <input type="checkbox" id="state-p0002" class="state-toggle" checked>
+                  <label for="state-p0002" class="status active">Activo</label>
+                  <label for="state-p0002" class="status inactive">Inactivo</label>
+                </div>
+              </td>
+              <td class="c">09/10/2025</td>
+              <td class="c">
+                <a href="#m-editar-p0002" class="action-icon edit" title="Editar">✎</a>
+                <a href="#m-borrar-p0002" class="action-icon delete" title="Eliminar">🗑</a>
+              </td>
             </tr>
+            <!-- Aceite -->
             <tr>
               <td>P-0003</td>
               <td>Aceite 1L</td>
-              <td>12.50</td>
-              <td>8</td>
-              <td><span class="tag warn">Inactivo</span></td>
-              <td class="c"><span class="icon">✎</span><span class="icon">🗑</span></td>
+              <td class="r">12.50</td>
+              <td class="c">8</td>
+              <td class="c">Abarrotes</td>
+              <td class="c">
+                <div class="toggle-state">
+                  <input type="checkbox" id="state-p0003" class="state-toggle">
+                  <label for="state-p0003" class="status active">Activo</label>
+                  <label for="state-p0003" class="status inactive">Inactivo</label>
+                </div>
+              </td>
+              <td class="c">08/10/2025</td>
+              <td class="c">
+                <a href="#m-editar-p0003" class="action-icon edit" title="Editar">✎</a>
+                <a href="#m-borrar-p0003" class="action-icon delete" title="Eliminar">🗑</a>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
-
-    <!-- Crear nuevo producto -->
-    <details id="nuevo" class="newbox">
-      <summary class="btn link">➕ Crear nuevo producto</summary>
-      <form class="form">
-        <div class="grid">
-          <label><span>Código*</span><input class="in" required></label>
-          <label><span>Nombre*</span><input class="in" required></label>
-          <label><span>Precio*</span><input class="in" type="number" step="0.01"></label>
-          <label><span>Stock*</span><input class="in" type="number"></label>
-          <label><span>Estado</span>
-            <select class="in"><option>Activo</option><option>Inactivo</option></select>
-          </label>
-          <label class="span-2"><span>Descripción</span><textarea class="in" rows="3"></textarea></label>
-        </div>
-        <div class="actions">
-          <a class="btn" href="#top">Cancelar</a>
-          <button class="btn pri" type="submit">Guardar</button>
-        </div>
-      </form>
-    </details>
-
   </main>
+
+  <!-- ================= MODALES ================= -->
+
+  <!-- Nuevo producto -->
+  <section id="m-nuevo" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Nuevo producto</h3>
+      <div class="grid-form">
+        <div class="field">
+          <label>Código</label>
+          <input class="in" type="text" placeholder="P-0005" value="">
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input class="in" type="text" placeholder="Galletas" value="">
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea class="in area" placeholder="Ej. Galletas de vainilla"></textarea>
+        </div>
+        <div class="field">
+          <label>Precio (S/)</label>
+          <input class="in" type="number" min="0" step="0.01" placeholder="5.50" value="">
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input class="in" type="number" min="0" placeholder="30" value="">
+        </div>
+        <div class="field">
+          <label>Categoría</label>
+          <input class="in" list="categorias" placeholder="Ej. Snacks" value="">
+          <datalist id="categorias">
+            <option value="Abarrotes">
+            <option value="Bebidas">
+            <option value="Limpieza">
+            <option value="Snacks">
+            <option value="Congelados">
+            <option value="Lácteos">
+          </datalist>
+        </div>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-nuevo" class="btn pri">Guardar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editar: Arroz -->
+  <section id="m-editar-p0001" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Editar producto</h3>
+      <div class="grid-form">
+        <div class="field">
+          <label>Código</label>
+          <input class="in" type="text" value="P-0001" readonly>
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input class="in" type="text" value="Arroz 5Kg">
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea class="in area">Arroz grano largo, 5Kg</textarea>
+        </div>
+        <div class="field">
+          <label>Precio (S/)</label>
+          <input class="in" type="number" min="0" step="0.01" value="24.90">
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input class="in" type="number" min="0" value="12">
+        </div>
+        <div class="field">
+          <label>Categoría</label>
+             <select class="in">
+              <option value="">Seleccionar categoría...</option>
+              <option value="Abarrotes">Abarrotes</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Limpieza">Limpieza</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Congelados">Congelados</option>
+              <option value="Lácteos">Lácteos</option>
+      </select>
+  </div>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-editar" class="btn pri">Guardar cambios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editar: Azúcar -->
+  <section id="m-editar-p0002" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Editar producto</h3>
+      <div class="grid-form">
+        <div class="field">
+          <label>Código</label>
+          <input class="in" type="text" value="P-0002" readonly>
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input class="in" type="text" value="Azúcar 1Kg">
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea class="in area">Azúcar blanca, 1Kg</textarea>
+        </div>
+        <div class="field">
+          <label>Precio (S/)</label>
+          <input class="in" type="number" min="0" step="0.01" value="4.20">
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input class="in" type="number" min="0" value="40">
+        </div>
+        <div class="field">
+          <label>Categoría</label>
+             <select class="in">
+              <option value="">Seleccionar categoría...</option>
+              <option value="Abarrotes">Abarrotes</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Limpieza">Limpieza</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Congelados">Congelados</option>
+              <option value="Lácteos">Lácteos</option>
+      </select>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-editar" class="btn pri">Guardar cambios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editar: Aceite -->
+  <section id="m-editar-p0003" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Editar producto</h3>
+      <div class="grid-form">
+        <div class="field">
+          <label>Código</label>
+          <input class="in" type="text" value="P-0003" readonly>
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input class="in" type="text" value="Aceite 1L">
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea class="in area">Aceite vegetal, 1 litro</textarea>
+        </div>
+        <div class="field">
+          <label>Precio (S/)</label>
+          <input class="in" type="number" min="0" step="0.01" value="12.50">
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input class="in" type="number" min="0" value="8">
+        </div>
+        <div class="field">
+          <label>Categoría</label>
+             <select class="in">
+              <option value="">Seleccionar categoría...</option>
+              <option value="Abarrotes">Abarrotes</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Limpieza">Limpieza</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Congelados">Congelados</option>
+              <option value="Lácteos">Lácteos</option>
+      </select>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-editar" class="btn pri">Guardar cambios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editar: Leche -->
+  <section id="m-editar-p0004" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Editar producto</h3>
+      <div class="grid-form">
+        <div class="field">
+          <label>Código</label>
+          <input class="in" type="text" value="P-0004" readonly>
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input class="in" type="text" value="Leche 1L">
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea class="in area">Leche entera, 1 litro</textarea>
+        </div>
+        <div class="field">
+          <label>Precio (S/)</label>
+          <input class="in" type="number" min="0" step="0.01" value="8.90">
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input class="in" type="number" min="0" value="25">
+        </div>
+        <div class="field">
+          <label>Categoría</label>
+          <input class="in" list="categorias" value="Bebidas">
+        </div>
+      </div>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-editar" class="btn pri">Guardar cambios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Borrar: Arroz -->
+  <section id="m-borrar-p0001" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Eliminar producto</h3>
+      <p>¿Seguro que deseas eliminar <b>Arroz 5Kg</b> del catálogo?</p>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-borrar" class="btn pri">Eliminar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Borrar: Azúcar -->
+  <section id="m-borrar-p0002" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Eliminar producto</h3>
+      <p>¿Seguro que deseas eliminar <b>Azúcar 1Kg</b> del catálogo?</p>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-borrar" class="btn pri">Eliminar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Borrar: Aceite -->
+  <section id="m-borrar-p0003" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Eliminar producto</h3>
+      <p>¿Seguro que deseas eliminar <b>Aceite 1L</b> del catálogo?</p>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-borrar" class="btn pri">Eliminar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Borrar: Leche -->
+  <section id="m-borrar-p0004" class="modal">
+    <div class="box">
+      <a href="#" class="x">×</a>
+      <h3>Eliminar producto</h3>
+      <p>¿Seguro que deseas eliminar <b>Leche 1L</b> del catálogo?</p>
+      <div class="actions r">
+        <a href="#" class="btn">Cancelar</a>
+        <a href="#m-ok-borrar" class="btn pri">Eliminar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OK: Nuevo producto -->
+  <section id="m-ok-nuevo" class="modal">
+    <div class="box ok">
+      <a href="#" class="x">×</a>
+      <h3>✅ Producto creado</h3>
+      <p><b>Galletas</b> (P-0005) ha sido añadido al catálogo.</p>
+      <div class="actions r"><a href="#" class="btn pri">Volver</a></div>
+    </div>
+  </section>
+
+  <!-- OK: Editar producto -->
+  <section id="m-ok-editar" class="modal">
+    <div class="box ok">
+      <a href="#" class="x">×</a>
+      <h3>✅ Producto actualizado</h3>
+      <p>Los cambios han sido guardados correctamente.</p>
+      <div class="actions r"><a href="#" class="btn pri">Volver</a></div>
+    </div>
+  </section>
+
+  <!-- OK: Borrar producto -->
+  <section id="m-ok-borrar" class="modal">
+    <div class="box ok">
+      <a href="#" class="x">×</a>
+      <h3>🗑️ Producto eliminado</h3>
+      <p>El producto ha sido eliminado del catálogo.</p>
+      <div class="actions r"><a href="#" class="btn pri">Volver</a></div>
+    </div>
+  </section>
+
 </body>
 </html>

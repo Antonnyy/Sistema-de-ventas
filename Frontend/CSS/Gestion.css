@@ -1,123 +1,426 @@
+/* =========================
+   VARIABLES Y BASE
+   ========================= */
 :root {
-  --bg:#0f172a; --panel:#0f1a2c; --line:#1f2a3a;
-  --txt:#e6edf5; --mut:#9aa3ad;
-  --acc:#22d3ee; --acc2:#06b6d4;
-  --ok:#10b981; --warn:#f59e0b;
-  --sh:0 10px 24px rgba(0,0,0,.35);
+  --bg: #0f172a;
+  --line: #1f2a3a;
+  --txt: #e6edf5;
+  --mut: #9aa3ad;
+  --acc: #22d3ee;
+  --acc2: #06b6d4;
+  --sh: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Base */
-*{box-sizing:border-box;margin:0;padding:0}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font:16px/1.5 system-ui,Segoe UI,Roboto,Arial;
-  background:radial-gradient(1000px 520px at 8% -10%,rgba(34,211,238,.1),transparent),var(--bg);
-  color:var(--txt);
+  font: 16px/1.5 system-ui, Segoe UI, Roboto, Arial;
+  background: var(--bg);
+  color: var(--txt);
 }
-.wrap {width:min(1100px,92%); margin:28px auto 80px}
-h1,h2 {margin:0}
-.muted {color:var(--mut)}
-.c {text-align:center}
 
-/* Botones + inputs */
+.wrap {
+  width: min(1100px, 92%);
+  margin: 24px auto 56px;
+}
+
+.muted {
+  color: var(--mut);
+}
+
+.c {
+  text-align: center;
+}
+
+.r {
+  text-align: right;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8%;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1f2937;
+  z-index: 10;
+}
+
+.logo {
+  font-weight: 700;
+  color: #1fccd2;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e2e8f0;
+}
+
+.nav-link:hover {
+  color: var(--acc);
+}
+
+.has-sub {
+  position: relative;
+}
+
+.sub {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  list-style: none;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.has-sub:hover .sub {
+  display: block;
+}
+
+/* =========================
+   BOTONES E INPUTS
+   ========================= */
 .btn {
-  display:inline-block; background:#12213a;
-  border:1px solid var(--line); color:var(--txt);
-  padding:10px 14px; border-radius:12px;
-  text-decoration:none; cursor:pointer;
+  background: #162033;
+  border: 1px solid var(--line);
+  color: var(--txt);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.9rem;
 }
-.btn:hover {border-color:var(--acc)}
+
+.btn:hover {
+  border-color: var(--acc);
+}
+
 .btn.pri {
-  background:linear-gradient(180deg,var(--acc),var(--acc2));
-  color:#001c25; border:0;
-  box-shadow:0 8px 20px rgba(34,211,238,.25);
+  background: linear-gradient(180deg, var(--acc), var(--acc2));
+  color: #001c25;
+  font-weight: 700;
+  border: 0;
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.25);
 }
-.btn.link {background:transparent; border:1px dashed var(--line)}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.btn.outline:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
 .in {
-  background:#0b1424; color:var(--txt);
-  border:1px solid var(--line); border-radius:10px;
-  padding:9px 12px; outline:none;
+  background: #0b1424;
+  color: var(--txt);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
 }
 
-/* Header */
+.small {
+  width: 140px;
+}
+
+.grow {
+  flex: 1;
+}
+
+.area {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* =========================
+   LAYOUT PRINCIPAL
+   ========================= */
 .top {
-  display:flex; justify-content:space-between;
-  align-items:flex-end; gap:12px; margin-bottom:16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 14px 0;
 }
 
-/* Toolbar */
 .bar {
-  display:flex; gap:12px; align-items:center;
-  margin:14px 0; background:rgba(17,24,39,.65);
-  border:1px solid var(--line); padding:12px;
-  border-radius:16px; box-shadow:var(--sh);
-}
-.bar .in {flex:1}
-
-/* Card + tabla */
-.card {
-  background:rgba(15,22,35,.95); border:1px solid var(--line);
-  border-radius:18px; box-shadow:var(--sh); overflow:hidden;
-}
-.cardh {
-  display:flex; justify-content:space-between;
-  align-items:center; padding:14px 16px;
-  border-bottom:1px solid var(--line);
-}
-.badge {
-  background:rgba(34,211,238,.15); color:var(--acc);
-  border:1px solid rgba(34,211,238,.4);
-  padding:4px 10px; border-radius:999px; font-size:.85rem;
-}
-.tbl {width:100%; border-collapse:collapse}
-.tbl th {
-  background:#0e1627; color:var(--mut);
-  text-align:left; font-weight:600; font-size:.9rem;
-  padding:14px 16px; border-bottom:1px solid var(--line);
-}
-.tbl td {
-  padding:14px 16px; border-bottom:1px solid var(--line);
-}
-.tbl tr:hover {background:rgba(34,211,238,.05)}
-.row {display:flex; gap:6px; justify-content:center}
-.icon {
-  width:34px; height:34px; display:inline-grid;
-  place-items:center; background:#102038;
-  border:1px solid var(--line); border-radius:10px;
-  color:var(--txt); cursor:pointer;
-}
-.icon:hover {border-color:var(--acc)}
-
-/* Estado */
-.tag {
-  padding:6px 10px; border-radius:999px; font-size:.8rem;
-  border:1px solid transparent;
-}
-.tag.ok {
-  color:var(--ok);
-  background:rgba(16,185,129,.12);
-  border-color:rgba(16,185,129,.3);
-}
-.tag.warn {
-  color:var(--warn);
-  background:rgba(245,158,11,.12);
-  border-color:rgba(245,158,11,.3);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+  background: rgba(17, 24, 39, 0.65);
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: var(--sh);
 }
 
-/* Formulario */
-.newbox {margin-top:18px}
-.form {
-  margin-top:10px; background:rgba(15,22,35,.95);
-  border:1px solid var(--line); border-radius:16px;
-  box-shadow:var(--sh); padding:14px 16px;
-}
 .grid {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
-.span-2 {grid-column:span 2}
+
+/* =========================
+   TARJETAS Y TABLA
+   ========================= */
+.card {
+  background: rgba(15, 22, 35, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--sh);
+  padding: 14px 16px;
+}
+
+.cardh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.badge {
+  background: rgba(34, 211, 238, 0.15);
+  color: var(--acc);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tbl th {
+  background: #0e1627;
+  color: var(--mut);
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.tbl td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.tbl tr:hover {
+  background: rgba(34, 211, 238, 0.05);
+}
+
+/* =========================
+   ÍCONOS DE ACCIÓN (EDITAR / ELIMINAR)
+   ========================= */
+.action-icon {
+  background: #102038;
+  border: 1px solid var(--line);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  margin: 0 2px;
+  text-decoration: none;
+  color: #e6edf5;
+  font-size: 0.9rem;
+}
+
+.action-icon:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+/* Estilo específico para EDITAR */
+.action-icon.edit {
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Estilo específico para ELIMINAR */
+.action-icon.delete {
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* =========================
+   TOGGLE DE ESTADO (ACTIVO/INACTIVO)
+   ========================= */
+.toggle-state {
+  display: inline-block;
+  position: relative;
+}
+
+.state-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.status {
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+/* Mostrar "Activo" cuando el checkbox está marcado */
+.state-toggle:checked + .status.active,
+/* Mostrar "Inactivo" cuando el checkbox NO está marcado */
+.state-toggle:not(:checked) + .status.active + .status.inactive {
+  display: block;
+}
+
+/* Estilos para Activo */
+.status.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+/* Estilos para Inactivo */
+.status.inactive {
+  background: rgba(234, 88, 12, 0.15);
+  color: #ea580c;
+  border: 1px solid rgba(234, 88, 12, 0.4);
+}
+
+.status:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   MODALES
+   ========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(2, 6, 23, 0.6);
+  padding: 16px;
+  z-index: 50;
+  backdrop-filter: blur(2px);
+}
+
+.modal:target {
+  display: grid;
+}
+
+.box {
+  width: min(600px, 95vw);
+  background: rgba(15, 22, 35, 0.98);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--sh);
+  padding: 24px;
+  position: relative;
+}
+
+.x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--txt);
+  text-decoration: none;
+}
+
+.x:hover {
+  border-color: var(--acc);
+}
+
+/* =========================
+   FORMULARIOS EN MODALES
+   ========================= */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 700;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0 6px;
+}
+
+.grid-form .area {
+  grid-column: 1 / -1;
+}
+
 .actions {
-  display:flex; justify-content:flex-end;
-  gap:10px; margin-top:12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
 }
-@media(max-width:720px){
-  .grid {grid-template-columns:1fr}
+
+.actions.r {
+  justify-content: flex-end;
 }
+
+/* =========================
+   IMPRESIÓN
+   ========================= */
+@media print {
+  .navbar, .bar, .actions, .modal {
+    display: none !important;
+  }
+  .wrap {
+    width: 100%;
+    margin: 0;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card, .tbl th, .tbl td {
+    border-color: #000 !important;
+    box-shadow: none;
+  }
+}
+
