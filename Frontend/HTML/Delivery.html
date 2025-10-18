@@ -250,13 +250,133 @@
         <!-- ===== Botones finales =====
              - Imprimir/Guardar PDF: usa el diálogo de impresión del navegador.
              - Limpiar: resetea los campos del formulario. -->
-        <div class="actions">
-          <button class="btn primary" type="button" onclick="window.print()">Imprimir / Guardar PDF</button>
-          <button class="btn" type="reset">Limpiar</button>
-        </div>
+       <!-- Acciones finales (único bloque) -->
+<div class="actions">
+  <button class="btn primary" type="button" onclick="window.print()">Imprimir / Guardar PDF</button>
+  <button class="btn" type="reset">Limpiar</button>
+
+  <!-- Botón (label) que abre el modal de historial -->
+  <label for="dlvHistorialToggle" class="btn" style="display:inline-flex;align-items:center;gap:8px;">
+    📜 <strong>Historial de pedidos</strong>
+  </label>
+</div>
+
+
       </form>
     </section>
   </main>
+  <!-- ====== MODAL: Historial de pedidos (sin JS) ====== -->
+<input type="checkbox" id="dlvHistorialToggle" hidden>
+
+<div class="dlv-modal">
+  <label class="dlv-overlay" for="dlvHistorialToggle"></label>
+
+  <div class="dlv-panel" role="dialog" aria-modal="true" aria-labelledby="dlvTitle">
+    <!-- Header -->
+    <header class="dlv-head">
+      <h3 id="dlvTitle">Historial de pedidos</h3>
+      <label class="dlv-close" for="dlvHistorialToggle" aria-label="Cerrar">✖</label>
+    </header>
+
+    <!-- Filtros (solo visual) -->
+    <section class="dlv-filters">
+      <div class="dlv-field">
+        <input type="text" placeholder="Buscar por cliente / dirección…">
+      </div>
+      <div class="dlv-field">
+        <select>
+          <option value="">Estado: todos</option>
+          <option>PENDIENTE</option>
+          <option>EN_CAMINO</option>
+          <option>ENTREGADO</option>
+          <option>CANCELADO</option>
+        </select>
+      </div>
+      <div class="dlv-field">
+        <input type="date" title="Desde">
+      </div>
+      <div class="dlv-field">
+        <input type="date" title="Hasta">
+      </div>
+    </section>
+
+    <!-- Tabla -->
+    <div class="dlv-table-wrap">
+      <table class="dlv-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Dirección</th>
+            <th>Items</th>
+            <th>Total (S/)</th>
+            <th>Estado</th>
+            <th>Cambiar a</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>21/05 18:42</td>
+            <td><strong>Juan Pérez</strong><br><small>987 654 321</small></td>
+            <td>Jr. Huancavelica 123<br><small>Ref: Parque</small></td>
+            <td>2× Gaseosa 500ml, 1× Pan molde</td>
+            <td class="num">28.50</td>
+            <td><span class="dlv-badge ok">ENTREGADO</span></td>
+            <td>
+              <select>
+                <option>PENDIENTE</option>
+                <option>EN_CAMINO</option>
+                <option selected>ENTREGADO</option>
+                <option>CANCELADO</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>21/05 19:10</td>
+            <td><strong>María Rojas</strong><br><small>900 111 222</small></td>
+            <td>Av. Real 456<br><small>Ref: Amarilla</small></td>
+            <td>1× Leche 1L, 3× Galleta vainilla</td>
+            <td class="num">32.90</td>
+            <td><span class="dlv-badge camino">EN_CAMINO</span></td>
+            <td>
+              <select>
+                <option selected>EN_CAMINO</option>
+                <option>PENDIENTE</option>
+                <option>ENTREGADO</option>
+                <option>CANCELADO</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>21/05 20:02</td>
+            <td><strong>Carlos Díaz</strong><br><small>901 222 333</small></td>
+            <td>Psj. Azul 789<br><small>Ref: Tienda roja</small></td>
+            <td>1× Arroz 5kg</td>
+            <td class="num">24.00</td>
+            <td><span class="dlv-badge pend">PENDIENTE</span></td>
+            <td>
+              <select>
+                <option selected>PENDIENTE</option>
+                <option>EN_CAMINO</option>
+                <option>ENTREGADO</option>
+                <option>CANCELADO</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Acciones del modal (solo visual) -->
+    <footer class="dlv-actions">
+      <label for="dlvHistorialToggle" class="btn">Cerrar</label>
+      <button type="button" class="btn primary" disabled title="Demostración sin JS">Aplicar cambios</button>
+    </footer>
+  </div>
+</div>
+
 
   <!-- ================= FOOTER ================= -->
   <footer id="footer">

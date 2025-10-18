@@ -307,3 +307,108 @@ html,body{
   .hero{ border:none; padding:6px 0 0 }                         /* Compacta el header */
   .wrapper{ width:100%; margin:0; padding:0 10mm }              /* Márgenes para la hoja */
 }
+/* =========================================================
+   MODAL — Historial de pedidos (Delivery)
+   Solo HTML + CSS (checkbox hack), sin JS
+   Prefijo: .dlv-
+   ========================================================= */
+
+/* Toggle de apertura: cuando está check, mostramos modal */
+#dlvHistorialToggle ~ .dlv-modal { 
+  pointer-events: none; 
+  opacity: 0; 
+  transition: opacity .25s ease;
+}
+#dlvHistorialToggle:checked ~ .dlv-modal {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Capa oscura detrás del panel */
+.dlv-overlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(2px);
+}
+
+/* Panel del modal */
+.dlv-panel{
+  position: fixed; inset: 50% auto auto 50%;
+  transform: translate(-50%,-50%);
+  width: min(980px, 92vw);
+  max-height: 86vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 12px;
+  background: #0f172a;                 /* combi con tu tema */
+  color: #e2e8f0;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  padding: 14px;
+}
+
+/* Header */
+.dlv-head{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom: 1px solid #1f2937;
+  padding-bottom: 10px;
+}
+.dlv-head h3{ font-size: 1.15rem }
+.dlv-close{
+  display:inline-grid;place-items:center;cursor:pointer;
+  width:34px;height:34px;border-radius:10px;background:#111827;border:1px solid #334155aa
+}
+.dlv-close:hover{ filter: brightness(1.08) }
+
+/* Filtros */
+.dlv-filters{
+  display:grid;grid-template-columns: 1.2fr .9fr .6fr .6fr;gap:10px;
+}
+@media (max-width: 720px){
+  .dlv-filters{ grid-template-columns: 1fr 1fr }
+}
+.dlv-field input,.dlv-field select{
+  width:100%;padding:10px 12px;border-radius:12px;border:1px solid #334155aa;
+  background:#0b1220;color:#e2e8f0;outline:none
+}
+.dlv-field input:focus,.dlv-field select:focus{
+  border-color:#22d3ee; box-shadow:0 0 0 6px #22d3ee26
+}
+
+/* Tabla */
+.dlv-table-wrap{ overflow:auto; border:1px solid #1f293744; border-radius:12px }
+.dlv-table{ width:100%; border-collapse:collapse; min-width: 780px }
+.dlv-table th,.dlv-table td{ padding:12px 10px; text-align:left; border-bottom:1px solid #1f293744; vertical-align: top }
+.dlv-table thead th{ position:sticky; top:0; background:#0f172a; z-index:1 }
+.dlv-table .num{ text-align:right; font-variant-numeric: tabular-nums }
+
+/* Badges de estado */
+.dlv-badge{
+  display:inline-block; padding:4px 8px; border-radius:999px; font-size:.8rem;
+  border:1px solid #33415588;
+}
+.dlv-badge.pend   { background:#f59e0b22; color:#fbbf24 }
+.dlv-badge.camino { background:#22d3ee22; color:#67e8f9 }
+.dlv-badge.ok     { background:#22c55e22; color:#86efac }
+.dlv-badge.cancel { background:#ef444422; color:#fca5a5 }
+
+/* Select “Cambiar a” */
+.dlv-table select{
+  width:100%; padding:8px 10px; border-radius:10px; background:#0b1220; color:#e2e8f0;
+  border:1px solid #334155aa; outline:none
+}
+.dlv-table select:focus{ border-color:#22d3ee; box-shadow:0 0 0 6px #22d3ee26 }
+
+/* Footer del modal */
+.dlv-actions{
+  display:flex;justify-content:flex-end;gap:10px;margin-top:8px;
+}
+.dlv-actions .btn{
+  display:inline-block; padding:10px 14px; border-radius:12px; border:1px solid #334155aa; cursor:pointer;
+}
+.dlv-actions .btn.primary{
+  background:linear-gradient(135deg,#22d3ee,#06b6d4); color:#05202a; font-weight:800;
+  box-shadow:0 0 18px #22d3ee55;
+}
+.dlv-actions .btn[disabled]{ opacity:.7; cursor:not-allowed }
